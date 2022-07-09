@@ -1,26 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-function App() {
+import {NavLink, Link, Route, Routes} from "react-router-dom";
 
-    const [greeting, setGreeting] = useState('')
+import Home from "./components/Home";
 
-    useEffect(() => {
-        fetch('/api/greeting', {
-            method: 'GET',
-            headers: {
-                'Accept': 'text/plain'
-            }
-        })
-            .then(response => response.text())
-            .then(text => setGreeting(text))
-            .catch(err => setGreeting('Da ist etwas schief gelaufen'));
-    }, []);
+import Ingredient from "./pages/Ingredient/Ingredient";
+import Favourite from "./pages/Favourite/Favourite";
+import DrinkDay from "./pages/DrinkDay/DrinkDay";
+import Category from "./pages/Ingredient/Category";
+import Details from "./pages/Ingredient/Details";
+
+
+
+export default function App() {
+
 
     return (
-        <div>
-            {greeting}
+
+    <>            <div className={"App"}>
+        <h1>shaken or stirred</h1>
+        <Routes>
+
+            <Route path={"/home"} element={<Home />} />
+            <Route path={"/ingredient"} element={<Ingredient />} />
+            <Route path={"/favourites"} element={<Favourite />}/>
+            <Route path={"/drinkDay"} element={<DrinkDay />} />
+            <Route path={"/ingredient=:drinkCategory"} element={<Category />} />
+            <Route path={"/details=:details"} element={<Details />} />
+
+
+        </Routes>
+    </div>
+        <div className={"Menu"}>
+            <NavLink className={({isActive}) => isActive ? "active" : "not-active"} to={"/main"} >Main</NavLink>
+            <NavLink className={({isActive}) => isActive ? "active" : "not-active"}  to={"/ingredient"} >Ingredient</NavLink>
+            <NavLink className={({isActive}) => isActive ? "active" : "not-active"} to={"/category"} >Category</NavLink>
+
         </div>
-    );
+    </>
+    )
 }
 
-export default App;
+
