@@ -20,3 +20,11 @@ export function getDrink(details:string | undefined) {
     return axios.get(`https://thecocktaildb.com/api/json/v1/1/lookup.php?i=${details}`)
         .then(response => response.data)
 }
+
+export function postToFavourites(details: string | undefined) {
+    return axios.post(``)
+}
+
+export function createUser(username:string, password:string) {
+    return axios.post(``)
+}

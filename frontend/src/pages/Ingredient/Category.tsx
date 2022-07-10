@@ -3,9 +3,6 @@ import {useEffect, useState} from "react";
 import {CategoryModel} from "../../components/Model";
 import {getCategory} from "../../apiServices/service";
 
-interface Params {
-    drinkCategory:string
-}
 
 
 export default function Category() {
@@ -24,13 +21,13 @@ export default function Category() {
     return(
         <div>
             {category &&
-            category.drinks.map(cat => <div onClick={() => nav(`/details=${cat.idDrink}`)}>
+            category.drinks.map(singleCategory => <div onClick={() => nav(`/details=${singleCategory.idDrink}`)}>
                <div>
-                   <img src={cat.strDrinkThumb} />
+                   <img src={singleCategory.strDrinkThumb} alt={"drinkCategory"} />
 
                </div>
                 <div>
-                    {cat.strDrink}
+                    {singleCategory.strDrink}
                 </div>
             </div>)}
         </div>

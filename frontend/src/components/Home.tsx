@@ -16,7 +16,7 @@ export default function Home() {
 
     return(
         <div className={"Home"}>
-            <h2>Shaken or Stirred</h2>
+
 
             <button onClick={() => nav("/ingredient")}>show all ingredients</button>
             <button onClick={() => nav("/favourites")}>show my favorites</button>
