@@ -1,18 +1,9 @@
-import {useNavigate} from "react-router-dom";
+
 import "./Login.css"
-import {FormEvent, useState} from "react";
+
 
 export default function Login() {
 
-    const nav = useNavigate()
-    const [username,setUsername] = useState("")
-    const [password,setPassword] = useState("")
-    const [passwordAgain,setPasswordAgain] = useState("")
-
-    const register = (event:FormEvent) => {
-        event.preventDefault()
-
-    }
 
 
 
@@ -20,18 +11,18 @@ export default function Login() {
     return(
         <div >
 
-            <form className={"login"} onSubmit={register}>
+            <form className={"login"} >
                 <label>username</label>
-                <input type={"text"} placeholder={"enter your username:"} value={username} onChange={event => event.target.value}/><br/>
+                <input type={"text"} placeholder={"enter your username:"}  onChange={event => event.target.value}/><br/>
                 <label>password</label>
-                <input type={"password"} placeholder={"enter your password:"} value={password} onChange={event => event.target.value}/>
+                <input type={"password"} placeholder={"enter your password:"}  onChange={event => event.target.value}/>
                 <label> repeat password</label>
-                <input type={"password"} placeholder={"enter your password again:"} value={passwordAgain}onChange={event => event.target.value}/>
+                <input type={"password"} placeholder={"enter your password again:"} onChange={event => event.target.value}/>
                 <br/>
                 <button>login</button>
                 <br/>
                 <div className={"accountQuestion"}>No account yet? Please register:</div>
-                 <button onClick={register}>register</button>
+                 <button >register</button>
             </form>
         </div>
     )
