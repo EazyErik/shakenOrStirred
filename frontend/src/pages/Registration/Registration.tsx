@@ -3,7 +3,7 @@ import {useEffect} from "react";
 import "./Registration.css"
 
 export default function Registration() {
-    const nav = useNavigate()
+
     useEffect(() => {
 
     },[])

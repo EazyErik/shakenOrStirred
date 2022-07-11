@@ -14,7 +14,7 @@ export default function Details() {
             console.log(data)}
             )
 
-    },[])
+    },[details])
 
     const handleClick = () =>{
 
@@ -25,7 +25,7 @@ export default function Details() {
             {detail &&
                 <div>
                     <div>{detail.drinks[0].strDrink}</div>
-                    <img src={detail.drinks[0].strDrinkThumb}/>
+                    <img src={detail.drinks[0].strDrinkThumb} alt={""}/>
                     <button onClick={handleClick}>I like</button>
                     <div>{detail.drinks[0].strInstructions}</div>
                     <div>{detail.drinks[0].strIngredient1}</div>

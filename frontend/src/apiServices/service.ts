@@ -22,9 +22,10 @@ export function getDrink(details:string | undefined) {
 }
 
 export function postToFavourites(details: string | undefined) {
-    return axios.post(``)
+    return axios.post(`api/addToFav`)
+
 }
 
 export function createUser(username:string, password:string) {
-    return axios.post(``)
+    return axios.post(`api/user`)
 }

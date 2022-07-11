@@ -4,9 +4,9 @@ import React from "react";
 export default function Footer() {
     return(
         <div className={"Menu"}>
-            <NavLink className={({isActive}) => isActive ? "active" : "not-active"} to={"/main"} >Home</NavLink>
-            <NavLink className={({isActive}) => isActive ? "active" : "not-active"}  to={"/ingredient"} >ShoppingList</NavLink>
-            <NavLink className={({isActive}) => isActive ? "active" : "not-active"} to={"/category"} >Favourites</NavLink>
+            <NavLink className={({isActive}) => isActive ? "active" : "not-active"} to={"/home"} >Home</NavLink>
+            <NavLink className={({isActive}) => isActive ? "active" : "not-active"}  to={"/shopping"} >ShoppingList</NavLink>
+            <NavLink className={({isActive}) => isActive ? "active" : "not-active"} to={"/map"} >Google Maps</NavLink>
 
         </div>
     )

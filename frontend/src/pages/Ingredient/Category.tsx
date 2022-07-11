@@ -16,7 +16,7 @@ export default function Category() {
             .then(data => setCategory(data))
 
 
-    },[])
+    },[drinkCategory])
 
     return(
         <div>
