@@ -1,0 +1,36 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.App {
+    background-color: #ffc520;
+    margin:0;
+    height: calc(100vh - 50px);
+    overflow-y: scroll;
+}
+
+
+
+.Menu {
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.Menu > a  {
+    padding: 0 5px 0 5px;
+    text-decoration: none;
+    color: black;
+}
+
+
+.Menu > a.active {
+    color:grey;
+}
+
+.main-part{
+    min-height: 50%;
+    overflow:auto;
+}
