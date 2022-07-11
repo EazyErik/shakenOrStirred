@@ -36,4 +36,10 @@ export interface DetailModel{
         strMeasure2: string
         strMeasure3: string
     }]
+
+
+}
+export interface LoginResponse{
+    token:string
+
 }
