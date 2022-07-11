@@ -11,7 +11,7 @@ export default function Category() {
 
     useEffect(() => {
         getGinDrinks()
-            .then(data => setResults(data.drinks))
+            .then(data => setResults(data))
 
 
     },[])
