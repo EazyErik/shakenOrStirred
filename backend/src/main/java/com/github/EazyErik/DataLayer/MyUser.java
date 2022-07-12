@@ -17,7 +17,6 @@ public class MyUser {
     @Indexed(unique = true)
     String username;
     String password;
-    String passwordAgain;
     @Id
     String id;
     private List<String> roles;

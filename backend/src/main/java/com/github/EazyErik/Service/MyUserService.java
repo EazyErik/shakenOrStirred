@@ -21,7 +21,8 @@ public class MyUserService {
 
     public void createUser(UserCreationData user) {
 
-        if (!Objects.equals(user.getPassword(), user.getPasswordAgain())) {
+        if (!Objects.equals(user.getPassword(), user.getPasswordAgain()) || user.getPassword().isBlank()
+       || user.getPasswordAgain().isBlank() ) {
             throw new IllegalArgumentException("password do not match");
         }
 
@@ -30,7 +31,6 @@ public class MyUserService {
         MyUser myUser = new MyUser();
         myUser.setUsername(user.getUsername());
         myUser.setPassword(encodedPassword);
-        myUser.setPasswordAgain(encodedPassword);
         myUser.setRoles(Collections.singletonList("user"));
         myUserRepo.save(myUser);
 
