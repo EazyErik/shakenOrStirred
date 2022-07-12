@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {CategoryModel, Cocktail, DetailModel, IngredientModel, LoginResponse} from "../components/Model";
+import {CategoryModel,DetailModel, IngredientModel, LoginResponse} from "../components/Model";
 
 export function getIngredients() {
     return axios.get<IngredientModel>("https://thecocktaildb.com/api/json/v1/1/list.php?i=list"
