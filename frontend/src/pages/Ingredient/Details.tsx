@@ -1,12 +1,13 @@
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {getDrink} from "../../apiServices/service";
+import {getDrink, postToFavourites} from "../../apiServices/service";
 import {DetailModel} from "../../components/Model";
 
 
 export default function Details() {
     const {details} = useParams()
     const[detail,setDetail] = useState<DetailModel>()
+    const nav = useNavigate()
 
     useEffect(() => {
         getDrink(details)
@@ -17,6 +18,9 @@ export default function Details() {
     },[details])
 
     const handleClick = () =>{
+        postToFavourites(details)
+            .then(() => nav(`/favourites=${details}`))
+
 
     }
 

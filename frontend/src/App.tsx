@@ -27,7 +27,7 @@ export default function App() {
             <Route path={"/register"} element={<Registration />}/>
             <Route path={"/home"} element={<Home />} />
             <Route path={"/ingredient"} element={<Ingredient />} />
-            <Route path={"/favourites"} element={<Favourite />}/>
+            <Route path={"/favourites=:favourites"} element={<Favourite />}/>
             <Route path={"/drinkDay"} element={<DrinkDay />} />
             <Route path={"/ingredient=:drinkCategory"} element={<Category />} />
             <Route path={"/details=:details"} element={<Details />} />
