@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class DrinksController {
 
 
-    public DrinksService drinksService;
+ private final DrinksService drinksService;
 
 }

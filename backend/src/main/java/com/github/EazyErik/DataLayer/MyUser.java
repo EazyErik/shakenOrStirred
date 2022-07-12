@@ -13,13 +13,13 @@ import java.util.List;
 @Document(collection = "cocktailUser")
 @NoArgsConstructor
 public class MyUser {
-
-    @Indexed(unique = true)
-    String username;
-    String password;
-    String passwordAgain;
     @Id
-    String id;
+    private String id;
+    @Indexed(unique = true)
+    private String username;
+    private String password;
+    private String passwordAgain;
+
     private List<String> roles;
 
 }

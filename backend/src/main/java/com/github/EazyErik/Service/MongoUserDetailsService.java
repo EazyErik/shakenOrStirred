@@ -1,6 +1,7 @@
 package com.github.EazyErik.Service;
 
 import com.github.EazyErik.Repository.MyUserRepo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,14 +12,13 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 
-@Component
+    @Component
+    @RequiredArgsConstructor
     public class MongoUserDetailsService implements UserDetailsService {
 
         private final MyUserRepo repository;
 
-        public MongoUserDetailsService(MyUserRepo repository) {
-            this.repository = repository;
-        }
+
 
         @Override
         public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
