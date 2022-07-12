@@ -21,9 +21,13 @@ public class MyUserService {
 
     public void createUser(UserCreationData user) {
 
-        if (!Objects.equals(user.getPassword(), user.getPasswordAgain()) || user.getPassword().isBlank()
-       || user.getPasswordAgain().isBlank() ) {
-            throw new IllegalArgumentException("password do not match");
+        if (user.getPassword() == null
+                ||
+                user.getPasswordAgain() == null
+                || !Objects.equals(user.getPassword(), user.getPasswordAgain())
+                || user.getPassword().isBlank()
+                || user.getPasswordAgain().isBlank()) {
+            throw new IllegalArgumentException("passwords do not match");
         }
 
 

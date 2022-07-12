@@ -101,7 +101,7 @@ public class MyUserServiceTest {
         MyUserService testService = new MyUserService(null,null);
 
         //when and then
-        Assertions.assertThatExceptionOfType(NullPointerException.class)
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> testService.createUser(new UserCreationData("ben", null, null)));
 
 
