@@ -22,7 +22,8 @@ export function getDrink(details:string | undefined) {
 }
 
 export function postToFavourites(details: string | undefined) {
-    return axios.post(`api/addToFav/${details}`, {
+    return axios.post(`api/addToFav/`,//todo
+        {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
         }
