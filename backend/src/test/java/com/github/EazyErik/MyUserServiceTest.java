@@ -5,14 +5,13 @@ import com.github.EazyErik.DataLayer.MyUser;
 import com.github.EazyErik.DataLayer.UserCreationData;
 import com.github.EazyErik.Repository.MyUserRepo;
 import com.github.EazyErik.Service.MyUserService;
-import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Collections;
-import java.util.List;
+
 
 
 public class MyUserServiceTest {
