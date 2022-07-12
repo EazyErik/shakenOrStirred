@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,7 +47,7 @@ public class LoginController {
             claims.put("roles",user.getRoles());
             return ResponseEntity.ok(new LoginResponse(jwtService.createToken(claims,loginData.getUsername())));
 
-        }catch (Exception e) {
+        }catch (AuthenticationException e) {
             LOGGER.warn("user with " + loginData.getUsername() + " and " + loginData.getPassword()
             + " could not authenticated",e);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
