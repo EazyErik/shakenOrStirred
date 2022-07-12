@@ -29,7 +29,7 @@ import java.util.Map;
 @RequestMapping("api/login")
 public class LoginController {
 
-    private static final Logger LOGGER= LoggerFactory.getLogger(LoginController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
     private final AuthenticationManager authenticationManager;
     private final JWTService jwtService;
@@ -47,7 +47,8 @@ public class LoginController {
             return ResponseEntity.ok(new LoginResponse(jwtService.createToken(claims,loginData.getUsername())));
 
         }catch (Exception e) {
-            LOGGER.info(e.getMessage());
+            LOGGER.warn("user with " + loginData.getUsername() + " and " + loginData.getPassword()
+            + " could not authenticated",e);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
