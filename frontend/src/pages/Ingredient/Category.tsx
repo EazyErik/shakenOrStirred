@@ -21,7 +21,7 @@ export default function Category() {
     return(
         <div>
             {category &&
-            category.drinks.map(singleCategory => <div onClick={() => nav(`/details=${singleCategory.idDrink}`)}>
+            category.drinks.map(singleCategory => <div key={Math.random()} onClick={() => nav(`/details=${singleCategory.idDrink}`)}>
                <div>
                    <img src={singleCategory.strDrinkThumb} alt={"drinkCategory"} />
 

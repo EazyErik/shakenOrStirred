@@ -15,7 +15,7 @@ export default function Registration() {
   const register = (event:FormEvent) => {
         event.preventDefault()
       createUser(username,password,passwordAgain)
-          .then(() => nav("/login"))
+          .then(() => nav("/"))
           .catch(() => setError("Registration failed. Please try again"))
 
   }

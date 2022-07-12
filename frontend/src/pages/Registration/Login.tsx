@@ -10,15 +10,16 @@ export default function Login() {
 
     const [username,setUsername] = useState("")
     const[password,setPassword] = useState("")
-    const[passwordAgain, setPasswordAgain] = useState("")
     const[error,setError] = useState("")
 
     const login = (event:FormEvent) => {
         event.preventDefault()
-        loginNow(username,password,passwordAgain)
-            .then(loginResponse=> localStorage.setItem("jwt",loginResponse.token))
+        loginNow(username,password)
+            .then(loginResponse=> {localStorage.setItem("jwt",loginResponse.token)
+            console.log(loginResponse)})
+
             .then(() => nav("/home"))
-            .catch(() => setError("Passwords do not match!"))
+            .catch(() => setError("Password is wrong!"))
 
 
 
@@ -30,11 +31,11 @@ export default function Login() {
             <form onSubmit={login}>
                 <input type={"text"} placeholder={"Username"} onChange={event => setUsername(event.target.value)}/>
                 <input type={"password"} placeholder={"Password"} onChange={event => setPassword(event.target.value)}/>
-                <input type={"password"} placeholder={"Password again"} onChange={event => setPasswordAgain(event.target.value)}/>
                 <input type={"submit"} value={"Login now"} />
             </form>
             {error && <div>{error}</div>}
-            {password != passwordAgain ? "Passwords dont match" :""}
+
+
             <div className={"signUp"}>
                 <h3>Don't have an account yet?</h3>
 
