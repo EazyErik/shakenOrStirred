@@ -1,4 +1,4 @@
-package com.github.EazyErik.DataLayer;
+package com.github.EazyErik.datalayer;
 
 
 import lombok.AllArgsConstructor;
@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginResponse {
-    String token;
+    private String token;
 }

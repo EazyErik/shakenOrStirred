@@ -1,7 +1,7 @@
-package com.github.EazyErik.Controller;
+package com.github.EazyErik.controller;
 
 
-import com.github.EazyErik.Service.DrinksService;
+import com.github.EazyErik.service.DrinksService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class DrinksController {
 
 
-    public DrinksService drinksService;
+    private final DrinksService drinksService;
 
 }

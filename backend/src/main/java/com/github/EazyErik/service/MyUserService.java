@@ -1,8 +1,8 @@
-package com.github.EazyErik.Service;
+package com.github.EazyErik.service;
 
-import com.github.EazyErik.DataLayer.MyUser;
-import com.github.EazyErik.Repository.MyUserRepo;
-import com.github.EazyErik.DataLayer.UserCreationData;
+import com.github.EazyErik.datalayer.MyUser;
+import com.github.EazyErik.repository.MyUserRepo;
+import com.github.EazyErik.datalayer.UserCreationData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -40,6 +40,7 @@ public class MyUserService {
 
 
     }
+
     public Optional<MyUser> findByUserName(String username) {
         return myUserRepo.findByUsername(username);
     }

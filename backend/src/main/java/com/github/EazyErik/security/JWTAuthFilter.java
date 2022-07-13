@@ -25,28 +25,29 @@ public class JWTAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = getToken(request);
         if (token != null && !token.isBlank()) {
-            try{
+            try {
                 Claims claims = jwtService.extractAllClaims(token);
                 setSecurityContext(claims);
-            }catch(Exception e) {
+            } catch (Exception e) {
                 response.setStatus(401);
             }
         }
-        filterChain.doFilter(request,response);
+        filterChain.doFilter(request, response);
     }
+
     private String getToken(HttpServletRequest request) {
         String authorization = request.getHeader("Authorization");
         if (authorization != null) {
-            return authorization.replace("Bearer","").trim();
+            return authorization.replace("Bearer", "").trim();
         }
         return null;
     }
 
     private void setSecurityContext(Claims claims) {
         List<SimpleGrantedAuthority> grantedAuthorities = claims.get("roles") == null ?
-           List.of( )  :  ((List<String>) claims.get("roles")).stream()
-                        .map(authorities -> new SimpleGrantedAuthority("ROLE_" +authorities)).toList();
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(claims.getSubject(),"",grantedAuthorities);
+                List.of() : ((List<String>) claims.get("roles")).stream()
+                .map(authorities -> new SimpleGrantedAuthority("ROLE_" + authorities)).toList();
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(claims.getSubject(), "", grantedAuthorities);
         SecurityContextHolder.getContext().setAuthentication(token);
     }
 }

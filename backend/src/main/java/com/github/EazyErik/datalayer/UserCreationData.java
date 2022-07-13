@@ -1,4 +1,4 @@
-package com.github.EazyErik.DataLayer;
+package com.github.EazyErik.datalayer;
 
 
 import lombok.AllArgsConstructor;
@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserCreationData {
 
-    String username;
-    String password;
-    String passwordAgain;
+    private String username;
+    private String password;
+    private String passwordAgain;
 
 }

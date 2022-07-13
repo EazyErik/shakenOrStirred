@@ -1,7 +1,7 @@
-package com.github.EazyErik.Controller;
+package com.github.EazyErik.controller;
 
-import com.github.EazyErik.Service.MyUserService;
-import com.github.EazyErik.DataLayer.UserCreationData;
+import com.github.EazyErik.service.MyUserService;
+import com.github.EazyErik.datalayer.UserCreationData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,11 +18,11 @@ public class MyUserController {
 
     @PostMapping
     public ResponseEntity<Void> createUser(@RequestBody UserCreationData user) {
-        try{
+        try {
             myUserService.createUser(user);
             return ResponseEntity.ok().build();
-        }catch(IllegalArgumentException e) {
-           return ResponseEntity.badRequest().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
         }
 
     }

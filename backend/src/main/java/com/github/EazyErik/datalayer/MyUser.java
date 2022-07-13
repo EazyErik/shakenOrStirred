@@ -1,4 +1,4 @@
-package com.github.EazyErik.DataLayer;
+package com.github.EazyErik.datalayer;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,11 +14,13 @@ import java.util.List;
 @NoArgsConstructor
 public class MyUser {
 
-    @Indexed(unique = true)
-    String username;
-    String password;
     @Id
-    String id;
+    private String id;
+    @Indexed(unique = true)
+    private String username;
+    private String password;
+
+
     private List<String> roles;
 
 }
