@@ -5,6 +5,8 @@ import com.github.EazyErik.repository.DrinksRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class DrinksService {
@@ -14,5 +16,10 @@ public class DrinksService {
 
     public Drink addToFavorite(Drink idDrink) {
         return drinksRepository.save(idDrink);
+    }
+
+
+    public Optional<Drink> getDrinkById(String id) {
+        return drinksRepository.findById(id);
     }
 }
