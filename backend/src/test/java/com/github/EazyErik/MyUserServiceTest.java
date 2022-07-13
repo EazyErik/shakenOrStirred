@@ -1,10 +1,10 @@
 package com.github.EazyErik;
 
 
-import com.github.EazyErik.DataLayer.MyUser;
-import com.github.EazyErik.DataLayer.UserCreationData;
-import com.github.EazyErik.Repository.MyUserRepo;
-import com.github.EazyErik.Service.MyUserService;
+import com.github.EazyErik.datalayer.MyUser;
+import com.github.EazyErik.datalayer.UserCreationData;
+import com.github.EazyErik.repository.MyUserRepo;
+import com.github.EazyErik.service.MyUserService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
