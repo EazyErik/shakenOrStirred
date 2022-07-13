@@ -1,4 +1,4 @@
-package com.github.EazyErik.DataLayer;
+package com.github.EazyErik.datalayer;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

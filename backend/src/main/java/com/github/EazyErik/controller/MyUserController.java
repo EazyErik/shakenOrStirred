@@ -1,7 +1,7 @@
-package com.github.EazyErik.Controller;
+package com.github.EazyErik.controller;
 
 import com.github.EazyErik.Service.MyUserService;
-import com.github.EazyErik.DataLayer.UserCreationData;
+import com.github.EazyErik.datalayer.UserCreationData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

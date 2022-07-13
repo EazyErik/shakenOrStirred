@@ -1,14 +1,17 @@
-package com.github.EazyErik.DataLayer;
+package com.github.EazyErik.datalayer;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class LoginData {
+@NoArgsConstructor
+public class UserCreationData {
+
     private String username;
     private String password;
+    private String passwordAgain;
 
 }

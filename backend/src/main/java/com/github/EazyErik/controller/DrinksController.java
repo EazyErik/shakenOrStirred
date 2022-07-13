@@ -1,4 +1,4 @@
-package com.github.EazyErik.Controller;
+package com.github.EazyErik.controller;
 
 
 import com.github.EazyErik.Service.DrinksService;

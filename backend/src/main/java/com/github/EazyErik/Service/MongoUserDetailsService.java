@@ -1,6 +1,6 @@
 package com.github.EazyErik.Service;
 
-import com.github.EazyErik.Repository.MyUserRepo;
+import com.github.EazyErik.repository.MyUserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

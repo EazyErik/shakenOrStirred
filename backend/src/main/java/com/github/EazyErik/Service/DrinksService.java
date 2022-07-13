@@ -1,6 +1,6 @@
 package com.github.EazyErik.Service;
 
-import com.github.EazyErik.Repository.DrinksRepository;
+import com.github.EazyErik.repository.DrinksRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,13 +1,12 @@
-package com.github.EazyErik.Controller;
+package com.github.EazyErik.controller;
 
 
-import com.github.EazyErik.DataLayer.LoginData;
-import com.github.EazyErik.DataLayer.LoginResponse;
-import com.github.EazyErik.DataLayer.MyUser;
+import com.github.EazyErik.datalayer.LoginData;
+import com.github.EazyErik.datalayer.LoginResponse;
+import com.github.EazyErik.datalayer.MyUser;
 import com.github.EazyErik.Service.MyUserService;
 import com.github.EazyErik.security.JWTService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -48,7 +47,7 @@ public class LoginController {
             return ResponseEntity.ok(new LoginResponse(jwtService.createToken(claims,loginData.getUsername())));
 
         }catch (AuthenticationException e) {
-            LOGGER.warn("user with " + loginData.getUsername() + " and " + loginData.getPassword()
+            LOGGER.warn("user with " + loginData.getUsername()
             + " could not authenticated",e);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }

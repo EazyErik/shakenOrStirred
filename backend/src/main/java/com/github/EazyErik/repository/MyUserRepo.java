@@ -1,6 +1,6 @@
-package com.github.EazyErik.Repository;
+package com.github.EazyErik.repository;
 
-import com.github.EazyErik.DataLayer.MyUser;
+import com.github.EazyErik.datalayer.MyUser;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

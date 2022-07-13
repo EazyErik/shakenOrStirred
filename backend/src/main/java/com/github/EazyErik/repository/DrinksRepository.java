@@ -1,8 +1,7 @@
-package com.github.EazyErik.Repository;
+package com.github.EazyErik.repository;
 
 
-import com.github.EazyErik.DataLayer.Drink;
-import lombok.Data;
+import com.github.EazyErik.datalayer.Drink;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
