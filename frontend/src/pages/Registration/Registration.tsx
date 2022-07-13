@@ -15,7 +15,7 @@ export default function Registration() {
   const register = (event:FormEvent) => {
         event.preventDefault()
       createUser(username,password,passwordAgain)
-          .then(() => nav("/login"))
+          .then(() => nav("/"))
           .catch(() => setError("Registration failed. Please try again"))
 
   }
@@ -23,20 +23,15 @@ export default function Registration() {
 
     return(
         <div>
-            <form className={"registration"} onSubmit={register}>
-                <p>Please register:</p>
-                <label>username</label>
-                <input type={"text"} placeholder={"enter your username:"} value={username} onChange={event => setUsername(event.target.value)}/><br/>
-                <label>password</label>
-                <input type={"password"} placeholder={"enter your password:"} value={password} onChange={event => setPassword(event.target.value)}/><br/>
-                <label>password again</label>
-                <input type={"password"} placeholder={"enter your password again:"} value={passwordAgain} onChange={event => setPasswordAgain(event.target.value)} />
-                <br/>
+            <h1>Please register:</h1>
+            <form onSubmit={register} >
+                <input type={"text"} placeholder={"Username"} value={username} onChange={event => setUsername(event.target.value)}/>
+                <input type={"password"} placeholder={"Password"} value={password} onChange={event => setPassword(event.target.value)}/>
+                <input type={"password"} placeholder={"Password again"} value={passwordAgain} onChange={event => setPasswordAgain(event.target.value)}/>
+                <input type={"submit"} value={"Register now"}/>
 
-                <button onClick={register} >register</button>
-                {error &&
-                <div>{error}</div>}
             </form>
+            {error}
         </div>
     )
 }

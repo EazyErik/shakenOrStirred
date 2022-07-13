@@ -1,18 +1,17 @@
 import axios, {AxiosResponse} from "axios";
-import {CategoryModel, Cocktail, DetailModel, IngredientModel} from "../components/Model";
+import {CategoryModel,DetailModel, IngredientModel, LoginResponse} from "../components/Model";
 
-export function getGinDrinks() {
-    return axios.get("https://thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka")
-        .then((response:AxiosResponse<Cocktail[]> )=> response.data)
-
-}
 export function getIngredients() {
-    return axios.get<IngredientModel>("https://thecocktaildb.com/api/json/v1/1/list.php?i=list")
+    return axios.get<IngredientModel>("https://thecocktaildb.com/api/json/v1/1/list.php?i=list"
+
+    )
         .then((response:AxiosResponse<IngredientModel> )=> response.data)
 }
 
 export function getCategory(drinkCategory: string | undefined) {
-    return axios.get(`https://thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkCategory}`)
+    return axios.get(`https://thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkCategory}`
+
+    )
         .then((response:AxiosResponse<CategoryModel>) => response.data)
 
 }
@@ -22,6 +21,7 @@ export function getDrink(details:string | undefined) {
 }
 
 export function postToFavourites(details: string | undefined) {
+
     return axios.post(`api/addToFav/`,//todo
         {
         headers: {
@@ -33,5 +33,10 @@ export function postToFavourites(details: string | undefined) {
 }
 
 export function createUser(username:string, password:string, passwordAgain:string) {
-    return axios.post(`api/user`,{username:username,password:password,passwordAgain:passwordAgain})
+    return axios.post("api/user",{username:username,password:password,passwordAgain:passwordAgain})
+}
+
+export function loginNow(username:string, password:string) {
+    return axios.post("/api/login",{username:username, password:password})
+        .then((response:AxiosResponse<LoginResponse>) => response.data)
 }

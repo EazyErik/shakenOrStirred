@@ -1,29 +1,48 @@
 
 import "./Login.css"
+import {useNavigate} from "react-router-dom";
+import {FormEvent, useState} from "react";
+import {loginNow} from "../../apiServices/service";
 
 
 export default function Login() {
+    const nav = useNavigate()
+
+    const [username,setUsername] = useState("")
+    const[password,setPassword] = useState("")
+    const[error,setError] = useState("")
+
+    const login = (event:FormEvent) => {
+        event.preventDefault()
+        loginNow(username,password)
+            .then(loginResponse=> {localStorage.setItem("jwt",loginResponse.token)
+            console.log(loginResponse)})
+
+            .then(() => nav("/home"))
+            .catch(() => setError("Password is wrong!"))
 
 
 
-
+    }
 
     return(
-        <div >
-
-            <form className={"login"} >
-                <label>username</label>
-                <input type={"text"} placeholder={"enter your username:"}  onChange={event => event.target.value}/><br/>
-                <label>password</label>
-                <input type={"password"} placeholder={"enter your password:"}  onChange={event => event.target.value}/>
-                <label> repeat password</label>
-                <input type={"password"} placeholder={"enter your password again:"} onChange={event => event.target.value}/>
-                <br/>
-                <button>login</button>
-                <br/>
-                <div className={"accountQuestion"}>No account yet? Please register:</div>
-                 <button >register</button>
+        <div className={"Login"}>
+            <h1>Please Login:</h1>
+            <form onSubmit={login}>
+                <input type={"text"} placeholder={"Username"} onChange={event => setUsername(event.target.value)}/>
+                <input type={"password"} placeholder={"Password"} onChange={event => setPassword(event.target.value)}/>
+                <input type={"submit"} value={"Login now"} />
             </form>
+            {error && <div>{error}</div>}
+
+
+            <div className={"signUp"}>
+                <h3>Don't have an account yet?</h3>
+
+                <button onClick={() => nav("/register")}> Sign up</button>
+            </div>
+
         </div>
     )
-}
+
+ }
