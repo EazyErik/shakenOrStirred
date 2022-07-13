@@ -17,7 +17,7 @@ export default function Ingredient() {
     return(
         <div>
             {ingredient &&
-            ingredient.drinks.map(ingr => <button onClick={() => nav(`/ingredient=${ingr.strIngredient1}`)}>{ingr.strIngredient1}</button>)}
+            ingredient.drinks.map((ingr,index) => <button key={index} onClick={() => nav(`/ingredient=${ingr.strIngredient1}`)}>{ingr.strIngredient1}</button>)}
 
         </div>
     )
