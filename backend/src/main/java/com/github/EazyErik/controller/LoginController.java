@@ -38,17 +38,17 @@ public class LoginController {
     @PostMapping
     public ResponseEntity<LoginResponse> login(@RequestBody LoginData loginData) {
 
-        try{
+        try {
 
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginData.getUsername(),loginData.getPassword()));
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginData.getUsername(), loginData.getPassword()));
             MyUser user = myUserService.findByUserName(loginData.getUsername()).orElseThrow();
-            Map<String,Object> claims = new HashMap<>();
-            claims.put("roles",user.getRoles());
-            return ResponseEntity.ok(new LoginResponse(jwtService.createToken(claims,loginData.getUsername())));
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("roles", user.getRoles());
+            return ResponseEntity.ok(new LoginResponse(jwtService.createToken(claims, loginData.getUsername())));
 
-        }catch (AuthenticationException e) {
+        } catch (AuthenticationException e) {
             LOGGER.warn("user with " + loginData.getUsername()
-            + " could not authenticated",e);
+                    + " could not authenticated", e);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }

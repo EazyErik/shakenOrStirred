@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 
-public interface DrinksRepository extends MongoRepository<Drink,String> {
+public interface DrinksRepository extends MongoRepository<Drink, String> {
 }

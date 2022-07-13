@@ -12,19 +12,18 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 
-    @Component
-    @RequiredArgsConstructor
-    public class MongoUserDetailsService implements UserDetailsService {
+@Component
+@RequiredArgsConstructor
+public class MongoUserDetailsService implements UserDetailsService {
 
-        private final MyUserRepo repository;
+    private final MyUserRepo repository;
 
 
-
-        @Override
-        public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-            return repository.findByUsername(username)
-                    .map(user -> new User(user.getUsername(), user.getPassword(), List.of(new SimpleGrantedAuthority("user"))))
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        }
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return repository.findByUsername(username)
+                .map(user -> new User(user.getUsername(), user.getPassword(), List.of(new SimpleGrantedAuthority("user"))))
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
 
 }

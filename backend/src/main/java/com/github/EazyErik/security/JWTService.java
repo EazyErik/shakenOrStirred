@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Map;
+
 @Service
 public class JWTService {
 
@@ -25,7 +26,7 @@ public class JWTService {
                 .setSubject(subject)
                 .setIssuedAt(Date.from(Instant.now()))
                 .setExpiration(Date.from(Instant.now().plus(Duration.ofHours(4))))
-                .signWith(SignatureAlgorithm.HS256,secret)
+                .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
 
     }

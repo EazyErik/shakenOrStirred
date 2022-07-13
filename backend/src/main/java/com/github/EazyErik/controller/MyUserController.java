@@ -18,11 +18,11 @@ public class MyUserController {
 
     @PostMapping
     public ResponseEntity<Void> createUser(@RequestBody UserCreationData user) {
-        try{
+        try {
             myUserService.createUser(user);
             return ResponseEntity.ok().build();
-        }catch(IllegalArgumentException e) {
-           return ResponseEntity.badRequest().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
         }
 
     }
