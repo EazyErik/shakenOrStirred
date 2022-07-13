@@ -1,4 +1,4 @@
-package com.github.EazyErik.Service;
+package com.github.EazyErik.service;
 
 import com.github.EazyErik.repository.DrinksRepository;
 import lombok.RequiredArgsConstructor;

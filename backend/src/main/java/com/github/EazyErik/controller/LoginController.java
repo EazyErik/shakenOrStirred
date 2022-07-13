@@ -4,7 +4,7 @@ package com.github.EazyErik.controller;
 import com.github.EazyErik.datalayer.LoginData;
 import com.github.EazyErik.datalayer.LoginResponse;
 import com.github.EazyErik.datalayer.MyUser;
-import com.github.EazyErik.Service.MyUserService;
+import com.github.EazyErik.service.MyUserService;
 import com.github.EazyErik.security.JWTService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

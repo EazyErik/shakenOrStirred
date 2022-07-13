@@ -1,6 +1,6 @@
 package com.github.EazyErik.security;
 
-import com.github.EazyErik.Service.MongoUserDetailsService;
+import com.github.EazyErik.service.MongoUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
