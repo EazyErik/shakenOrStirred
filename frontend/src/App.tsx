@@ -13,6 +13,7 @@ import Footer from "./components/Footer/Footer";
 
 
 
+
 export default function App() {
 
 
@@ -27,10 +28,10 @@ export default function App() {
             <Route path={"/register"} element={<Registration />}/>
             <Route path={"/home"} element={<Home />} />
             <Route path={"/ingredient"} element={<Ingredient />} />
-            <Route path={"/favourites=:favourites"} element={<Favourite />}/>
+            <Route path={"/favorites"} element={<Favourite />}/>
             <Route path={"/drinkDay"} element={<DrinkDay />} />
             <Route path={"/ingredient=:drinkCategory"} element={<Category />} />
-            <Route path={"/details=:details"} element={<Details />} />
+            <Route path={"/details=:details"} element={<Details  />} />
 
 
         </Routes>

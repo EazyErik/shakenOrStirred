@@ -12,8 +12,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Drink {
 
     @Id
-    private String drinkID;
-    private String name;
+    private String idDrink;
+    private String strDrink;
 
 
 }

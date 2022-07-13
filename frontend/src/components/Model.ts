@@ -16,9 +16,10 @@ export interface IngredientModel{
 
 export interface CategoryModel{
     drinks:[{
+        idDrink:string
         strDrink:string
         strDrinkThumb:string
-        idDrink:string
+
     }]
 }
 

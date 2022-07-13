@@ -20,17 +20,17 @@ export function getDrink(details:string | undefined) {
         .then((response:AxiosResponse<DetailModel>) => response.data)
 }
 
-export function postToFavourites(details: string | undefined) {
+export function postToFavourites(id:string | undefined) {
 
-    return axios.post(`api/addToFav/`,//todo
+    return axios.post(`api/addToFav`,{idDrink:id},
         {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`
-        }
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwt")}`
+     }
 
-    })
+     }
 
-}
+    )}
 
 export function createUser(username:string, password:string, passwordAgain:string) {
     return axios.post("api/user",{username:username,password:password,passwordAgain:passwordAgain})
