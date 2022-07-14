@@ -1,17 +1,69 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import showMyFavourites, {getCategory, getDrink} from "../../apiServices/service";
+import {Cocktail} from "../../components/Model";
+
+import {useNavigate, useParams} from "react-router-dom";
+import "./Favourite.css"
+
+
+
 
 export default function Favourite() {
 
-    useEffect(() => {
+    const[favourites, setFavourites] = useState<Cocktail[]>([])
 
-    })
+
+
+
+
+    const nav = useNavigate()
+
+
+    useEffect(() => {
+        const arr: Cocktail[] = []
+        showMyFavourites()
+            .then(data => {
+                data.map(fav => fav.idDrink)
+                    .map(async id => {
+                        arr.push((await getDrink(id)).drinks[0])
+                        setFavourites([...arr])
+
+                    })
+
+            })
+
+
+    },[])
+
+    const handleClick = () => {
+        nav(-3)
+
+    }
+
+
+
+
+
 
 
 
     return(
         <div>
-         Favourite Results
+        <div className={"FavouritesList"}>
+            <p className={"title"}>here are your favourites:</p>
+            {favourites.map(drink => <div>{drink.strDrink}</div>)}
+
+
 
         </div>
+            <div>
+            <button onClick={ handleClick}>back to ingredients</button>
+            </div>
+        </div>
     )
+
+
+
+
+
 }

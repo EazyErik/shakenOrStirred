@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+import java.util.List;
+
 @RestController("DrinksController")
 @RequestMapping("api/addToFav")
 @RequiredArgsConstructor
@@ -17,14 +20,17 @@ public class DrinksController {
     private final DrinksService drinksService;
 
     @PostMapping
-    public Drink addToFavorite(@RequestBody Drink idDrink) {
-        return drinksService.addToFavorite(idDrink);
+    public Drink addToFavorite(@RequestBody Drink idDrink, Principal username) {
+
+        return drinksService.addToFavorite(idDrink,username.getName());
 
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Drink> getDrinkById(@PathVariable String id) {
-        return ResponseEntity.of(drinksService.getDrinkById(id));
+    @GetMapping
+    public List<Drink> getAllMyFavourites(Principal username) {
+        return drinksService.getAllMyFavourites(username.getName());
     }
+
+
 
 }

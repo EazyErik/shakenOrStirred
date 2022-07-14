@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {CategoryModel,DetailModel, IngredientModel, LoginResponse} from "../components/Model";
+import {CategoryModel, DetailModel, FavouriteDrink, IngredientModel, LoginResponse} from "../components/Model";
 
 export function getIngredients() {
     return axios.get<IngredientModel>("https://thecocktaildb.com/api/json/v1/1/list.php?i=list"
@@ -31,6 +31,15 @@ export function postToFavourites(id:string | undefined) {
      }
 
     )}
+export default function showMyFavourites() {
+    return axios.get(`/api/addToFav`,{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        }
+
+    })
+        .then((response:AxiosResponse<FavouriteDrink[]>) => response.data)
+}
 
 export function createUser(username:string, password:string, passwordAgain:string) {
     return axios.post("api/user",{username:username,password:password,passwordAgain:passwordAgain})

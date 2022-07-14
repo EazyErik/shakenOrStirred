@@ -14,7 +14,7 @@ export default function Home() {
         <div className="d-grid gap-2 col-6 mx-auto">
 
 
-            <button className={"btn btn-black"} type={"button"} onClick={() => nav("/ingredient")}>show all ingredients</button>
+            <button onClick={() => nav("/ingredient")}>show all ingredients</button>
             <br/>
             <button onClick={() => nav("/favourites")}>show my favorites</button>
             <br/>

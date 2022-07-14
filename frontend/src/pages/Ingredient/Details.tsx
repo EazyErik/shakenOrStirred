@@ -1,7 +1,8 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getDrink, postToFavourites} from "../../apiServices/service";
-import {CategoryModel, DetailModel} from "../../components/Model";
+import {DetailModel} from "../../components/Model";
+import "./Details.css"
 
 
 
@@ -10,7 +11,6 @@ import {CategoryModel, DetailModel} from "../../components/Model";
 export default function Details() {
     const {details} = useParams()
     const[detail,setDetail] = useState<DetailModel>()
-    const[id,setId] = useState<CategoryModel>()
     const nav = useNavigate()
 
     useEffect(() => {
@@ -21,17 +21,23 @@ export default function Details() {
 
     const handleClick = () =>{
         postToFavourites(details)
-            .then(() => nav(`/favorites`))
+            .then(() => nav(`/favourites`))
 
 
     }
 
     return(
-        <div>
+        <div className={"detailPage"}>
             {detail &&
                 <div>
                     <div>{detail.drinks[0].strDrink}</div>
-                    <img src={detail.drinks[0].strDrinkThumb} alt={""}/>
+
+
+
+
+                    <div>
+                    <img className={"detailDrink"} src={detail.drinks[0].strDrinkThumb} alt={""}/>
+                    </div>
                     <button onClick={handleClick}>I like</button>
                     <div>{detail.drinks[0].strInstructions}</div>
                     <div>{detail.drinks[0].strIngredient1}</div>

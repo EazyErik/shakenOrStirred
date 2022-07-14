@@ -13,7 +13,7 @@ public class Drink {
 
     @Id
     private String idDrink;
-    private String strDrink;
+    private String username;
 
 
 }

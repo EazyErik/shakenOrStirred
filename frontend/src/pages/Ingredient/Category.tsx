@@ -2,6 +2,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {CategoryModel} from "../../components/Model";
 import {getCategory} from "../../apiServices/service";
+import "./Category.css"
 
 
 
@@ -19,15 +20,17 @@ export default function Category() {
     },[drinkCategory])
 
     return(
-        <div>
+        <div className={"table"}>
             {category &&
             category.drinks.map((singleCategory,index) => <div key={index} onClick={() => nav(`/details=${singleCategory.idDrink}`)}>
-               <div>
-                   <img src={singleCategory.strDrinkThumb} alt={"drinkCategory"} />
+               <div className={"drinkName"}>
+                   {singleCategory.strDrink}
+
 
                </div>
-                <div>
-                    {singleCategory.strDrink}
+                <div >
+                    <img className={"photoDrink"} src={singleCategory.strDrinkThumb} alt={"drinkCategory"} />
+
                 </div>
             </div>)}
         </div>

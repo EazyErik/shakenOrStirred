@@ -2,6 +2,7 @@ package com.github.EazyErik;
 
 
 import com.github.EazyErik.datalayer.Drink;
+import com.github.EazyErik.datalayer.MyUser;
 import com.github.EazyErik.repository.DrinksRepository;
 import com.github.EazyErik.service.DrinksService;
 import org.assertj.core.api.Assertions;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -27,10 +30,12 @@ public class DrinksServiceTest {
 
 
         //when
-        Drink actual = testService.addToFavorite(testDrink);
+
+        Drink actual = testService.addToFavorite(testDrink, "Hansi");
 
         //then
         Assertions.assertThat(actual.getIdDrink()).isEqualTo("123");
+        Assertions.assertThat(actual.getUsername()).isEqualTo("Hansi");
 
     }
 
@@ -40,16 +45,17 @@ public class DrinksServiceTest {
         //given
         Drink testDrink = new Drink();
         testDrink.setIdDrink("123");
+
         DrinksRepository testRepo = Mockito.mock(DrinksRepository.class);
         DrinksService testService = new DrinksService(testRepo);
-        Mockito.when(testRepo.findById("123")).thenReturn(Optional.of(testDrink));
+        Mockito.when(testRepo.findAllByUsername("Hansi")).thenReturn(List.of(testDrink));
 
 
         //when
-        Optional<Drink> actual = testService.getDrinkById("123");
+        List<Drink> actual = testService.getAllMyFavourites("Hansi");
 
         //then
-        Assertions.assertThat(actual.get()).isEqualTo(testDrink);
+        Assertions.assertThat(actual.get(0)).isEqualTo(testDrink);
 
     }
 
@@ -59,13 +65,14 @@ public class DrinksServiceTest {
         //given
         Drink testDrink = new Drink();
         testDrink.setIdDrink("123");
+
         DrinksRepository testRepo = Mockito.mock(DrinksRepository.class);
         DrinksService testService = new DrinksService(testRepo);
-        Mockito.when(testRepo.findById("1234")).thenReturn(Optional.empty());
+        Mockito.when(testRepo.findAllByUsername("Klausi")).thenReturn(List.of(testDrink));
 
 
         //when
-        Optional<Drink> actual = testService.getDrinkById("1234");
+       List<Drink> actual = testService.getAllMyFavourites("Hansi");
 
         //then
         Assertions.assertThat(actual).isEmpty();
