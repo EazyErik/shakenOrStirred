@@ -3,6 +3,7 @@ package com.github.EazyErik.datalayer;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,7 +21,8 @@ public class MyUser {
     private String username;
     private String password;
 
-
     private List<String> roles;
+
+
 
 }

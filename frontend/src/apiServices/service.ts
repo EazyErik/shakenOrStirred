@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {CategoryModel,DetailModel, IngredientModel, LoginResponse} from "../components/Model";
+import {CategoryModel, DetailModel, FavouriteDrink, IngredientModel, LoginResponse} from "../components/Model";
 
 export function getIngredients() {
     return axios.get<IngredientModel>("https://thecocktaildb.com/api/json/v1/1/list.php?i=list"
@@ -17,18 +17,37 @@ export function getCategory(drinkCategory: string | undefined) {
 }
 export function getDrink(details:string | undefined) {
     return axios.get(`https://thecocktaildb.com/api/json/v1/1/lookup.php?i=${details}`)
-        .then((response:AxiosResponse<DetailModel>) => response.data)
+        .then((response:AxiosResponse<DetailModel>) =>{
+            return response.data
+
+        })
 }
 
-export function postToFavourites(details: string | undefined) {
-    return axios.post("api/addToFav",
-        //todo
+
+// export function deleteFromFavourites(){
+//     return axios.get()
+//
+// }
+
+export function postToFavourites(id:string | undefined) {
+
+    return axios.post(`api/addToFav`,{idDrink:id},
         {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("jwt")}`
-            }
-        })
+     }
 
+     }
+
+    )}
+export default function showMyFavourites() {
+    return axios.get(`/api/addToFav`,{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        }
+
+    })
+        .then((response:AxiosResponse<FavouriteDrink[]>) => response.data)
 }
 
 export function createUser(username:string, password:string, passwordAgain:string) {

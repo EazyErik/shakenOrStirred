@@ -1,0 +1,14 @@
+.detailDrink{
+    width:70%;
+    height:70%;
+    border:solid black;
+}
+
+.detailPage{
+    text-align: center;
+}
+
+.heading_details{
+    font-size: larger;
+    font-weight: bolder;
+}

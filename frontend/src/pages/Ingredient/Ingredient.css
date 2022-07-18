@@ -1,0 +1,16 @@
+.ingredients {
+    text-align: center;
+
+}
+
+.singleIngredient {
+    background-color: white;
+    margin-bottom: 2px;
+    width: 50%;
+    margin-left: 28%;
+    border: solid black;
+}
+
+.ingredientsTable {
+    text-align: center;
+}
