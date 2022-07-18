@@ -21,12 +21,11 @@ export default function Category() {
 
     return(
         <div className={"table"}>
+           <label className={"category"}> {drinkCategory} Drinks:</label>
             {category &&
             category.drinks.map((singleCategory,index) => <div key={index} onClick={() => nav(`/details=${singleCategory.idDrink}`)}>
                <div className={"drinkName"}>
                    {singleCategory.strDrink}
-
-
                </div>
                 <div >
                     <img className={"photoDrink"} src={singleCategory.strDrinkThumb} alt={"drinkCategory"} />

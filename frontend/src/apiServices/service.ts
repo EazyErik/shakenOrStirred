@@ -17,8 +17,17 @@ export function getCategory(drinkCategory: string | undefined) {
 }
 export function getDrink(details:string | undefined) {
     return axios.get(`https://thecocktaildb.com/api/json/v1/1/lookup.php?i=${details}`)
-        .then((response:AxiosResponse<DetailModel>) => response.data)
+        .then((response:AxiosResponse<DetailModel>) =>{
+            return response.data
+
+        })
 }
+
+
+// export function deleteFromFavourites(){
+//     return axios.get()
+//
+// }
 
 export function postToFavourites(id:string | undefined) {
 

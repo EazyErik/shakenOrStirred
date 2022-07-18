@@ -18,9 +18,9 @@ export default function Ingredient() {
 
     return(
         <div className={"ingredientsTable"}>
-        <div className={"ingredients"}>
+        <div className="d-grid gap-2">
             {ingredient &&
-            ingredient.drinks.map((ingr,index) => <div className={"singleIngredient"} key={index} onClick={() => nav(`/ingredient=${ingr.strIngredient1}`)}>{ingr.strIngredient1}</div>)}<br/>
+            ingredient.drinks.map((ingr,index) => <button type="button" className={"btn btn-secondary"} key={index} onClick={() => nav(`/ingredient=${ingr.strIngredient1}`)}>{ingr.strIngredient1}</button>)}<br/>
 
         </div>
         </div>

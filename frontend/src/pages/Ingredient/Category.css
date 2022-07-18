@@ -3,14 +3,16 @@
     height:40%;
     border:4px solid;
     margin-bottom: 2%;
-
-
-
-
+    padding:0!important;
 }
-
 
 .drinkName{
    font-weight: bolder;
 
+}
+
+.category{
+    background-color: white;
+    font-weight: bold;
+    margin-bottom: 10%;
 }

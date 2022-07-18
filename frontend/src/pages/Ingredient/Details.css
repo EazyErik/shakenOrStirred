@@ -7,3 +7,8 @@
 .detailPage{
     text-align: center;
 }
+
+.heading_details{
+    font-size: larger;
+    font-weight: bolder;
+}

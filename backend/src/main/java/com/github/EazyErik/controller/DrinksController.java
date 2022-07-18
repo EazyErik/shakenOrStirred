@@ -4,7 +4,6 @@ package com.github.EazyErik.controller;
 import com.github.EazyErik.datalayer.Drink;
 import com.github.EazyErik.service.DrinksService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -21,7 +20,6 @@ public class DrinksController {
 
     @PostMapping
     public Drink addToFavorite(@RequestBody Drink idDrink, Principal username) {
-
         return drinksService.addToFavorite(idDrink,username.getName());
 
     }
@@ -30,7 +28,5 @@ public class DrinksController {
     public List<Drink> getAllMyFavourites(Principal username) {
         return drinksService.getAllMyFavourites(username.getName());
     }
-
-
 
 }
