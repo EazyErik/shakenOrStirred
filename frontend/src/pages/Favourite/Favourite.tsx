@@ -41,7 +41,7 @@ export default function Favourite() {
             {favourites.map(drink =>
                 <div className={"favName"}>
                     {drink.strDrink}
-                   <div> <img className={"favPic"} src={drink.strDrinkThumb}></img></div>
+                   <div> <img className={"favPic"} src={drink.strDrinkThumb} alt={"picture of cocktail"}></img></div>
                     <button onClick={deleteDrink} type="button" className="btn btn-danger">delete this drink</button>
 
                 </div>
