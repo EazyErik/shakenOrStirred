@@ -1,4 +1,4 @@
-import {Cocktail} from "./Model";
+import {Cocktail} from "../Model";
 import "./Drink.css"
 
 interface DrinkProps{

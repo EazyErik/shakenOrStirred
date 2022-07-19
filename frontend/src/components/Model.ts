@@ -1,9 +1,10 @@
 
 
-export interface Cocktail {
+export interface CocktailFavs {
 
     strDrink:string
     strDrinkThumb:string
+    idDrink:string
 
 
 }
@@ -29,6 +30,7 @@ export interface DetailModel{
 
 }
 export interface Cocktail{
+    idDrink:string
     strDrinkThumb: string
     strDrink: string
     strInstructions: string

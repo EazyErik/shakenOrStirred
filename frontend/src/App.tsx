@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, Routes} from "react-router-dom";
-import Home from "./components/Home";
+import Home from "./components/home/Home";
 import Ingredient from "./pages/Ingredient/Ingredient";
 import Favourite from "./pages/Favourite/Favourite";
 import Category from "./pages/Ingredient/Category";

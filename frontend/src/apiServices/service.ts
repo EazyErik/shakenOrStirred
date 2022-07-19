@@ -24,14 +24,21 @@ export function getDrink(details:string | undefined) {
 }
 
 
-// export function deleteFromFavourites(){
-//     return axios.get()
-//
-// }
+export function deleteFromFavourites(id:string | undefined){
+    return axios.delete(`api/favourites/${id}`,
+        {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwt")}`
+            }
+
+        })
+
+
+}
 
 export function postToFavourites(id:string | undefined) {
 
-    return axios.post(`api/addToFav`,{idDrink:id},
+    return axios.post(`api/favourites`,{idDrink:id},
         {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("jwt")}`
@@ -41,7 +48,7 @@ export function postToFavourites(id:string | undefined) {
 
     )}
 export default function showMyFavourites() {
-    return axios.get(`/api/addToFav`,{
+    return axios.get(`/api/favourites`,{
         headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
         }

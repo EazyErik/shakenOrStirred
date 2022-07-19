@@ -13,6 +13,8 @@ public interface DrinksRepository extends MongoRepository<Drink, String> {
 
     List<Drink> findAllByUsername(String username);
 
+    int countAllByUsername(String username);
+
 
 
 

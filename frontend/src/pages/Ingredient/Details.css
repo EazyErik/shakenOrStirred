@@ -1,7 +1,8 @@
-.detailDrink{
+.detailDrinkPhoto{
     width:70%;
     height:70%;
     border:solid black;
+    margin-bottom: 5%;
 }
 
 .detailPage{
@@ -11,4 +12,16 @@
 .heading_details{
     font-size: larger;
     font-weight: bolder;
+    margin-top: 10%;
+
+}
+
+.error{
+    color: red;
+}
+.alertSpots{
+
+    color: red;
+
+
 }

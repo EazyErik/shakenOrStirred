@@ -1,22 +1,32 @@
 import {useEffect, useState} from "react";
-import showMyFavourites, { getDrink} from "../../apiServices/service";
-import {Cocktail} from "../../components/Model";
+import showMyFavourites, {deleteFromFavourites, getDrink} from "../../apiServices/service";
+import {CocktailFavs} from "../../components/Model";
 import {useNavigate} from "react-router-dom";
 import "./Favourite.css"
 
+
 export default function Favourite() {
 
-    const[favourites, setFavourites] = useState<Cocktail[]>([])
+    const [favourites, setFavourites] = useState<CocktailFavs[]>([])
+
 
 
     const nav = useNavigate()
 
 
     useEffect(() => {
-        const arr: Cocktail[] = []
+       getFavourites()
+
+    }, [])
+
+    const getFavourites = () => {
+        const arr: CocktailFavs[] = []
+
         showMyFavourites()
             .then(data => {
-                data.map(fav=> fav.idDrink)
+                console.log(data)
+                setFavourites([])
+                data.map(fav => fav.idDrink)
                     .map(async id => {
                         arr.push((await getDrink(id)).drinks[0])
                         setFavourites([...arr])
@@ -25,38 +35,39 @@ export default function Favourite() {
 
             })
 
-
-    },[])
-
+    }
 
 
-    const deleteDrink = () => {
+    const deleteDrink = (id: string) => {
+
+        deleteFromFavourites(id)
+            .then(() => getFavourites())
 
     }
 
-    return(
+
+
+
+
+    return (
         <div>
-        <div className={"FavouritesList"}>
-            <label className={"title"}>Here are your favourites:</label>
-            {favourites.map(drink =>
-                <div className={"favName"}>
-                    {drink.strDrink}
-                   <div> <img className={"favPic"} src={drink.strDrinkThumb} alt={"cocktail"}></img></div>
-                    <button onClick={deleteDrink} type="button" className="btn btn-danger">delete this drink</button>
+            <div className={"FavouritesList"}>
+                <label className={"title"}>Here are your 5 favourites:</label>
+                {favourites.map(drink =>
+                    <div key={drink.idDrink} className={"favName"}>
+                        {drink.strDrink}
+                        <div><img className={"favPic"} src={drink.strDrinkThumb} alt={"cocktail"}></img></div>
+                        <button onClick={() => deleteDrink(drink.idDrink)} type="button"
+                                className="btn btn-danger">delete this drink
+                        </button>
+                    </div>
+                )
+                }
 
-                </div>
-            )
-            }
-
-        </div>
+            </div>
             <div>
-            <button type="button" className="btn btn-secondary" onClick={() => nav(-3)}>back to ingredients</button>
+                <button type="button" className="btn btn-secondary" onClick={() => nav(-3)}>back to ingredients</button>
             </div>
         </div>
     )
-
-
-
-
-
 }
