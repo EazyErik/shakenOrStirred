@@ -50,8 +50,8 @@ export interface LoginResponse{
 export interface FavouriteDrinkModel {
 
     idDrink: string
-    strDrink: string
-    strDrinkThumb: string
+
+
 
 
 }

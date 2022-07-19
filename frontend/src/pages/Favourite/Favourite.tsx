@@ -1,13 +1,13 @@
 import {useEffect, useState} from "react";
 import showMyFavourites, {deleteFromFavourites, getDrink} from "../../apiServices/service";
-import {FavouriteDrinkModel} from "../../components/Model";
+import {Cocktail} from "../../components/Model";
 import {useNavigate} from "react-router-dom";
 import "./Favourite.css"
 
 
 export default function Favourite() {
 
-    const [favourites, setFavourites] = useState<FavouriteDrinkModel[]>([])
+    const [favourites, setFavourites] = useState<Cocktail[]>([])
 
 
     const nav = useNavigate()
@@ -19,7 +19,7 @@ export default function Favourite() {
     }, [])
 
     const getFavourites = () => {
-        const arr: FavouriteDrinkModel[] = []
+        const arr: Cocktail[] = []
 
         showMyFavourites()
             .then(data => {
