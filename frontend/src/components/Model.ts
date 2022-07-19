@@ -1,14 +1,4 @@
 
-
-export interface CocktailFavs {
-
-    strDrink:string
-    strDrinkThumb:string
-    idDrink:string
-
-
-}
-
 export interface IngredientModel{
    drinks:[{
        strIngredient1:string
@@ -57,9 +47,12 @@ export interface LoginResponse{
 
 }
 
-export interface FavouriteDrink{
+export interface FavouriteDrinkModel {
 
-        idDrink:string
+    idDrink: string
+    strDrink: string
+    strDrinkThumb: string
+
 
 }
 

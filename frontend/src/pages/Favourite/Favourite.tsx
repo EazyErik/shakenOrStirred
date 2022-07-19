@@ -1,26 +1,25 @@
 import {useEffect, useState} from "react";
 import showMyFavourites, {deleteFromFavourites, getDrink} from "../../apiServices/service";
-import {CocktailFavs} from "../../components/Model";
+import {FavouriteDrinkModel} from "../../components/Model";
 import {useNavigate} from "react-router-dom";
 import "./Favourite.css"
 
 
 export default function Favourite() {
 
-    const [favourites, setFavourites] = useState<CocktailFavs[]>([])
-
+    const [favourites, setFavourites] = useState<FavouriteDrinkModel[]>([])
 
 
     const nav = useNavigate()
 
 
     useEffect(() => {
-       getFavourites()
+        getFavourites()
 
     }, [])
 
     const getFavourites = () => {
-        const arr: CocktailFavs[] = []
+        const arr: FavouriteDrinkModel[] = []
 
         showMyFavourites()
             .then(data => {
@@ -44,10 +43,6 @@ export default function Favourite() {
             .then(() => getFavourites())
 
     }
-
-
-
-
 
     return (
         <div>
