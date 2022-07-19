@@ -1,13 +1,4 @@
 
-
-export interface Cocktail {
-
-    strDrink:string
-    strDrinkThumb:string
-
-
-}
-
 export interface IngredientModel{
    drinks:[{
        strIngredient1:string
@@ -29,6 +20,7 @@ export interface DetailModel{
 
 }
 export interface Cocktail{
+    idDrink:string
     strDrinkThumb: string
     strDrink: string
     strInstructions: string
@@ -55,9 +47,12 @@ export interface LoginResponse{
 
 }
 
-export interface FavouriteDrink{
+export interface FavouriteDrinkModel {
 
-        idDrink:string
+    idDrink: string
+    strDrink: string
+    strDrinkThumb: string
+
 
 }
 

@@ -1,6 +1,6 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {getDrink, postToFavourites} from "../../apiServices/service";
+import showMyFavourites, {getDrink, postToFavourites} from "../../apiServices/service";
 import {DetailModel} from "../../components/Model";
 import "./Details.css"
 
@@ -11,9 +11,13 @@ import "./Details.css"
 export default function Details() {
     const {details} = useParams()
     const[detail,setDetail] = useState<DetailModel>()
+    const[count,setCount] = useState(0)
+
+    const[error, setError] = useState("")
     const nav = useNavigate()
 
     useEffect(() => {
+        numberOfFavourites()
         getDrink(details)
             .then(data => setDetail(data))
 
@@ -22,9 +26,16 @@ export default function Details() {
     const handleClick = () =>{
         postToFavourites(details)
             .then(() => nav(`/favourites`))
+            .catch(()=> setError("Only 5 favourites are allowed!"))
 
 
     }
+    const numberOfFavourites = () => {
+        showMyFavourites()
+            .then(data => {setCount(data.length)
+                console.log(data.length)})
+    }
+
 
     return(
         <div className={"detailPage"}>
@@ -32,9 +43,17 @@ export default function Details() {
                 <div>
                     <div className={"heading_details"}>{detail.drinks[0].strDrink}</div>
                     <div>
-                        <img className={"detailDrink"} src={detail.drinks[0].strDrinkThumb} alt={""}/>
+                        <img className={"detailDrinkPhoto"} src={detail.drinks[0].strDrinkThumb} alt={""}/>
                     </div>
-                    <button type="button" className="btn btn-danger" onClick={handleClick}>Add to favourites</button>
+                    <button type="button" className="btn btn-warning" onClick={() => {
+                        handleClick();
+                        numberOfFavourites();
+                    }}>Add to favourites</button>
+                    <div className={"alertSpots"}>{5 - count} spot(s) left for your favs! </div>
+                    {error && <div className={"error"}>{error}
+                        <br/>
+                        <button onClick={()=> nav("/favourites")}>back to favourites</button>
+                    </div>}
 
                     <div className={"heading_details"}>Instructions:</div>
                     <div>{detail.drinks[0].strInstructions}</div>
