@@ -26,10 +26,21 @@ export default function Details() {
     const handleClick = () =>{
         postToFavourites(details)
             .then(() => nav(`/favourites`))
-            .catch(()=> setError("Only 5 favourites are allowed!"))
+            .catch((error)=> {if (error.response.status === 400){
+                setError("Only 5 favourites are allowed!")
+            }
+            else if(error.response.status === 403) {
+                localStorage.removeItem("jwt")
+                nav("/")
+            }
+
+           })
 
 
     }
+
+
+
     const numberOfFavourites = () => {
         showMyFavourites()
             .then(data => {setCount(data.length)

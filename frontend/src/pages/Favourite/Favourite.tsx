@@ -5,6 +5,8 @@ import {useNavigate} from "react-router-dom";
 import "./Favourite.css"
 
 
+
+
 export default function Favourite() {
 
     const [favourites, setFavourites] = useState<Cocktail[]>([])
@@ -33,6 +35,12 @@ export default function Favourite() {
                     })
 
             })
+            .catch((error) => {
+                if (error.response.status === 403) {
+                    localStorage.removeItem("jwt")
+                    nav("/")
+                }
+            })
 
     }
 
@@ -41,6 +49,12 @@ export default function Favourite() {
 
         deleteFromFavourites(id)
             .then(() => getFavourites())
+            .catch((error) => {
+                if (error.response.status === 403) {
+                    localStorage.removeItem("jwt")
+                    nav("/")
+                }
+            })
 
     }
 

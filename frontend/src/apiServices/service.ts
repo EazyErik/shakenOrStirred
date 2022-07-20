@@ -1,5 +1,7 @@
 import axios, {AxiosResponse} from "axios";
-import {CategoryModel, DetailModel, FavouriteDrinkModel, IngredientModel, LoginResponse} from "../components/Model";
+import {CategoryModel, DetailModel, FavouriteDrinkModel, IngredientModel, LoginResponse}
+    from "../components/Model";
+
 
 export function getIngredients() {
     return axios.get<IngredientModel>("https://thecocktaildb.com/api/json/v1/1/list.php?i=list"
@@ -38,6 +40,7 @@ export function deleteFromFavourites(id:string | undefined){
 
 export function postToFavourites(id:string | undefined) {
 
+
     return axios.post(`api/favourites`,{idDrink:id},
         {
             headers: {
@@ -46,7 +49,10 @@ export function postToFavourites(id:string | undefined) {
 
      }
 
-    )}
+    )
+
+}
+
 export default function showMyFavourites() {
     return axios.get(`/api/favourites`,{
         headers: {

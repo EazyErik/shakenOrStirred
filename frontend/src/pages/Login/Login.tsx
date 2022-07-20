@@ -1,7 +1,7 @@
 
 import "./Login.css"
 import {useNavigate} from "react-router-dom";
-import {FormEvent, useState} from "react";
+import {FormEvent, useEffect, useState} from "react";
 import {loginNow} from "../../apiServices/service";
 
 
@@ -12,10 +12,24 @@ export default function Login() {
     const[password,setPassword] = useState("")
     const[error,setError] = useState("")
 
+
+
+    //no need to login if token is still valid
+    useEffect(()=> {
+        if(localStorage.getItem("jwt") !== null && localStorage.getItem("jwt") !== undefined) {
+            nav("/home")
+        }
+
+
+
+    },[])
+
+
     const login = (event:FormEvent) => {
         event.preventDefault()
         loginNow(username,password)
             .then(loginResponse=> {localStorage.setItem("jwt",loginResponse.token)
+                localStorage.setItem("username",username)
             console.log(loginResponse)})
 
             .then(() => nav("/home"))
