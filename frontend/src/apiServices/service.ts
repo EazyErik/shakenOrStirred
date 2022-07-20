@@ -2,6 +2,7 @@ import axios, {AxiosResponse} from "axios";
 import {CategoryModel, DetailModel, FavouriteDrinkModel, IngredientModel, LoginResponse}
     from "../components/Model";
 
+
 // communication with cocktail api
 export function getIngredients() {
     return axios.get<IngredientModel>("https://thecocktaildb.com/api/json/v1/1/list.php?i=list"
@@ -65,13 +66,20 @@ export function showMyFavourites() {
 
 //communication with database(Collection:customDrink)
 
-export function postCustomDrink(instruction:string | undefined,ingredient:string | undefined, glass:string |undefined) {
-    return axios.post(`api/customDrink`,{customInstruction:instruction,customIngredient:ingredient,customGlass:glass},{
+export function postCustomDrink(instruction:string | undefined,ingredient:string | undefined, glass:string |undefined, data:string|undefined) {
+    return axios.post(`api/customDrink`,{customInstruction:instruction,customIngredient:ingredient,customGlass:glass,customDrinkURL:data},{
         headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
         }
     }
     )
+}
+
+//communication with cloudinary
+
+export function sendPicture(formData:FormData) {
+    return axios.post(`https://api.cloudinary.com/v1_1/eazyerik/image/upload`,formData)
+        .then(response => response.data)
 }
 
 

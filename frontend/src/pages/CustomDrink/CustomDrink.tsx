@@ -1,6 +1,6 @@
 import "./CustomDrink.css"
 import {FormEvent, useState} from "react";
-import {postCustomDrink} from "../../apiServices/service";
+import {postCustomDrink, sendPicture} from "../../apiServices/service";
 
 
 export default function CustomDrink(){
@@ -9,13 +9,35 @@ export default function CustomDrink(){
     const[instruction,setInstruction] = useState("")
     const[ingredient, setIngredient] = useState("")
     const[glass, setGlass] = useState("")
+    const[image,setImage] = useState({} as File)
+    const[url,setUrl] = useState("")
+
+
+
     //info to user, that drink is added
     const[userInfo, setUserInfo] = useState("")
 
 
     const addCustomDrink = (event:FormEvent) => {
         event.preventDefault()
-        postCustomDrink(instruction,ingredient,glass)
+        handleUpload()
+        postCustomDrink(instruction,ingredient,glass,url)
+
+
+
+    }
+
+
+
+    const handleUpload = () => {
+        const formData = new FormData()
+        formData.append("file",image)
+        formData.append("upload_preset","customDrink")
+        sendPicture(formData)
+            .then((data) => {setUrl(data.secure_url)
+            console.log(data.secure_url)})
+
+
 
 
     }
@@ -23,25 +45,29 @@ export default function CustomDrink(){
 
     return(
         <div className={"customDrink"}>
-            <h3>Show your creations</h3>
+            <h3>Add your own creations:</h3>
             <form onSubmit={addCustomDrink} >
                 <div>
                 <label>Upload your picture here:</label>
-                <img src={""} alt={"super fancy cocktail"}/>
+                    <input type={"file"} accept={"image/*"} onChange={event => {
+                        if(event.target.files !== null){
+                            setImage(event.target.files[0])}}
+                        }/>
                 </div>
                 <div>
                 <label>Enter your instructions:</label>
-                <input type={"text"} placeholder={"how do you prepare your drink?"} onChange={event => setInstruction(event.target.value)} />
+                <input type={"text"} onChange={event => setInstruction(event.target.value)} />
                 </div>
                 <div>
                 <label>Enter your ingredients:</label>
-                <input type={"text"} placeholder={"what's in it?"} onChange={event => setIngredient(event.target.value)} />
+                <input type={"text"} onChange={event => setIngredient(event.target.value)} />
                 </div>
                 <div>
                 <label>Enter your glass :</label>
-                <input type={"text"} placeholder={"which glass did you use?"} onChange={event => setGlass(event.target.value)}/>
+                <input type={"text"} onChange={event => setGlass(event.target.value)}/>
                 </div>
-                <button onClick={addCustomDrink}>add</button>
+                {image && instruction && ingredient && glass &&
+                <button type={"submit"}>add</button>}
 
             </form>
         </div>

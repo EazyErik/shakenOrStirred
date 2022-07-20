@@ -18,4 +18,5 @@ public class CustomDrink {
     private String customInstruction;
     private String customIngredient;
     private String customGlass;
+    private String customDrinkURL;
 }
