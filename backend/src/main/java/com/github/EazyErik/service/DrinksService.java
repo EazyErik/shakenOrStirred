@@ -1,8 +1,8 @@
 package com.github.EazyErik.service;
 
 
-import com.github.EazyErik.datalayer.Drink;
-import com.github.EazyErik.repository.DrinksRepository;
+import com.github.EazyErik.datalayer.FavouriteDrink;
+import com.github.EazyErik.repository.FavouriteDrinksRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,23 +15,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DrinksService {
 
-    private final DrinksRepository drinksRepository;
+    private final FavouriteDrinksRepository favouriteDrinksRepository;
 
 
-    public Drink addToFavorite(Drink drinkToAdd, String username) {
+    public FavouriteDrink addToFavorite(FavouriteDrink drinkToAdd, String username) {
 
 
-        int cocktailCounter = drinksRepository.countAllByUsername(username);
+        int cocktailCounter = favouriteDrinksRepository.countAllByUsername(username);
         if (cocktailCounter >= 5) {
             throw new IllegalStateException("too many drinks in your list");
         }
         drinkToAdd.setUsername(username);
-        return drinksRepository.save(drinkToAdd);
+        return favouriteDrinksRepository.save(drinkToAdd);
     }
 
-    public List<Drink> getAllMyFavourites(String username) {
+    public List<FavouriteDrink> getAllMyFavourites(String username) {
 
-      return drinksRepository.findAllByUsername(username);
+      return favouriteDrinksRepository.findAllByUsername(username);
 
 
 
@@ -40,7 +40,7 @@ public class DrinksService {
     public void removeFromFavs(String id) {
 
 
-        drinksRepository.deleteById(id);
+        favouriteDrinksRepository.deleteById(id);
     }
 }
 

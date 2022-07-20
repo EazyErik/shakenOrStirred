@@ -21,7 +21,7 @@ export default function Home() {
             <br/>
             <button type="button" className="btn btn-light" onClick={() => nav("/favourites")}>show my favourites</button>
             <br/>
-            <button type="button" className="btn btn-light" onClick={() => nav("/ownDrink")}>create your own drink</button>
+            <button type="button" className="btn btn-light" onClick={() => nav("/customDrink")}>create your own drink</button>
 
 
         </div>

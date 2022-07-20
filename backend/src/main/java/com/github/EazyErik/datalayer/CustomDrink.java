@@ -7,15 +7,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
+@Document(collection = "customDrinks")
 @NoArgsConstructor
-@Document(collection = "Drinks")
-public class Drink {
+public class CustomDrink {
 
     @Id
-    private String idDrink;
+    private String customIDFromDB;
+    private boolean isCustomDrink = true;
     private String username;
-
-
-
-
+    private String customInstruction;
+    private String customIngredient;
+    private String customGlass;
 }

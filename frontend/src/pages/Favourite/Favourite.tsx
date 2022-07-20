@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import showMyFavourites, {deleteFromFavourites, getDrink} from "../../apiServices/service";
+import {deleteFromFavourites, getDrink, showMyFavourites} from "../../apiServices/service";
 import {Cocktail} from "../../components/Model";
 import {useNavigate} from "react-router-dom";
 import "./Favourite.css"

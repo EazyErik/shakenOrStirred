@@ -1,6 +1,6 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import showMyFavourites, {getDrink, postToFavourites} from "../../apiServices/service";
+import {getDrink, postToFavourites, showMyFavourites} from "../../apiServices/service";
 import {DetailModel} from "../../components/Model";
 import "./Details.css"
 

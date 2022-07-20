@@ -2,7 +2,7 @@ import axios, {AxiosResponse} from "axios";
 import {CategoryModel, DetailModel, FavouriteDrinkModel, IngredientModel, LoginResponse}
     from "../components/Model";
 
-
+// communication with cocktail api
 export function getIngredients() {
     return axios.get<IngredientModel>("https://thecocktaildb.com/api/json/v1/1/list.php?i=list"
 
@@ -24,7 +24,7 @@ export function getDrink(details:string | undefined) {
 
         })
 }
-
+// communication with database(collection: favouriteDrink)
 
 export function deleteFromFavourites(id:string | undefined){
     return axios.delete(`api/favourites/${id}`,
@@ -53,7 +53,7 @@ export function postToFavourites(id:string | undefined) {
 
 }
 
-export default function showMyFavourites() {
+export function showMyFavourites() {
     return axios.get(`/api/favourites`,{
         headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
@@ -63,6 +63,20 @@ export default function showMyFavourites() {
         .then((response:AxiosResponse<FavouriteDrinkModel[]>) => response.data)
 }
 
+//communication with database(Collection:customDrink)
+
+export function postCustomDrink(instruction:string | undefined,ingredient:string | undefined, glass:string |undefined) {
+    return axios.post(`api/customDrink`,{customInstruction:instruction,customIngredient:ingredient,customGlass:glass},{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        }
+    }
+    )
+}
+
+
+
+//registration and login
 export function createUser(username:string, password:string, passwordAgain:string) {
     return axios.post("api/user",{username:username,password:password,passwordAgain:passwordAgain})
 }

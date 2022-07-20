@@ -1,7 +1,7 @@
 package com.github.EazyErik.controller;
 
 
-import com.github.EazyErik.datalayer.Drink;
+import com.github.EazyErik.datalayer.FavouriteDrink;
 import com.github.EazyErik.service.DrinksService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -10,17 +10,18 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.List;
 
-@RestController("DrinksController")
+
+@RestController("FavouriteDrinksController")
 @RequestMapping("api/favourites")
 @RequiredArgsConstructor
 @CrossOrigin
-public class DrinksController {
+public class FavouriteDrinksController {
 
 
     private final DrinksService drinksService;
 
     @PostMapping
-    public ResponseEntity<Drink> addToFavorite(@RequestBody Drink idDrink, Principal username) {
+    public ResponseEntity<FavouriteDrink> addToFavorite(@RequestBody FavouriteDrink idDrink, Principal username) {
         try{
             return ResponseEntity.ok(drinksService.addToFavorite(idDrink,username.getName()));
         }catch(IllegalStateException e){
@@ -31,7 +32,7 @@ public class DrinksController {
     }
 
     @GetMapping
-    public List<Drink> getAllMyFavourites(Principal username) {
+    public List<FavouriteDrink> getAllMyFavourites(Principal username) {
         return drinksService.getAllMyFavourites(username.getName());
     }
 
