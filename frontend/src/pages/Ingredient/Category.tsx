@@ -14,7 +14,9 @@ export default function Category() {
 
     useEffect(() => {
         getCategory(drinkCategory)
-            .then(data => setCategory(data))
+            .then(data => {setCategory(data)
+            console.log(data)})
+
 
 
     },[drinkCategory])

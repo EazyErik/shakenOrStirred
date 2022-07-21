@@ -51,8 +51,20 @@ export interface FavouriteDrinkModel {
 
     idDrink: string
 
+}
 
+export interface CustomDrinkModel{
+    customName:string
+    customDrinkUrl:string
+    customIngredients:Array<CustomIngredientModel>
+    customInstruction:string
+    customGlass:string
+}
 
+export interface CustomIngredientModel {
+    customAmount:string
+    customUnit:string
+    customIngredientName:string
 
 }
 

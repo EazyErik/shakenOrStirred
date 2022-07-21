@@ -1,10 +1,10 @@
 import axios, {AxiosResponse} from "axios";
-import {CategoryModel, DetailModel, FavouriteDrinkModel, IngredientModel, LoginResponse}
+import {CategoryModel, CustomDrinkModel, DetailModel, FavouriteDrinkModel, IngredientModel, LoginResponse}
     from "../components/Model";
 
 
 // communication with cocktail api
-export function getIngredients() {
+export function getIngredientsFromCocktailApi() {
     return axios.get<IngredientModel>("https://thecocktaildb.com/api/json/v1/1/list.php?i=list"
 
     )
@@ -66,13 +66,45 @@ export function showMyFavourites() {
 
 //communication with database(Collection:customDrink)
 
-export function postCustomDrink(instruction:string | undefined,ingredient:string | undefined, glass:string |undefined, data:string|undefined) {
-    return axios.post(`api/customDrink`,{customInstruction:instruction,customIngredient:ingredient,customGlass:glass,customDrinkURL:data},{
+export function postCustomDrink(
+    instruction:string | undefined,
+    amount:string | undefined,
+    unit:string | undefined,
+    ingredient:string | undefined,
+    glass:string |undefined,
+    data:string|undefined,
+    name:String |undefined) {
+    return axios.post(`api/customDrink`,{
+        customInstruction:instruction,
+        customIngredient:ingredient,
+        customGlass:glass,
+        customDrinkURL:data,
+        customDrinkName:name},{
         headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
         }
     }
     )
+}
+
+export function getCustomIngredients () {
+    return axios(`/api/customDrink`,{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        }
+    })
+        .then((response:AxiosResponse<CustomDrinkModel[]>) =>response.data)
+        .then(customDrinks => customDrinks.flatMap(customDrink => customDrink.customIngredients))
+}
+
+export function getCustomDrinks(ingredient:string) {
+    return axios(`/api/customDrink?ingredient=${ingredient}`,{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        }
+    })
+        .then((response:AxiosResponse<CustomDrinkModel[]>) =>response.data)
+
 }
 
 //communication with cloudinary
