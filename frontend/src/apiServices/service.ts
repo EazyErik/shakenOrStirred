@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {CategoryModel, CustomDrinkModel, DetailModel, FavouriteDrinkModel, IngredientModel, LoginResponse}
+import {CategoryModel, CustomDrinkModel, DetailModel, FavouriteDrinkModel, IngredientModel, LoginResponseModel}
     from "../components/Model";
 
 
@@ -66,26 +66,15 @@ export function showMyFavourites() {
 
 //communication with database(Collection:customDrink)
 
-export function postCustomDrink(
-    instruction:string | undefined,
-    amount:string | undefined,
-    unit:string | undefined,
-    ingredient:string | undefined,
-    glass:string |undefined,
-    data:string|undefined,
-    name:String |undefined) {
-    return axios.post(`api/customDrink`,{
-        customInstruction:instruction,
-        customIngredient:ingredient,
-        customGlass:glass,
-        customDrinkURL:data,
-        customDrinkName:name},{
+export function postCustomDrink(customDrink:CustomDrinkModel) {
+    return axios.post(`api/customDrink`,customDrink,{
         headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
         }
     }
     )
 }
+
 
 export function getCustomIngredients () {
     return axios(`/api/customDrink`,{
@@ -97,7 +86,7 @@ export function getCustomIngredients () {
         .then(customDrinks => customDrinks.flatMap(customDrink => customDrink.customIngredients))
 }
 
-export function getCustomDrinks(ingredient:string) {
+export function getAllCustomDrinks(ingredient:string | undefined) {
     return axios(`/api/customDrink?ingredient=${ingredient}`,{
         headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
@@ -106,6 +95,17 @@ export function getCustomDrinks(ingredient:string) {
         .then((response:AxiosResponse<CustomDrinkModel[]>) =>response.data)
 
 }
+
+export function getCustomDrink(details:string | undefined) {
+    return axios(`api/customDrink/details?id=${details}`,{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        }
+    })
+        .then((response:AxiosResponse<CustomDrinkModel>) => response.data)
+}
+
+
 
 //communication with cloudinary
 
@@ -123,5 +123,5 @@ export function createUser(username:string, password:string, passwordAgain:strin
 
 export function loginNow(username:string, password:string) {
     return axios.post("/api/login",{username:username, password:password})
-        .then((response:AxiosResponse<LoginResponse>) => response.data)
+        .then((response:AxiosResponse<LoginResponseModel>) => response.data)
 }

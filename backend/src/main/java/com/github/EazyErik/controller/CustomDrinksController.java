@@ -18,14 +18,19 @@ public class CustomDrinksController {
 
 
 
-    @PostMapping
+    @PostMapping()
     public CustomDrink addCustomDrink(@RequestBody CustomDrink customDrink, Principal username) {
         return customDrinksService.addCustomDrink(customDrink,username.getName());
 
     }
-    @GetMapping
+    @GetMapping()
     public List<CustomDrink> getCustomDrinks( @RequestParam(required = false) String ingredient) {
         return customDrinksService.getCustomDrinks(ingredient);
+    }
+
+    @GetMapping("/details")
+    public CustomDrink getCustomDrink(@RequestParam String id) {
+        return customDrinksService.getCustomDrink(id);
     }
 
 

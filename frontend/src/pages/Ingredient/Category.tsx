@@ -1,38 +1,51 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
-import {CategoryModel} from "../../components/Model";
-import {getCategory} from "../../apiServices/service";
+import {Key, useEffect, useState} from "react";
+import {CategoryModel, CustomDrinkModel} from "../../components/Model";
+import {getCategory, getAllCustomDrinks} from "../../apiServices/service";
 import "./Category.css"
 
+import CocktailCard from "../../components/CocktailCard";
 
 
 export default function Category() {
     const {drinkCategory} = useParams()
-    const[category,setCategory] = useState<CategoryModel>()
+    const [category, setCategory] = useState<CategoryModel>()
+    const [customDrink, setCustomDrink] = useState<CustomDrinkModel[]>([])
     const nav = useNavigate()
 
 
     useEffect(() => {
         getCategory(drinkCategory)
-            .then(data => {setCategory(data)
-            console.log(data)})
+            .then(data => {
+                setCategory(data)
+                console.log(data)
+            })
+        getAllCustomDrinks(drinkCategory)
+            .then(currentCocktail => setCustomDrink(currentCocktail))
+        console.log(drinkCategory)
+
+    }, [])
 
 
-
-    },[drinkCategory])
-
-    return(
+    return (
         <div className={"table"}>
-           <label className={"category"}> {drinkCategory} Drinks:</label>
-            {category &&
-            category.drinks.map((singleCategory,index) => <div key={index} onClick={() => nav(`/details=${singleCategory.idDrink}`)}>
-               <div className={"drinkName"}>
-                   {singleCategory.strDrink}
-               </div>
-                <div >
-                    <img className={"photoDrink"} src={singleCategory.strDrinkThumb} alt={"drinkCategory"} />
+            <label className={"category"}> {drinkCategory} Drinks:</label>
+            {customDrink &&
+                customDrink
+                    .map((currentDrink, index)=>
+                       <div key={index} onClick={() => nav(`/details=${currentDrink.customIDFromDB}`)}>
+                            <CocktailCard cocktailName={currentDrink.customDrinkName}
+                                                      cocktailPicture={currentDrink.customDrinkURL} />
+                       </div> )}
 
-                </div>
+
+
+            {category &&
+            category.drinks.map((singleCategory,index) =>
+                <div  key={index} onClick={() => nav(`/details=${singleCategory.idDrink}`)}>
+               <CocktailCard cocktailName={singleCategory.strDrink} cocktailPicture={singleCategory.strDrinkThumb} />
+
+
             </div>)}
         </div>
 

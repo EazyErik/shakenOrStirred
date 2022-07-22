@@ -1,7 +1,13 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {getDrink, postToFavourites, showMyFavourites} from "../../apiServices/service";
-import {DetailModel} from "../../components/Model";
+import {
+    getAllCustomDrinks,
+    getCustomDrink,
+    getDrink,
+    postToFavourites,
+    showMyFavourites
+} from "../../apiServices/service";
+import {CustomDrinkModel, DetailModel} from "../../components/Model";
 import "./Details.css"
 
 
@@ -11,6 +17,7 @@ import "./Details.css"
 export default function Details() {
     const {details} = useParams()
     const[detail,setDetail] = useState<DetailModel>()
+    const[customDrink, setCustomDrink] = useState<CustomDrinkModel>()
     const[count,setCount] = useState(0)
 
     const[error, setError] = useState("")
@@ -20,8 +27,14 @@ export default function Details() {
         numberOfFavourites()
         getDrink(details)
             .then(data => setDetail(data))
+        getCustomDrink(details)
+            .then(data => {
+                setCustomDrink(data)
+            console.log(customDrink)
+            })
 
-    },[details])
+
+    },[details,customDrink])
 
     const handleClick = () =>{
         postToFavourites(details)
@@ -35,11 +48,7 @@ export default function Details() {
             }
 
            })
-
-
     }
-
-
 
     const numberOfFavourites = () => {
         showMyFavourites()
@@ -50,6 +59,14 @@ export default function Details() {
 
     return(
         <div className={"detailPage"}>
+          <div>
+              {customDrink &&
+                  <h1>{customDrink.customDrinkName}</h1>}
+              <img  src={customDrink?.customDrinkURL} alt="cocktail"/>
+              <div>
+                  {customDrink?.customIngredients.map(ingr => <div>{ingr.customIngredientName}</div> )}
+              </div>
+          </div>
             {detail &&
                 <div>
                     <div className={"heading_details"}>{detail.drinks[0].strDrink}</div>

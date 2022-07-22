@@ -12,6 +12,7 @@ import java.util.List;
 public interface CustomDrinksRepository extends MongoRepository<CustomDrink,String> {
 
     List<CustomDrink> findAllByUsername(String username);
+    CustomDrink findCustomDrinkByCustomIDFromDB(String id);
 
 
 

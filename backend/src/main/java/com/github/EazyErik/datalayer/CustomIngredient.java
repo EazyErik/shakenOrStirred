@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CustomIngredient {
 
-    private String amount;
-    private String unit;
-    private String name;
+    private String customAmount;
+    private String customUnit;
+    private String customIngredientName;
 }

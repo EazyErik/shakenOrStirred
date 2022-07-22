@@ -32,7 +32,10 @@ public class CustomDrinksService {
     }
     private boolean hasIngredient(CustomDrink customDrink,String ingredient ) {
         return customDrink.getCustomIngredients().stream()
-                .anyMatch(customIngredient -> customIngredient.getName().equals(ingredient));
+                .anyMatch(customIngredient -> customIngredient.getCustomIngredientName().equals(ingredient));
     }
 
+    public CustomDrink getCustomDrink(String id) {
+        return customDrinksRepository.findCustomDrinkByCustomIDFromDB(id);
+    }
 }
