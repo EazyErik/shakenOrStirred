@@ -29,7 +29,7 @@ export default function App() {
             <Route path={"/favourites"} element={<Favourite />}/>
             <Route path={"/customDrink"} element={<CustomDrink />} />
             <Route path={"/ingredient=:drinkCategory"} element={<Category />} />
-            <Route path={"/details=:details"} element={<Details />} />
+            <Route path={"/details=:details&source=:source"} element={<Details />} />
 
         </Routes>
         </div>

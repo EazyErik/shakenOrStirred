@@ -14,7 +14,7 @@ public class FavouriteDrink {
     @Id
     private String idDrink;
     private String username;
-    boolean isCustomDrink = false;
+    private String source;
 
 
 

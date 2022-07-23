@@ -15,7 +15,7 @@ import "./Details.css"
 
 
 export default function Details() {
-    const {details} = useParams()
+    const {details,source} = useParams()
     const[detail,setDetail] = useState<DetailModel>()
     const[customDrink, setCustomDrink] = useState<CustomDrinkModel>()
     const[count,setCount] = useState(0)
@@ -24,6 +24,7 @@ export default function Details() {
     const nav = useNavigate()
 
     useEffect(() => {
+        console.log(source)
         numberOfFavourites()
         getDrink(details)
             .then(data => setDetail(data))
@@ -34,10 +35,10 @@ export default function Details() {
             })
 
 
-    },[details,customDrink])
+    },[details])
 
     const handleClick = () =>{
-        postToFavourites(details)
+        postToFavourites(details,source)
             .then(() => nav(`/favourites`))
             .catch((error)=> {if (error.response.status === 400){
                 setError("Only 5 favourites are allowed!")
@@ -59,15 +60,32 @@ export default function Details() {
 
     return(
         <div className={"detailPage"}>
-          <div>
-              {customDrink &&
-                  <h1>{customDrink.customDrinkName}</h1>}
-              <img  src={customDrink?.customDrinkURL} alt="cocktail"/>
-              <div>
-                  {customDrink?.customIngredients.map(ingr => <div>{ingr.customIngredientName}</div> )}
-              </div>
+            <div>
+                {customDrink && source === "db" && <div>
+
+
+                    <div className={"heading_details"}>{customDrink.customDrinkName}</div>
+                    <img className={"detailDrinkPhoto"} src={customDrink?.customDrinkURL} alt="cocktail"/>
+                    <div>
+                        {customDrink?.customIngredients.map(ingr =>
+                            <div>{ingr.customIngredientName}</div>)}
+                    </div>
+                    <button type="button" className="btn btn-warning" onClick={() => {
+                        handleClick();
+                        numberOfFavourites();
+                    }}>Add to favourites</button>
+                    <div className={"alertSpots"}>{5 - count} spot(s) left for your favs! </div>
+                    {error && <div className={"error"}>{error}
+                        <br/>
+                        <button onClick={()=> nav("/favourites")}>back to favourites</button>
+                    </div>}
+                </div>}
+
+
+
+
           </div>
-            {detail &&
+            {detail && source === "public_api" &&
                 <div>
                     <div className={"heading_details"}>{detail.drinks[0].strDrink}</div>
                     <div>

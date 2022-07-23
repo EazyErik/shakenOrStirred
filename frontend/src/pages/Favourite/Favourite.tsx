@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import {deleteFromFavourites, getDrink, showMyFavourites} from "../../apiServices/service";
-import {CocktailModel} from "../../components/Model";
+import {deleteFromFavourites, getCustomDrink, getDrink, showMyFavourites} from "../../apiServices/service";
+import {CocktailModel, CustomDrinkModel} from "../../components/Model";
 import {useNavigate} from "react-router-dom";
 import "./Favourite.css"
 
@@ -10,6 +10,7 @@ import "./Favourite.css"
 export default function Favourite() {
 
     const [favourites, setFavourites] = useState<CocktailModel[]>([])
+    const [customFavourites, setCustomFavourites] = useState<CustomDrinkModel[]>([])
 
 
     const nav = useNavigate()
@@ -22,15 +23,22 @@ export default function Favourite() {
 
     const getFavourites = () => {
         const arr: CocktailModel[] = []
+        const customArr:CustomDrinkModel[] = []
 
         showMyFavourites()
             .then(data => {
                 console.log(data)
                 setFavourites([])
-                data.map(fav => fav.idDrink)
-                    .map(async id => {
-                        arr.push((await getDrink(id)).drinks[0])
-                        setFavourites([...arr])
+                 data.map(async fav => {
+                     if(fav.source === "public_api"){
+                         arr.push((await getDrink(fav.idDrink)).drinks[0])
+                         setFavourites([...arr])
+                     }else if(fav.source === "db"){
+                         customArr.push((await getCustomDrink(fav.idDrink) ))
+                         setCustomFavourites([...customArr])
+
+                     }
+
 
                     })
 
@@ -45,7 +53,7 @@ export default function Favourite() {
     }
 
 
-    const deleteDrink = (id: string) => {
+    const deleteDrink = (id: string | undefined) => {
 
         deleteFromFavourites(id)
             .then(() => getFavourites())
@@ -71,6 +79,17 @@ export default function Favourite() {
                         </button>
                     </div>
                 )
+                }
+                {customFavourites.map(drink =>
+                    <div key={drink.customIDFromDB} className={"favName"}>
+                        {drink.customDrinkName}
+                        <div><img className={"favPic"} src={drink.customDrinkURL} alt={"cocktail"}></img></div>
+                        <button onClick={()=> deleteDrink(drink.customIDFromDB)} type="button"
+                                className="btn btn-danger">delete this drink
+                        </button>
+                    </div>
+                )
+
                 }
 
             </div>

@@ -36,9 +36,14 @@ public class FavouriteDrinksController {
         return drinksService.getAllMyFavourites(username.getName());
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteDrinkFromFavourites(@PathVariable String id) {
-        drinksService.removeFromFavs(id);
+//    @DeleteMapping("/{id}")
+//    public void deleteDrinkFromFavourites(@PathVariable String id) {
+//        drinksService.removeFromFavs(id);
+//    }
+
+    @DeleteMapping
+    public void deleteDrinkFromFavourites(@RequestBody FavouriteDrink favouriteDrink) {
+        drinksService.removeFromFavs(favouriteDrink.getIdDrink());
     }
 
 }

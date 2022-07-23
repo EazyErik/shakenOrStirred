@@ -26,6 +26,7 @@ public class DrinksService {
             throw new IllegalStateException("too many drinks in your list");
         }
         drinkToAdd.setUsername(username);
+
         return favouriteDrinksRepository.save(drinkToAdd);
     }
 

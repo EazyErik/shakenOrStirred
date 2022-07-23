@@ -33,7 +33,7 @@ export default function Category() {
             {customDrink &&
                 customDrink
                     .map((currentDrink, index)=>
-                       <div key={index} onClick={() => nav(`/details=${currentDrink.customIDFromDB}`)}>
+                       <div key={index} onClick={() => nav(`/details=${currentDrink.customIDFromDB}&source=db`)}>
                             <CocktailCard cocktailName={currentDrink.customDrinkName}
                                                       cocktailPicture={currentDrink.customDrinkURL} />
                        </div> )}
@@ -42,7 +42,7 @@ export default function Category() {
 
             {category &&
             category.drinks.map((singleCategory,index) =>
-                <div  key={index} onClick={() => nav(`/details=${singleCategory.idDrink}`)}>
+                <div  key={index} onClick={() => nav(`/details=${singleCategory.idDrink}&source=public_api`)}>
                <CocktailCard cocktailName={singleCategory.strDrink} cocktailPicture={singleCategory.strDrinkThumb} />
 
 

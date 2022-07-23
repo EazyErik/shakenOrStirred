@@ -39,10 +39,12 @@ export function deleteFromFavourites(id:string | undefined){
 
 }
 
-export function postToFavourites(id:string | undefined) {
+export function postToFavourites(id:string | undefined, source:string |undefined) {
+    console.log(source)
 
 
-    return axios.post(`api/favourites`,{idDrink:id},
+    return axios.post(`api/favourites`,{idDrink:id,source:source},
+
         {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("jwt")}`
