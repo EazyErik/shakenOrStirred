@@ -65,6 +65,15 @@ export default function Details() {
 
                     <div className={"heading_details"} >{customDrink.customDrinkName}</div>
                     <img className={"detailDrinkPhoto"} src={customDrink?.customDrinkURL} alt="cocktail"/>
+                    <button type="button" className="btn btn-warning" onClick={() => {
+                        handleClick();
+                        numberOfFavourites();
+                    }}>Add to favourites</button>
+                    <div className={"alertSpots"}>{5 - count} spot(s) left for your favs! </div>
+                    {error && <div className={"error"}>{error}
+                        <br/>
+                        <button onClick={()=> nav("/favourites")}>back to favourites</button>
+                    </div>}
                     <div className={"heading_details"}>Instructions:</div>
                     <div>
                         {customDrink.customInstruction}
@@ -85,15 +94,7 @@ export default function Details() {
                     <div>
                         {customDrink.customGlass}
                     </div>
-                    <button type="button" className="btn btn-warning" onClick={() => {
-                        handleClick();
-                        numberOfFavourites();
-                    }}>Add to favourites</button>
-                    <div className={"alertSpots"}>{5 - count} spot(s) left for your favs! </div>
-                    {error && <div className={"error"}>{error}
-                        <br/>
-                        <button onClick={()=> nav("/favourites")}>back to favourites</button>
-                    </div>}
+
                 </div>}
           </div>
             {detail && source === "public_api" &&
