@@ -19,8 +19,11 @@ export default function Ingredient() {
 
     useEffect(() => {
         getCustomIngredients()
+
             .then(customIngredients => customIngredients.map(customIngredients => customIngredients.customIngredientName))
+
             .then(customIngredientName => {setAllIngredientNames(currentIngredientNames => [...currentIngredientNames,...customIngredientName])
+
             console.log(customIngredientName)})
 
     },[])

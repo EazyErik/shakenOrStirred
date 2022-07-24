@@ -29,6 +29,7 @@ export default function Favourite() {
             .then(data => {
                 console.log(data)
                 setFavourites([])
+                setCustomFavourites([])
                  data.map(async fav => {
                      if(fav.source === "public_api"){
                          arr.push((await getDrink(fav.idDrink)).drinks[0])

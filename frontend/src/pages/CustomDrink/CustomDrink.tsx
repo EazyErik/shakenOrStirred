@@ -3,6 +3,7 @@ import {FormEvent, useState} from "react";
 import {postCustomDrink, sendPicture} from "../../apiServices/service";
 import {CustomIngredientModel} from "../../components/Model";
 import {findAllByDisplayValue} from "@testing-library/react";
+import {useNavigate} from "react-router-dom";
 
 
 export default function CustomDrink(){
@@ -17,6 +18,7 @@ export default function CustomDrink(){
     const[image,setImage] = useState({} as File)
     const[cocktailName, setCocktailName] = useState("")
     const[info, setInfo] = useState("")
+    const nav = useNavigate()
 
 
 
@@ -42,7 +44,12 @@ export default function CustomDrink(){
 
                 }
                 postCustomDrink(currentDrink)
-            console.log(data.secure_url)})
+                    .catch(()=> {localStorage.removeItem("jwt")
+                    nav("/")})
+
+          })
+
+
 
 
     }
@@ -57,16 +64,13 @@ export default function CustomDrink(){
         setAmount(0)
         setUnit("")
         setIngredientName("")
-        setInstruction("")
-        setCocktailName("")
-        setGlass("")
+
+
+
 
     }
-
-
-
-
-
+const disabledButton = (cocktailName !== "" && instruction !== ""  && glass !== "")
+    console.log(disabledButton)
     return (
         <div className={"customDrink"}>
             <h3>Add your own creations:</h3>
@@ -74,12 +78,12 @@ export default function CustomDrink(){
                 <div>
                 <label>Enter the name of your drink:</label>
 
-                    <input type={"text"} onChange={event => setCocktailName(event.target.value)}/>
+                    <input type={"text"} value={cocktailName} onChange={event => setCocktailName(event.target.value)}/>
                 </div>
 
                 <div>
                     <label>Upload your picture here:</label>
-                    <input type={"file"} accept={"image/*"} onChange={event => {
+                    <input type={"file"}  accept={"image/*"} onChange={event => {
                         if (event.target.files !== null) {
                             setImage(event.target.files[0])
                         }
@@ -88,31 +92,35 @@ export default function CustomDrink(){
                 </div>
                 <div>
                     <label>Enter your instructions:</label>
-                    <input type={"text"} onChange={event => setInstruction(event.target.value)}/>
+                    <input type={"text"} value={instruction} onChange={event => setInstruction(event.target.value)}/>
                 </div>
-                <div>
+                <div className={"ingredient"}>
+                <span>
                     <label>Enter the amount of your ingredient:</label>
                     <input type={"number"} pattern={"[0-9]*"} value={amount}
                            onChange={event => setAmount((value) =>(event.target.validity ? parseInt(event.target.value) : value))}/>
-                </div>
-                <div>
+                </span>
+                <span>
                     <label>Enter the unit of your ingredient:</label>
                     <input type={"text"} value={unit} onChange={event => setUnit(event.target.value)}/>
-                </div>
-                <div>
+                </span>
+                <span>
                     <label>Enter the name of your ingredient:</label>
                     <input type={"text"} value={ingredientName} onChange={event => setIngredientName(event.target.value)}/>
-                </div>
+                </span>
+
                 <div>
                     <button onClick={composeIngredient}>add</button>
                 </div>
                 <div>{ingredients.map(c => <div>{c.customAmount} {c.customUnit} {c.customIngredientName}</div> )}</div>
-                <div>
-                    <label>Enter your glass :</label>
-                    <input type={"text"} onChange={event => setGlass(event.target.value)}/>
                 </div>
-                {cocktailName && instruction && ingredients && image && glass && cocktailName &&
-                    <button type={"submit"}>add</button>}
+                <div>
+
+                    <label>Enter your glass :</label>
+                    <input type={"text"} value={glass} onChange={event => setGlass(event.target.value)}/>
+                </div>
+                {
+                    <button disabled={!disabledButton} type={"submit"}>add</button>}
                 <div>
                     {info}
                 </div>
