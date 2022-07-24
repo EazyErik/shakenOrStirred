@@ -33,7 +33,7 @@ export default function Details() {
             console.log(customDrink)
             })
 
-
+//   eslint-disable-next-line react-hooks/exhaustive-deps
     },[details])
 
     const handleClick = () =>{
