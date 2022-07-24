@@ -19,7 +19,7 @@ export default function Favourite() {
     useEffect(() => {
         getFavourites()
 
-    }, [])
+    },[])
 
     const getFavourites = () => {
         const arr: CocktailModel[] = []

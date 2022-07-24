@@ -1,7 +1,6 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {
-    getAllCustomDrinks,
     getCustomDrink,
     getDrink,
     postToFavourites,
@@ -64,11 +63,27 @@ export default function Details() {
                 {customDrink && source === "db" && <div>
 
 
-                    <div className={"heading_details"}>{customDrink.customDrinkName}</div>
+                    <div className={"heading_details"} >{customDrink.customDrinkName}</div>
                     <img className={"detailDrinkPhoto"} src={customDrink?.customDrinkURL} alt="cocktail"/>
+                    <div className={"heading_details"}>Instructions:</div>
                     <div>
-                        {customDrink?.customIngredients.map(ingr =>
-                            <div>{ingr.customIngredientName}</div>)}
+                        {customDrink.customInstruction}
+                    </div>
+                    <label className={"heading_details"}>Ingredients:</label>
+
+                    <div>{
+                        customDrink.customIngredients.map(ingr =><div>
+                          <span>  {ingr.customAmount}</span>
+                           <span> {ingr.customUnit}</span>
+                           <span> {ingr.customIngredientName}</span></div>)
+
+                    }
+                    </div>
+
+
+                    <div className={"heading_details"}>Glass:</div>
+                    <div>
+                        {customDrink.customGlass}
                     </div>
                     <button type="button" className="btn btn-warning" onClick={() => {
                         handleClick();
@@ -80,10 +95,6 @@ export default function Details() {
                         <button onClick={()=> nav("/favourites")}>back to favourites</button>
                     </div>}
                 </div>}
-
-
-
-
           </div>
             {detail && source === "public_api" &&
                 <div>

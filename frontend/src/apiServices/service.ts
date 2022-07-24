@@ -35,8 +35,6 @@ export function deleteFromFavourites(id:string | undefined){
             }
 
         })
-
-
 }
 
 export function postToFavourites(id:string | undefined, source:string |undefined) {
@@ -51,10 +49,7 @@ export function postToFavourites(id:string | undefined, source:string |undefined
      }
 
      }
-
-    )
-
-}
+    )}
 
 export function showMyFavourites() {
     return axios.get(`/api/favourites`,{

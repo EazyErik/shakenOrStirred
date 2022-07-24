@@ -27,8 +27,6 @@ public class FavouriteDrinksController {
         }catch(IllegalStateException e){
             return ResponseEntity.badRequest().build();
         }
-
-
     }
 
     @GetMapping
@@ -41,9 +39,4 @@ public class FavouriteDrinksController {
         drinksService.removeFromFavs(id);
     }
 
-
-//  @DeleteMapping
-//    public void deleteDrinkFromFavourites(@RequestBody FavouriteDrink favouriteDrink) {
-//        drinksService.removeFromFavs(favouriteDrink.getIdDrink());
-//    }
 }

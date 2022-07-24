@@ -1,5 +1,5 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {Key, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {CategoryModel, CustomDrinkModel} from "../../components/Model";
 import {getCategory, getAllCustomDrinks} from "../../apiServices/service";
 import "./Category.css"

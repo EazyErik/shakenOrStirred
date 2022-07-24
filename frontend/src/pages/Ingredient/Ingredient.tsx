@@ -21,7 +21,6 @@ export default function Ingredient() {
         getCustomIngredients()
 
             .then(customIngredients => customIngredients.map(customIngredients => customIngredients.customIngredientName))
-
             .then(customIngredientName => {setAllIngredientNames(currentIngredientNames => [...currentIngredientNames,...customIngredientName])
 
             console.log(customIngredientName)})

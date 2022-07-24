@@ -2,7 +2,6 @@ import "./CustomDrink.css"
 import {FormEvent, useState} from "react";
 import {postCustomDrink, sendPicture} from "../../apiServices/service";
 import {CustomIngredientModel} from "../../components/Model";
-import {findAllByDisplayValue} from "@testing-library/react";
 import {useNavigate} from "react-router-dom";
 
 
@@ -17,7 +16,6 @@ export default function CustomDrink(){
     const[glass, setGlass] = useState("")
     const[image,setImage] = useState({} as File)
     const[cocktailName, setCocktailName] = useState("")
-    const[info, setInfo] = useState("")
     const nav = useNavigate()
 
 
@@ -48,10 +46,6 @@ export default function CustomDrink(){
                     nav("/")})
 
           })
-
-
-
-
     }
 
     const composeIngredient = () => {
@@ -64,9 +58,6 @@ export default function CustomDrink(){
         setAmount(0)
         setUnit("")
         setIngredientName("")
-
-
-
 
     }
 const disabledButton = (cocktailName !== "" && instruction !== ""  && glass !== "")
@@ -122,7 +113,7 @@ const disabledButton = (cocktailName !== "" && instruction !== ""  && glass !== 
                 {
                     <button disabled={!disabledButton} type={"submit"}>add</button>}
                 <div>
-                    {info}
+
                 </div>
 
             </form>
