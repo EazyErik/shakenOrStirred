@@ -1,26 +1,41 @@
 import {useEffect, useState} from "react";
-import {getIngredients} from "../../apiServices/service";
-import {IngredientModel} from "../../components/Model";
+import {getCustomIngredients, getIngredientsFromCocktailApi} from "../../apiServices/service";
+
 import {useNavigate} from "react-router-dom";
 import "./Ingredient.css"
 
 
 export default function Ingredient() {
-    const[ingredient,setIngredient] = useState<IngredientModel>()
+    const[allIngredientNames,setAllIngredientNames] = useState<string[]>([])
     const nav = useNavigate()
 
     useEffect(() => {
-      getIngredients()
-          .then(response => setIngredient(response)
-          )
+
+      getIngredientsFromCocktailApi()
+          .then(cocktailIngredients => cocktailIngredients.drinks.map(cocktailIngredient => cocktailIngredient.strIngredient1))
+          .then(cocktailIngredientNames => setAllIngredientNames(currentIngredientNames => [...currentIngredientNames,...cocktailIngredientNames]))
 
     },[])
+
+    useEffect(() => {
+        getCustomIngredients()
+
+            .then(customIngredients => customIngredients.map(customIngredients => customIngredients.customIngredientName))
+            .then(customIngredientName => {setAllIngredientNames(currentIngredientNames => [...currentIngredientNames,...customIngredientName])
+
+            console.log(customIngredientName)})
+
+    },[])
+
+    const distinct = (value: string, index:number, self: Array<string>) => {
+        return self.indexOf(value) === index;
+    }
 
     return(
         <div className={"ingredientsTable"}>
         <div className="d-grid gap-2">
-            {ingredient &&
-            ingredient.drinks.map((ingr,index) => <button type="button" className={"btn btn-secondary"} key={index} onClick={() => nav(`/ingredient=${ingr.strIngredient1}`)}>{ingr.strIngredient1}</button>)}<br/>
+            {allIngredientNames &&
+            allIngredientNames.filter(distinct).map(name =><button type="button" className={"btn btn-secondary"} onClick={() => nav(`/ingredient=${name}`)}>{name}</button>)}<br/>
 
         </div>
         </div>

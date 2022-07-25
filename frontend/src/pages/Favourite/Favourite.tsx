@@ -1,13 +1,16 @@
 import {useEffect, useState} from "react";
-import showMyFavourites, {deleteFromFavourites, getDrink} from "../../apiServices/service";
-import {Cocktail} from "../../components/Model";
+import {deleteFromFavourites, getCustomDrink, getDrink, showMyFavourites} from "../../apiServices/service";
+import {CocktailModel, CustomDrinkModel} from "../../components/Model";
 import {useNavigate} from "react-router-dom";
 import "./Favourite.css"
 
 
+
+
 export default function Favourite() {
 
-    const [favourites, setFavourites] = useState<Cocktail[]>([])
+    const [favourites, setFavourites] = useState<CocktailModel[]>([])
+    const [customFavourites, setCustomFavourites] = useState<CustomDrinkModel[]>([])
 
 
     const nav = useNavigate()
@@ -15,32 +18,52 @@ export default function Favourite() {
 
     useEffect(() => {
         getFavourites()
-
-    }, [])
+// eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
     const getFavourites = () => {
-        const arr: Cocktail[] = []
+        const arr: CocktailModel[] = []
+        const customArr:CustomDrinkModel[] = []
 
         showMyFavourites()
             .then(data => {
                 console.log(data)
                 setFavourites([])
-                data.map(fav => fav.idDrink)
-                    .map(async id => {
-                        arr.push((await getDrink(id)).drinks[0])
-                        setFavourites([...arr])
+                setCustomFavourites([])
+                 data.map(async fav => {
+                     if(fav.source === "public_api"){
+                         arr.push((await getDrink(fav.idDrink)).drinks[0])
+                         setFavourites([...arr])
+                     }else if(fav.source === "db"){
+                         customArr.push((await getCustomDrink(fav.idDrink) ))
+                         setCustomFavourites([...customArr])
+
+                     }
+
 
                     })
 
+            })
+            .catch((error) => {
+                if (error.response.status === 403) {
+                    localStorage.removeItem("jwt")
+                    nav("/")
+                }
             })
 
     }
 
 
-    const deleteDrink = (id: string) => {
+    const deleteDrink = (id: string | undefined) => {
 
         deleteFromFavourites(id)
             .then(() => getFavourites())
+            .catch((error) => {
+                if (error.response.status === 403) {
+                    localStorage.removeItem("jwt")
+                    nav("/")
+                }
+            })
 
     }
 
@@ -57,6 +80,17 @@ export default function Favourite() {
                         </button>
                     </div>
                 )
+                }
+                {customFavourites.map(drink =>
+                    <div key={drink.customIDFromDB} className={"favName"}>
+                        {drink.customDrinkName}
+                        <div><img className={"favPic"} src={drink.customDrinkURL} alt={"cocktail"}></img></div>
+                        <button onClick={()=> deleteDrink(drink.customIDFromDB)} type="button"
+                                className="btn btn-danger">delete this drink
+                        </button>
+                    </div>
+                )
+
                 }
 
             </div>

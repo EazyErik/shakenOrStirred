@@ -1,5 +1,16 @@
 .Home{
     display:flex;
     justify-content: space-between;
+    position:relative;
+
+
+}
+
+.loggedInUser{
+   position:absolute;
+    right: 0;
+    bottom:0;
+    border: solid 1px black;
+    font-size: x-small;
 
 }
