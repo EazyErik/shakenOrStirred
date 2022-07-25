@@ -76,7 +76,7 @@ const disabledButton = (cocktailName !== "" && instruction !== ""  && glass !== 
     return (
         <div className={"customDrink"}>
             <h3>Add your own creations:</h3>
-            {/*<form onSubmit={addCustomDrink}>*/}
+
                 <div>
                 <label>Enter the name of your drink:</label>
 
@@ -129,7 +129,7 @@ const disabledButton = (cocktailName !== "" && instruction !== ""  && glass !== 
 
                 </div>
 
-        {/*    </form>*/}
+
         </div>
     )
 }
