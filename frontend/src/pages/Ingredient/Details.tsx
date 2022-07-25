@@ -14,7 +14,9 @@ export default function Details() {
     const {details,source} = useParams()
     const[detail,setDetail] = useState<DetailModel>()
     const[customDrink, setCustomDrink] = useState<CustomDrinkModel>()
-    const[count,setCount] = useState(0)
+    const[spotsLeft,setSpotsLeft] = useState(5)
+
+    const maxNumberOfEmptySpots = 5;
 
     const[error, setError] = useState("")
     const nav = useNavigate()
@@ -27,7 +29,6 @@ export default function Details() {
         getCustomDrink(details)
             .then(data => {
                 setCustomDrink(data)
-            console.log(customDrink)
             })
 
 
@@ -48,9 +49,11 @@ export default function Details() {
     }
 
     const numberOfFavourites = () => {
+
         showMyFavourites()
-            .then(data => {setCount(data.length)
-                console.log(data.length)})
+            .then(data => {setSpotsLeft( maxNumberOfEmptySpots - data.length )
+                console.log(data.length)
+          })
     }
 
 
@@ -62,12 +65,13 @@ export default function Details() {
 
                     <div className={"heading_details"} >{customDrink.customDrinkName}</div>
                     <img className={"detailDrinkPhoto"} src={customDrink?.customDrinkURL} alt="cocktail"/>
-                    <button type="button" className="btn btn-warning" onClick={() => {
+                    <button disabled={!(spotsLeft > 0)} className="btn btn-warning"   onClick={() => {
                         handleClick();
                         numberOfFavourites();
-                    }}>Add to favourites</button>
-                    <div className={"alertSpots"}>{5 - count} spot(s) left for your favs! </div>
-                    {error && <div className={"error"}>{error}
+
+                    }}>Add to </button>
+                    <div className={"alertSpots"}>{spotsLeft} spot(s) left for your favs! </div>
+                    {spotsLeft === 0 && <div className={"error"}>{error}
                         <br/>
                         <button onClick={()=> nav("/favourites")}>back to favourites</button>
                     </div>}
@@ -100,12 +104,12 @@ export default function Details() {
                     <div>
                         <img className={"detailDrinkPhoto"} src={detail.drinks[0].strDrinkThumb} alt={""}/>
                     </div>
-                    <button type="button" className="btn btn-warning" onClick={() => {
+                    <button disabled={!(spotsLeft > 0)}  className="btn btn-warning" onClick={() => {
                         handleClick();
                         numberOfFavourites();
                     }}>Add to favourites</button>
-                    <div className={"alertSpots"}>{5 - count} spot(s) left for your favs! </div>
-                    {error && <div className={"error"}>{error}
+                    <div className={"alertSpots"}>{spotsLeft} spot(s) left for your favs! </div>
+                    {(spotsLeft === 0) && <div className={"error"}>{error}
                         <br/>
                         <button onClick={()=> nav("/favourites")}>back to favourites</button>
                     </div>}
