@@ -7,7 +7,6 @@
 }
 
 .App {
-    /*background-image: "url(/2.png)";*/
 
     background-color: bisque;
     margin:0;
@@ -42,3 +41,4 @@
     min-height: 50%;
     overflow:auto;
 }
+
