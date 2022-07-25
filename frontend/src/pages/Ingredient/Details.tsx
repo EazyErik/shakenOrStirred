@@ -10,9 +10,6 @@ import {CustomDrinkModel, DetailModel} from "../../components/Model";
 import "./Details.css"
 
 
-
-
-
 export default function Details() {
     const {details,source} = useParams()
     const[detail,setDetail] = useState<DetailModel>()
@@ -33,7 +30,7 @@ export default function Details() {
             console.log(customDrink)
             })
 
-//   eslint-disable-next-line react-hooks/exhaustive-deps
+
     },[details])
 
     const handleClick = () =>{

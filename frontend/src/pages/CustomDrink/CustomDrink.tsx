@@ -25,6 +25,7 @@ export default function CustomDrink(){
         handleUpload()
 
 
+
     }
 
     const handleUpload = () => {
@@ -42,6 +43,16 @@ export default function CustomDrink(){
 
                 }
                 postCustomDrink(currentDrink)
+                    .then(()=> {
+                        setCocktailName("")
+                        setImage({} as File)
+                        setInstruction("")
+                        setAmount(0)
+                        setUnit("")
+                        setIngredientName("")
+                        setGlass("")
+                        alert("Your drink has just been added!")
+                    })
                     .catch(()=> {localStorage.removeItem("jwt")
                     nav("/")})
 
@@ -61,11 +72,11 @@ export default function CustomDrink(){
 
     }
 const disabledButton = (cocktailName !== "" && instruction !== ""  && glass !== "")
-    console.log(disabledButton)
+
     return (
         <div className={"customDrink"}>
             <h3>Add your own creations:</h3>
-            <form onSubmit={addCustomDrink}>
+            {/*<form onSubmit={addCustomDrink}>*/}
                 <div>
                 <label>Enter the name of your drink:</label>
 
@@ -83,12 +94,12 @@ const disabledButton = (cocktailName !== "" && instruction !== ""  && glass !== 
                 </div>
                 <div>
                     <label>Enter your instructions:</label>
-                    <input type={"text"} value={instruction} onChange={event => setInstruction(event.target.value)}/>
+                    <textarea id={"customDrink"} name={"customDrink"} rows={5} cols={50} value={instruction} onChange={event => setInstruction(event.target.value)}/>
                 </div>
                 <div className={"ingredient"}>
                 <span>
                     <label>Enter the amount of your ingredient:</label>
-                    <input type={"number"} pattern={"[0-9]*"} value={amount}
+                    <input type={"number"} pattern={"[0-9]*"} min={0} value={amount}
                            onChange={event => setAmount((value) =>(event.target.validity ? parseInt(event.target.value) : value))}/>
                 </span>
                 <span>
@@ -97,7 +108,9 @@ const disabledButton = (cocktailName !== "" && instruction !== ""  && glass !== 
                 </span>
                 <span>
                     <label>Enter the name of your ingredient:</label>
-                    <input type={"text"} value={ingredientName} onChange={event => setIngredientName(event.target.value)}/>
+
+                    <input  value={ingredientName} onChange={event => setIngredientName(event.target.value)}/>
+
                 </span>
 
                 <div>
@@ -111,12 +124,12 @@ const disabledButton = (cocktailName !== "" && instruction !== ""  && glass !== 
                     <input type={"text"} value={glass} onChange={event => setGlass(event.target.value)}/>
                 </div>
                 {
-                    <button disabled={!disabledButton} type={"submit"}>add</button>}
+                    <button disabled={!disabledButton} onClick={addCustomDrink} type={"button"}>add</button>}
                 <div>
 
                 </div>
 
-            </form>
+        {/*    </form>*/}
         </div>
     )
 }

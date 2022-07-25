@@ -23,7 +23,7 @@ export default function Category() {
         getAllCustomDrinks(drinkCategory)
             .then(currentCocktail => setCustomDrink(currentCocktail))
         console.log(drinkCategory)
-//   eslint-disable-next-line react-hooks/exhaustive-deps
+
     }, [])
 
 
