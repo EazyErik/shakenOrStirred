@@ -1,8 +1,10 @@
 
 import "./Login.css"
 import {useNavigate} from "react-router-dom";
-import {FormEvent, useEffect, useState} from "react";
+import React, {FormEvent, useEffect, useState} from "react";
 import {loginNow} from "../../apiServices/service";
+
+import background from "/cocktail.png"
 
 
 

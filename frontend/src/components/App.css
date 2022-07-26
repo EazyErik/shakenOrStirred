@@ -8,7 +8,7 @@
 
 .App {
 
-    background-color: bisque;
+    /*background-color: bisque;*/
     margin:0;
     height: calc(100vh - 50px);
     overflow-y: scroll;
