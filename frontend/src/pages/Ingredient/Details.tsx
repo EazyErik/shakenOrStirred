@@ -1,56 +1,115 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import showMyFavourites, {getDrink, postToFavourites} from "../../apiServices/service";
-import {DetailModel} from "../../components/Model";
+import {
+    getCustomDrink,
+    getDrink,
+    postToFavourites,
+    showMyFavourites
+} from "../../apiServices/service";
+import {CustomDrinkModel, DetailModel} from "../../components/Model";
 import "./Details.css"
 
 
-
-
-
 export default function Details() {
-    const {details} = useParams()
+    const {details,source} = useParams()
     const[detail,setDetail] = useState<DetailModel>()
-    const[count,setCount] = useState(0)
+    const[customDrink, setCustomDrink] = useState<CustomDrinkModel>()
+    const[spotsLeft,setSpotsLeft] = useState(5)
+
+    const maxNumberOfEmptySpots = 5;
 
     const[error, setError] = useState("")
     const nav = useNavigate()
 
     useEffect(() => {
+        console.log(source)
         numberOfFavourites()
         getDrink(details)
             .then(data => setDetail(data))
+        getCustomDrink(details)
+            .then(data => {
+                setCustomDrink(data)
+            })
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
     },[details])
 
     const handleClick = () =>{
-        postToFavourites(details)
+        postToFavourites(details,source)
             .then(() => nav(`/favourites`))
-            .catch(()=> setError("Only 5 favourites are allowed!"))
+            .catch((error)=> {if (error.response.status === 400){
+                setError("Only 5 favourites are allowed!")
+            }
+            else if(error.response.status === 403) {
+                localStorage.removeItem("jwt")
+                nav("/")
+            }
 
-
+           })
     }
+
     const numberOfFavourites = () => {
+
         showMyFavourites()
-            .then(data => {setCount(data.length)
-                console.log(data.length)})
+            .then(data => {setSpotsLeft( maxNumberOfEmptySpots - data.length )
+                console.log(data.length)
+          })
     }
 
 
     return(
         <div className={"detailPage"}>
-            {detail &&
+            <div>
+                {customDrink && source === "db" && <div>
+
+
+                    <div className={"heading_details"} >{customDrink.customDrinkName}</div>
+                    <img className={"detailDrinkPhoto"} src={customDrink?.customDrinkURL} alt="cocktail"/>
+                    <button disabled={!(spotsLeft > 0)} className="btn btn-warning"   onClick={() => {
+                        handleClick();
+                        numberOfFavourites();
+
+                    }}>Add to </button>
+                    <div className={"alertSpots"}>{spotsLeft} spot(s) left for your favs! </div>
+                    {spotsLeft === 0 && <div className={"error"}>{error}
+                        <br/>
+                        <button onClick={()=> nav("/favourites")}>back to favourites</button>
+                    </div>}
+                    <div className={"heading_details"}>Instructions:</div>
+                    <div>
+                        {customDrink.customInstruction}
+                    </div>
+                    <label className={"heading_details"}>Ingredients:</label>
+
+                    <div>{
+                        customDrink.customIngredients.map(ingr =><div>
+                          <span>  {ingr.customAmount}</span>
+                           <span> {ingr.customUnit}</span>
+                           <span> {ingr.customIngredientName}</span></div>)
+
+                    }
+                    </div>
+
+
+                    <div className={"heading_details"}>Glass:</div>
+                    <div>
+                        {customDrink.customGlass}
+                    </div>
+
+                </div>}
+          </div>
+            {detail && source === "public_api" &&
                 <div>
                     <div className={"heading_details"}>{detail.drinks[0].strDrink}</div>
                     <div>
                         <img className={"detailDrinkPhoto"} src={detail.drinks[0].strDrinkThumb} alt={""}/>
                     </div>
-                    <button type="button" className="btn btn-warning" onClick={() => {
+                    <button disabled={!(spotsLeft > 0)}  className="btn btn-warning" onClick={() => {
                         handleClick();
                         numberOfFavourites();
                     }}>Add to favourites</button>
-                    <div className={"alertSpots"}>{5 - count} spot(s) left for your favs! </div>
-                    {error && <div className={"error"}>{error}
+                    <div className={"alertSpots"}>{spotsLeft} spot(s) left for your favs! </div>
+                    {(spotsLeft === 0) && <div className={"error"}>{error}
                         <br/>
                         <button onClick={()=> nav("/favourites")}>back to favourites</button>
                     </div>}

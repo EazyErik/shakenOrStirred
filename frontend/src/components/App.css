@@ -2,22 +2,19 @@
 
 
 * {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Libre Baskerville, serif;
 
 }
 
 .App {
-    /*background-image: "url(/2.png)";*/
 
-    background-color: bisque;
+
     margin:0;
     height: calc(100vh - 50px);
     overflow-y: scroll;
     text-align: center;
 
 }
-
-
 
 .Menu {
     height: 30px;
@@ -42,3 +39,4 @@
     min-height: 50%;
     overflow:auto;
 }
+

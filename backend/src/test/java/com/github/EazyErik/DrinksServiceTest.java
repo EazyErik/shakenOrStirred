@@ -1,18 +1,15 @@
 package com.github.EazyErik;
 
 
-import com.github.EazyErik.datalayer.Drink;
-import com.github.EazyErik.datalayer.MyUser;
-import com.github.EazyErik.repository.DrinksRepository;
+
+import com.github.EazyErik.datalayer.FavouriteDrink;
+import com.github.EazyErik.repository.FavouriteDrinksRepository;
 import com.github.EazyErik.service.DrinksService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
+
 
 
 public class DrinksServiceTest {
@@ -22,16 +19,16 @@ public class DrinksServiceTest {
 
 
         //given
-        Drink testDrink = new Drink();
+        FavouriteDrink testDrink = new FavouriteDrink();
         testDrink.setIdDrink("123");
-        DrinksRepository testRepo = Mockito.mock(DrinksRepository.class);
+       FavouriteDrinksRepository testRepo = Mockito.mock(FavouriteDrinksRepository.class);
         DrinksService testService = new DrinksService(testRepo);
         Mockito.when(testRepo.save(testDrink)).thenReturn(testDrink);
 
 
         //when
 
-        Drink actual = testService.addToFavorite(testDrink, "Hansi");
+        FavouriteDrink actual = testService.addToFavorite(testDrink, "Hansi");
 
         //then
         Assertions.assertThat(actual.getIdDrink()).isEqualTo("123");
@@ -43,16 +40,16 @@ public class DrinksServiceTest {
     void shouldReturnDrink() {
 
         //given
-        Drink testDrink = new Drink();
+        FavouriteDrink testDrink = new FavouriteDrink();
         testDrink.setIdDrink("123");
 
-        DrinksRepository testRepo = Mockito.mock(DrinksRepository.class);
+        FavouriteDrinksRepository testRepo = Mockito.mock(FavouriteDrinksRepository.class);
         DrinksService testService = new DrinksService(testRepo);
         Mockito.when(testRepo.findAllByUsername("Hansi")).thenReturn(List.of(testDrink));
 
 
         //when
-        List<Drink> actual = testService.getAllMyFavourites("Hansi");
+        List<FavouriteDrink> actual = testService.getAllMyFavourites("Hansi");
 
         //then
         Assertions.assertThat(actual.get(0)).isEqualTo(testDrink);
@@ -63,16 +60,16 @@ public class DrinksServiceTest {
     void shouldNotReturnDrink() {
 
         //given
-        Drink testDrink = new Drink();
+        FavouriteDrink testDrink = new FavouriteDrink();
         testDrink.setIdDrink("123");
 
-        DrinksRepository testRepo = Mockito.mock(DrinksRepository.class);
+        FavouriteDrinksRepository testRepo = Mockito.mock(FavouriteDrinksRepository.class);
         DrinksService testService = new DrinksService(testRepo);
         Mockito.when(testRepo.findAllByUsername("Klausi")).thenReturn(List.of(testDrink));
 
 
         //when
-       List<Drink> actual = testService.getAllMyFavourites("Hansi");
+       List<FavouriteDrink> actual = testService.getAllMyFavourites("Hansi");
 
         //then
         Assertions.assertThat(actual).isEmpty();

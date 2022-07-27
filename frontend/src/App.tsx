@@ -9,10 +9,13 @@ import Registration from "./pages/Registration/Registration";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Login from "./pages/Login/Login";
-import OwnDrink from "./pages/OwnDrink/OwnDrink";
+import CustomDrink from "./pages/CustomDrink/CustomDrink";
+
 
 
 export default function App() {
+
+
 
 
     return (
@@ -20,6 +23,7 @@ export default function App() {
     <>            <div className={"App"}>
         <Header />
         <div  className={"main-part"}>
+
         <Routes>
 
             <Route path={"/"} element={<Login />}/>
@@ -27,9 +31,9 @@ export default function App() {
             <Route path={"/home"} element={<Home />} />
             <Route path={"/ingredient"} element={<Ingredient />} />
             <Route path={"/favourites"} element={<Favourite />}/>
-            <Route path={"/ownDrink"} element={<OwnDrink />} />
+            <Route path={"/customDrink"} element={<CustomDrink />} />
             <Route path={"/ingredient=:drinkCategory"} element={<Category />} />
-            <Route path={"/details=:details"} element={<Details  />} />
+            <Route path={"/details=:details&source=:source"} element={<Details />} />
 
         </Routes>
         </div>

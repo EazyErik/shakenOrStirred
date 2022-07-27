@@ -15,11 +15,11 @@ export interface CategoryModel{
 }
 
 export interface DetailModel{
-    drinks:Cocktail[]
+    drinks:CocktailModel[]
 
 
 }
-export interface Cocktail{
+export interface CocktailModel {
     idDrink:string
     strDrinkThumb: string
     strDrink: string
@@ -42,7 +42,7 @@ export interface Cocktail{
 }
 
 
-export interface LoginResponse{
+export interface LoginResponseModel {
     token:string
 
 }
@@ -50,9 +50,24 @@ export interface LoginResponse{
 export interface FavouriteDrinkModel {
 
     idDrink: string
+    source:string
 
+}
 
+export interface CustomDrinkModel{
+    customIDFromDB?:string
+    customDrinkName:string
+    customDrinkURL:string
+    customIngredients:Array<CustomIngredientModel>
+    customInstruction:string
+    customGlass:string
 
+}
+
+export interface CustomIngredientModel {
+    customAmount:number
+    customUnit:string
+    customIngredientName:string
 
 }
 
