@@ -10,7 +10,7 @@ export default function Category() {
     const {drinkCategory} = useParams()
     const [category, setCategory] = useState<CategoryModel>()
     const [customDrink, setCustomDrink] = useState<CocktailModel[]>([])
-    const nav = useNavigate()
+
 
 
     useEffect(() => {
