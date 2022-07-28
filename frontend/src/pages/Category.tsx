@@ -33,17 +33,6 @@ export default function Category() {
             <label className={"category"}> {drinkCategory} Drinks:</label>
             {customDrink && <CocktailList drinks={customDrink} sourceDrink={"db"} />}
             {category && <CocktailList drinks={category.drinks} sourceDrink={"public_api"} />}
-
-
-
-
-            {/*{category &&*/}
-            {/*category.drinks.map((singleCategory,index) =>*/}
-            {/*    <div  key={index} onClick={() => nav(`/details=${singleCategory.idDrink}&source=public_api`)}>*/}
-            {/*   <CocktailCard cocktailName={singleCategory.strDrink} cocktailPicture={singleCategory.strDrinkThumb} />*/}
-
-
-            {/*</div>)}*/}
         </div>
 
     )
