@@ -1,10 +1,8 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {CategoryModel, CocktailModel, CustomDrinkModel} from "../components/Model";
+import {CategoryModel, CocktailModel} from "../components/Model";
 import {getCategory, getAllCustomDrinks} from "../apiServices/service";
 import "./Category.css"
-
-import CocktailCard from "../components/CocktailCard/CocktailCard";
 import CocktailList from "../components/CocktailList";
 
 

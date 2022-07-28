@@ -6,7 +6,7 @@ import {
     postToFavourites,
     showMyFavourites
 } from "../apiServices/service";
-import {CocktailModel, CustomDrinkModel, DetailModel} from "../components/Model";
+import {CocktailModel,DetailModel} from "../components/Model";
 import "./Details.css"
 
 

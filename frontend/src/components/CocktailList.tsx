@@ -1,5 +1,5 @@
 import CocktailCard from "./CocktailCard/CocktailCard";
-import {ApiDrinkModel, CocktailModel, CustomDrinkModel} from "./Model";
+import {CocktailModel} from "./Model";
 import {useNavigate} from "react-router-dom";
 
 export interface CocktailListProps {
