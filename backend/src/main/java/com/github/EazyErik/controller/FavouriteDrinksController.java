@@ -14,7 +14,6 @@ import java.util.List;
 @RestController("FavouriteDrinksController")
 @RequestMapping("api/favourites")
 @RequiredArgsConstructor
-@CrossOrigin
 public class FavouriteDrinksController {
 
 

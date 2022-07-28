@@ -2,7 +2,7 @@
 import "./Login.css"
 import {useNavigate} from "react-router-dom";
 import React, {FormEvent, useEffect, useState} from "react";
-import {loginNow} from "../../apiServices/service";
+import {loginNow} from "../apiServices/service";
 
 
 

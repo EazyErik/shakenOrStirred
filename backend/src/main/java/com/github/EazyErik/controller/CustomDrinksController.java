@@ -2,6 +2,7 @@ package com.github.EazyErik.controller;
 
 
 import com.github.EazyErik.datalayer.CustomDrink;
+import com.github.EazyErik.datalayer.DrinkDTO;
 import com.github.EazyErik.service.CustomDrinksService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -24,14 +25,23 @@ public class CustomDrinksController {
 
     }
     @GetMapping()
-    public List<CustomDrink> getCustomDrinks( @RequestParam(required = false) String ingredient) {
-        return customDrinksService.getCustomDrinks(ingredient);
+    public List<DrinkDTO> getCustomDrinks(@RequestParam(required = false) String ingredient) {
+        return customDrinksService.getCustomDrinks(ingredient).stream()
+                .map(drink -> DrinkDTO.of(drink))
+                .toList();
     }
 
     @GetMapping("/details")
-    public CustomDrink getCustomDrink(@RequestParam String id) {
-        return customDrinksService.getCustomDrink(id);
+    public DrinkDTO getCustomDrink(@RequestParam String id) {
+        return DrinkDTO.of(customDrinksService.getCustomDrink(id));
     }
+
+    @GetMapping("/ingredients")
+    public List<String> getIngredients() {
+        return customDrinksService.getAllIngredients();
+
+    }
+
 
 
 

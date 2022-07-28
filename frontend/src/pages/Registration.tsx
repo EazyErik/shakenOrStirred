@@ -1,7 +1,7 @@
 
 import {FormEvent,useState} from "react";
 import "./Registration.css"
-import {createUser} from "../../apiServices/service";
+import {createUser} from "../apiServices/service";
 import {useNavigate} from "react-router-dom";
 
 export default function Registration() {

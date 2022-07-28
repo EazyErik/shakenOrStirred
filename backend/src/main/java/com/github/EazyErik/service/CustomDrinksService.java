@@ -6,6 +6,7 @@ import com.github.EazyErik.repository.CustomDrinksRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,5 +38,17 @@ public class CustomDrinksService {
 
     public CustomDrink getCustomDrink(String id) {
         return customDrinksRepository.findCustomDrinkByCustomIDFromDB(id);
+    }
+
+    public List<String> getAllIngredients() {
+        List<CustomDrink> allDrinks = customDrinksRepository.findAll();
+        List<String> ingredientNames = new ArrayList<>();
+
+
+        for(CustomDrink drink : allDrinks) {
+         ingredientNames.addAll(drink.getCustomIngredients().stream()
+                  .map(ing -> ing.getCustomIngredientName()).toList());
+        }
+        return ingredientNames.stream().distinct().toList();
     }
 }

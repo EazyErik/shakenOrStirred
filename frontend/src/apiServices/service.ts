@@ -1,5 +1,13 @@
 import axios, {AxiosResponse} from "axios";
-import {CategoryModel, CustomDrinkModel, DetailModel, FavouriteDrinkModel, IngredientModel, LoginResponseModel}
+import {
+    CategoryModel,
+    CocktailModel,
+    CustomDrinkModel,
+    DetailModel,
+    FavouriteDrinkModel,
+    IngredientModel,
+    LoginResponseModel
+}
     from "../components/Model";
 
 
@@ -74,13 +82,13 @@ export function postCustomDrink(customDrink:CustomDrinkModel) {
 
 
 export function getCustomIngredients () {
-    return axios(`/api/customDrink`,{
+    return axios(`/api/customDrink/ingredients`,{
         headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
         }
     })
-        .then((response:AxiosResponse<CustomDrinkModel[]>) =>response.data)
-        .then(customDrinks => customDrinks.flatMap(customDrink => customDrink.customIngredients))
+        .then((response:AxiosResponse<string[]>) =>response.data)
+
 }
 
 export function getAllCustomDrinks(ingredient:string | undefined) {
@@ -89,7 +97,7 @@ export function getAllCustomDrinks(ingredient:string | undefined) {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
         }
     })
-        .then((response:AxiosResponse<CustomDrinkModel[]>) =>response.data)
+        .then((response:AxiosResponse<CocktailModel[]>) =>response.data)
 
 }
 
@@ -99,7 +107,7 @@ export function getCustomDrink(details:string | undefined) {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
         }
     })
-        .then((response:AxiosResponse<CustomDrinkModel>) => response.data)
+        .then((response:AxiosResponse<CocktailModel>) => response.data)
 }
 
 

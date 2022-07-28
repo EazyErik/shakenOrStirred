@@ -20,9 +20,13 @@ export default function Footer() {
 
     return(
         <div className={"Menu"}>
-            <button className={"home-button"} onClick={()=>nav("/home")}>Home</button>
-            <button className={"admin-button"} onClick={()=>nav("/admin")} >Admin</button>
-            <button className={"logout-button"} onClick={logout}>Logout </button>
+            <button className={"home-button"}    onClick={()=>nav("/home")}><span className="material-symbols-outlined">
+home
+</span></button>
+
+            <button className={"logout-button"} onClick={logout}><span className="material-symbols-outlined">
+logout
+</span></button>
 
         </div>
     )

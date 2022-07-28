@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class FavouriteDrink {
 
     @Id
+    private String favouriteID;
     private String idDrink;
     private String username;
     private String source;

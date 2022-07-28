@@ -41,7 +41,7 @@ public class DrinksService {
     public void removeFromFavs(String id) {
 
 
-        favouriteDrinksRepository.deleteById(id);
+        favouriteDrinksRepository.deleteByIdDrink(id);
     }
 }
 

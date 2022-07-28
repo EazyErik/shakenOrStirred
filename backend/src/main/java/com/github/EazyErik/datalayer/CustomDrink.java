@@ -15,7 +15,6 @@ public class CustomDrink {
 
     @Id
     private String customIDFromDB;
-    private boolean isCustomDrink = true;
     private String username;
     private String customDrinkName;
     private String customInstruction;
