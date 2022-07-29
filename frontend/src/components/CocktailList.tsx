@@ -13,12 +13,14 @@ export interface CocktailListProps {
 export default function CocktailList({drinks,sourceDrink} : CocktailListProps) {
 
     const nav = useNavigate()
+    console.log(drinks)
 
     return (
         <div>
 
             {
                 drinks.map((currentDrink, index) =>
+
                     <div key={index} onClick={() => nav(`/details=${currentDrink.idDrink}&source=${sourceDrink}`)}>
 
                         <CocktailCard

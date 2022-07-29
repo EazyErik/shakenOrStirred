@@ -37,7 +37,7 @@ public class CustomDrinksController {
     }
 
     @GetMapping("/ingredients")
-    public List<String> getIngredients() {
+    public List<String> getIngredients()  {
         return customDrinksService.getAllIngredients();
 
     }

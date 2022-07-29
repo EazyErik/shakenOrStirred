@@ -1,6 +1,6 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {CategoryModel, CocktailModel} from "../components/Model";
+import {CocktailModel} from "../components/Model";
 import {getCategory, getAllCustomDrinks} from "../apiServices/service";
 import "./Category.css"
 import CocktailList from "../components/CocktailList";
@@ -8,7 +8,7 @@ import CocktailList from "../components/CocktailList";
 
 export default function Category() {
     const {drinkCategory} = useParams()
-    const [category, setCategory] = useState<CategoryModel>()
+    const [category, setCategory] = useState<CocktailModel[]>()
     const [customDrink, setCustomDrink] = useState<CocktailModel[]>([])
 
 
@@ -22,15 +22,15 @@ export default function Category() {
         getAllCustomDrinks(drinkCategory)
             .then(currentCocktail => setCustomDrink(currentCocktail))
         console.log(drinkCategory)
-// eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
 
+    }, [drinkCategory])
 
+console.log(category)
     return (
         <div className={"table"}>
             <label className={"category"}> {drinkCategory} Drinks:</label>
             {customDrink && <CocktailList drinks={customDrink} sourceDrink={"db"} />}
-            {category && <CocktailList drinks={category.drinks} sourceDrink={"public_api"} />}
+            {category && <CocktailList drinks={category} sourceDrink={"public_api"} />}
         </div>
 
     )

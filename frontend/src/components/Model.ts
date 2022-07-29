@@ -5,24 +5,13 @@ export interface IngredientModel{
    }]
 }
 
-export interface ApiDrinkModel{
-    idDrink:string
-    strDrink:string
-    strDrinkThumb:string
-}
-
-export interface CategoryModel{
-    drinks: CocktailModel[]
-
-
-}
-
 export interface DetailModel{
     drinks:CocktailModel[]
 
 
 }
 export interface CocktailModel {
+
     idDrink:string
     strDrinkThumb: string
     strDrink: string

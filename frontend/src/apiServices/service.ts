@@ -1,9 +1,8 @@
 import axios, {AxiosResponse} from "axios";
 import {
-    CategoryModel,
+
     CocktailModel,
     CustomDrinkModel,
-    DetailModel,
     FavouriteDrinkModel,
     IngredientModel,
     LoginResponseModel
@@ -23,13 +22,13 @@ export function getCategory(drinkCategory: string | undefined) {
     return axios.get(`https://thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkCategory}`
 
     )
-        .then((response:AxiosResponse<CategoryModel>) => response.data)
+        .then((response) => response.data.drinks)
 
 }
 export function getDrink(details:string | undefined) {
     return axios.get(`https://thecocktaildb.com/api/json/v1/1/lookup.php?i=${details}`)
-        .then((response:AxiosResponse<DetailModel>) =>{
-            return response.data
+        .then((response) =>{
+            return response.data.drinks[0]
 
         })
 }

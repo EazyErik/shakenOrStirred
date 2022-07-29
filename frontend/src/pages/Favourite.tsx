@@ -32,7 +32,7 @@ export default function Favourite() {
                 setCustomFavourites([])
                  data.map(async fav => {
                      if(fav.source === "public_api"){
-                         arr.push((await getDrink(fav.idDrink)).drinks[0])
+                         arr.push((await getDrink(fav.idDrink)))
                          setFavourites([...arr])
                      }else if(fav.source === "db"){
                          customArr.push((await getCustomDrink(fav.idDrink) ))
