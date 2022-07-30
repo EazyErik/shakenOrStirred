@@ -127,9 +127,6 @@ public class ShakenOrStirredControllerTestIT {
 
         Assertions.assertThat(getAllFavouritesResponse.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
 
-
-
-
     }
 
     private HttpHeaders createHeaders(String jwt) {

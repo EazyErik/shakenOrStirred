@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -17,6 +18,9 @@ public class CustomDrinksService {
 
 
     public CustomDrink addCustomDrink(CustomDrink customDrink, String username ) {
+        if(customDrink.getCustomDrinkName() == null ||customDrink.getCustomDrinkName().isBlank()) {
+            throw new IllegalArgumentException();
+        }
         customDrink.setUsername(username);
         return customDrinksRepository.save(customDrink);
     }
@@ -50,5 +54,30 @@ public class CustomDrinksService {
                   .map(ing -> ing.getCustomIngredientName()).toList());
         }
         return ingredientNames.stream().distinct().toList();
+    }
+    public List<CustomDrink> getDrinksByName(String drinkName) {
+
+            return customDrinksRepository.findAll().stream()
+                    .filter((customDrink) -> hasDrinkName(customDrink,drinkName))
+                    .toList();
+
+    }
+    private boolean hasDrinkName(CustomDrink customDrink,String drinkname ) {
+//        return customDrink.getCustomIngredients().stream()
+//                .anyMatch(customIngredient -> customIngredient.getCustomIngredientName().equals(ingredient));
+
+        return customDrink.getCustomDrinkName().contains(drinkname);
+    }
+
+    private boolean isAlcoholic(CustomDrink customDrink,String alcoholic) {
+        return customDrink.getCustomAlcoholic().equals(alcoholic);
+    }
+
+    public List<CustomDrink> getDrinksByAlcoholic(String alcoholic) {
+
+        return customDrinksRepository.findAll().stream()
+                .filter((customDrink) -> isAlcoholic(customDrink,alcoholic))
+                .toList();
+
     }
 }

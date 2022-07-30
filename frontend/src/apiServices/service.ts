@@ -129,3 +129,30 @@ export function loginNow(username:string, password:string) {
     return axios.post("/api/login",{username:username, password:password})
         .then((response:AxiosResponse<LoginResponseModel>) => response.data)
 }
+
+// search with drink name
+
+export function searchInPublicAPI(drinkname: string) {
+    return axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drinkname}`)
+        .then((response) => response.data.drinks)
+}
+
+export function searchInDB(drinkname:string) {
+    return axios.get(`/api/customDrink/search?drinkName=${drinkname}`,{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        }
+    })
+        .then(response => response.data)
+}
+
+//search with alcoholic
+
+export function searchWithAlcoholicInDB(alcoholic:string) {
+    return axios.get(`api/customDrink/searchByAlcoholic?alcoholic=${alcoholic}`,{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        }
+    })
+        .then(response => response.data)
+}

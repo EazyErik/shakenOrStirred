@@ -17,6 +17,7 @@ export interface CocktailModel {
     strDrink: string
     strInstructions: string
     strGlass: string
+    strAlcoholic:string
     strIngredient1: string
     strIngredient2: string
     strIngredient3: string

@@ -1,0 +1,12 @@
+
+.searchResults{
+    text-align: left;
+    margin-top: 5%;
+    max-height: 20vh;
+    overflow: auto;
+
+}
+
+.searchDrink{
+    margin: 2%;
+}
