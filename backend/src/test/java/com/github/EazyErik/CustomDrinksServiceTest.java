@@ -109,6 +109,94 @@ public class CustomDrinksServiceTest {
     }
 
     @Test
+    void shouldNOTPassIfInstructionsAreBlank() {
+
+
+        //given
+
+        CustomDrink newDrink = new CustomDrink();
+        newDrink.setCustomDrinkName("Sazerc");
+        newDrink.setCustomDrinkURL("cocktial Picture");
+        newDrink.setCustomInstruction("");
+        newDrink.setCustomIngredients(List.of(new CustomIngredient("6","cl","Rye Whiskey")));
+        newDrink.setCustomGlass("tumbler");
+
+
+        //when and then
+        CustomDrinksService testService = new CustomDrinksService(null);
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(()-> testService.addCustomDrink(newDrink,"Harri"));
+
+
+    }
+    @Test
+    void shouldNOTPassIfDrinkURLisBlank() {
+
+
+        //given
+
+        CustomDrink newDrink = new CustomDrink();
+        newDrink.setCustomDrinkName("Sazerc");
+        newDrink.setCustomDrinkURL("");
+        newDrink.setCustomInstruction("just do it");
+        newDrink.setCustomIngredients(List.of(new CustomIngredient("6", "cl", "Rye Whiskey")));
+        newDrink.setCustomGlass("tumbler");
+
+
+        //when and then
+        CustomDrinksService testService = new CustomDrinksService(null);
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> testService.addCustomDrink(newDrink, "Harri"));
+
+
+    }
+
+    @Test
+    void shouldNOTPassIfIngredientNameIsBlank() {
+
+
+        //given
+
+        CustomDrink newDrink = new CustomDrink();
+        newDrink.setCustomDrinkName("Sazerc");
+        newDrink.setCustomDrinkURL("CocktailPicture");
+        newDrink.setCustomInstruction("just do it");
+        newDrink.setCustomIngredients(List.of(new CustomIngredient("6", "cl", "")));
+        newDrink.setCustomGlass("tumbler");
+
+
+        //when and then
+        CustomDrinksService testService = new CustomDrinksService(null);
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> testService.addCustomDrink(newDrink, "Harri"));
+
+
+    }
+
+    @Test
+    void shouldNOTPassIfGlassIsBlank() {
+
+
+        //given
+
+        CustomDrink newDrink = new CustomDrink();
+        newDrink.setCustomDrinkName("Sazerc");
+        newDrink.setCustomDrinkURL("CocktailPicture");
+        newDrink.setCustomInstruction("just do it");
+        newDrink.setCustomIngredients(List.of(new CustomIngredient("6", "cl", "Ryw Whiskey")));
+        newDrink.setCustomGlass("");
+
+
+        //when and then
+        CustomDrinksService testService = new CustomDrinksService(null);
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> testService.addCustomDrink(newDrink, "Harri"));
+
+
+    }
+
+
+        @Test
     void shouldPassIfOneDrinkIsReturnWhenIPassTheIngredientOfTheSearchedDrink(){
 
         //given

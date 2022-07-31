@@ -17,8 +17,13 @@ public class CustomDrinksService {
     private final CustomDrinksRepository customDrinksRepository;
 
 
-    public CustomDrink addCustomDrink(CustomDrink customDrink, String username ) {
-        if(customDrink.getCustomDrinkName() == null ||customDrink.getCustomDrinkName().isBlank()) {
+    public CustomDrink addCustomDrink(CustomDrink customDrink, String username) {
+        if (customDrink.getCustomDrinkName() == null || customDrink.getCustomDrinkName().isBlank()
+                || customDrink.getCustomInstruction() == null || customDrink.getCustomInstruction().isBlank()
+                || customDrink.getCustomDrinkURL() == null || customDrink.getCustomDrinkURL().isBlank()
+                || customDrink.getCustomIngredients().get(0).getCustomIngredientName() == null || customDrink.getCustomIngredients().get(0).getCustomIngredientName().isBlank()
+                || customDrink.getCustomGlass() == null || customDrink.getCustomGlass().isBlank()
+        ) {
             throw new IllegalArgumentException();
         }
         customDrink.setUsername(username);
