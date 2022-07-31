@@ -9,6 +9,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomDrinksServiceTest {
@@ -104,9 +105,125 @@ public class CustomDrinksServiceTest {
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(()-> testService.addCustomDrink(newDrink,"Harri"));
 
+
+    }
+
+    @Test
+    void shouldPassIfOneDrinkIsReturnWhenIPassTheIngredientOfTheSearchedDrink(){
+
+        //given
+        String ingredient = "Rye Whiskey";
+
+        CustomDrink newDrink = new CustomDrink();
+        newDrink.setCustomDrinkName("testDrink");
+        newDrink.setCustomDrinkURL("cocktailPicture");
+        newDrink.setCustomInstruction("just do it!");
+        newDrink.setCustomIngredients(List.of(new CustomIngredient("6","cl","Rye Whiskey")));
+        newDrink.setCustomGlass("tumbler");
+
+
+
+
+        CustomDrinksRepository testRepo = Mockito.mock(CustomDrinksRepository.class);
+        CustomDrinksService customDrinksService = new CustomDrinksService(testRepo);
+
+        //when
+        Mockito.when(testRepo.findAll()).thenReturn(List.of(newDrink));
+        List<CustomDrink> actual = customDrinksService.getCustomDrinks(ingredient);
+
+        //then
+        Assertions.assertThat(actual.size()).isEqualTo(1);
+
+        Assertions.assertThat(
+                actual.get(0).getCustomIngredients()
+                .get(0).getCustomIngredientName())
+                .isEqualTo("Rye Whiskey");
+
+
+    }
+
+    @Test
+    void shouldPassIfDrinkIsReturned() {
+
+        //given
+        CustomDrink newDrink = new CustomDrink();
+        newDrink.setCustomDrinkName("testDrink");
+        newDrink.setCustomDrinkURL("cocktailPicture");
+        newDrink.setCustomInstruction("just do it!");
+        newDrink.setCustomIngredients(List.of(new CustomIngredient("6","cl","Rye Whiskey")));
+        newDrink.setCustomGlass("tumbler");
+
+        CustomDrinksRepository testRepo = Mockito.mock(CustomDrinksRepository.class);
+        CustomDrinksService customDrinksService = new CustomDrinksService(testRepo);
+
+        //when
+        Mockito.when(testRepo.findAll()).thenReturn(List.of(newDrink));
+        List<CustomDrink> actual = customDrinksService.getCustomDrinks(null);
+
+        //then
+        Assertions.assertThat(actual.size()).isEqualTo(1);
+
+    }
+
+    @Test
+    void shouldReturnDrinkForPassedID() {
+
+        //given
+        CustomDrink newDrink = new CustomDrink();
+        newDrink.setCustomIDFromDB("1234");
+        newDrink.setCustomDrinkName("testDrink");
+        newDrink.setCustomDrinkURL("cocktailPicture");
+        newDrink.setCustomInstruction("just do it!");
+        newDrink.setCustomIngredients(List.of(new CustomIngredient("6","cl","Rye Whiskey")));
+        newDrink.setCustomGlass("tumbler");
+
+        CustomDrinksRepository testRepo = Mockito.mock(CustomDrinksRepository.class);
+        CustomDrinksService customDrinksService = new CustomDrinksService(testRepo);
+
         //when
 
+        Mockito.when(testRepo.findCustomDrinkByCustomIDFromDB("1234")).thenReturn(newDrink);
+        CustomDrink actual = customDrinksService.getCustomDrink("1234");
 
+        //then
+
+        Assertions.assertThat(actual.getCustomIDFromDB()).isEqualTo("1234");
+
+    }
+
+    @Test
+
+    void shouldReturnListOfIngredientNames() {
+
+        //given
+        CustomDrink firstDrink = new CustomDrink();
+        firstDrink.setCustomDrinkName("testDrink");
+        firstDrink.setCustomDrinkURL("cocktailPicture");
+        firstDrink.setCustomInstruction("just do it!");
+        firstDrink.setCustomIngredients(List.of(new CustomIngredient("6","cl","Rye Whiskey")));
+        firstDrink.setCustomGlass("tumbler");
+
+        CustomDrink secondDrink = new CustomDrink();
+        secondDrink.setCustomDrinkName("testDrink");
+        secondDrink.setCustomDrinkURL("cocktailPicture");
+        secondDrink.setCustomInstruction("just do it!");
+        secondDrink.setCustomIngredients(List.of(new CustomIngredient("6","cl","Vodka")));
+        secondDrink.setCustomGlass("tumbler");
+
+
+        CustomDrinksRepository testRepo = Mockito.mock(CustomDrinksRepository.class);
+        CustomDrinksService customDrinksService = new CustomDrinksService(testRepo);
+
+        //when
+
+        Mockito.when(testRepo.findAll()).
+                thenReturn(List.of(firstDrink,secondDrink));
+
+        List<String> actual = customDrinksService.getAllIngredients();
+
+        Assertions.assertThat(actual.size()).isEqualTo(2);
+        Assertions.assertThat(actual.get(0)).isEqualTo(firstDrink.getCustomIngredients().get(0).getCustomIngredientName());
+        Assertions.assertThat(actual.get(1)).isEqualTo(secondDrink.getCustomIngredients().get(0).getCustomIngredientName());
 
 
 
