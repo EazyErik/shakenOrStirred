@@ -68,8 +68,7 @@ public class CustomDrinksService {
 
     }
     private boolean hasDrinkName(CustomDrink customDrink,String drinkname ) {
-//        return customDrink.getCustomIngredients().stream()
-//                .anyMatch(customIngredient -> customIngredient.getCustomIngredientName().equals(ingredient));
+//
 
         return customDrink.getCustomDrinkName().contains(drinkname);
     }
@@ -82,6 +81,13 @@ public class CustomDrinksService {
 
         return customDrinksRepository.findAll().stream()
                 .filter((customDrink) -> isAlcoholic(customDrink,alcoholic))
+                .toList();
+
+    }
+
+    public List<CustomDrink> getDrinksByIngredient(String ingredient) {
+        return customDrinksRepository.findAll().stream()
+                .filter((customDrink) -> hasIngredient(customDrink,ingredient))
                 .toList();
 
     }

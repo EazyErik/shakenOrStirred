@@ -56,6 +56,13 @@ public class CustomDrinksController {
                 .toList();
     }
 
+    @GetMapping("/searchByIngredient")
+    public List<DrinkDTO>getDrinksByIngredient(@RequestParam String ingredient) {
+        return customDrinksService.getDrinksByIngredient(ingredient).stream()
+                .map(drink -> DrinkDTO.of(drink))
+                .toList();
+    }
+
 
 
 
