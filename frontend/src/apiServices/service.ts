@@ -156,3 +156,23 @@ export function searchWithAlcoholicInDB(alcoholic:string) {
     })
         .then(response => response.data)
 }
+
+export function searchWithAlcoholicInPublicAPI(alcoholic:string) {
+    return axios.get(`https://thecocktaildb.com/api/json/v1/1/filter.php?a=${alcoholic}`)
+        .then(response => response.data.drinks)
+}
+
+export function searchWithIngrNameInDB(ingredient:string) {
+    return axios.get(`api/customDrink/searchByIngredient?ingredient=${ingredient}`,{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        }
+    })
+        .then(response => response.data)
+}
+
+export function searchWithIngrNameInPublicAPI(ingredient:string) {
+    return axios.get(`https://thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`)
+        .then(response => response.data.drinks)
+
+}

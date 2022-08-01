@@ -1,5 +1,10 @@
-import {useState} from "react";
-import {searchInDB, searchInPublicAPI, searchWithAlcoholicInDB} from "../apiServices/service";
+import {useEffect, useState} from "react";
+import {
+    searchInDB,
+    searchInPublicAPI,
+    searchWithAlcoholicInDB,
+    searchWithAlcoholicInPublicAPI, searchWithIngrNameInDB, searchWithIngrNameInPublicAPI
+} from "../apiServices/service";
 import {CocktailModel} from "../components/Model";
 import "./Search.css"
 
@@ -11,20 +16,41 @@ export default function Search() {
     const[radioButtonValue,setRadioButtonValue] = useState("Alcoholic")
     const[ingredient,setIngredient] = useState("")
 
+useEffect (()=> {
+
+    console.log(drinks)
+
+},[drinks])
+
+
+
+
     const searchWithDrinkName = () => {
         searchInPublicAPI(drinkName)
-            .then(data => setDrinks(data))
+            .then(data =>
+                data &&
+                setDrinks([...drinks,...data]))
         searchInDB(drinkName)
-            .then(data => setDrinks([...drinks,...data]))
+            .then(data =>
+                setDrinks([...drinks,...data]))
     }
 
-    const searchWithIngredientName = () => {
+    const searchWithIngredientName = async () => {
+         let temp :CocktailModel[] = []
+        await searchWithIngrNameInPublicAPI(ingredient)
+            .then(data => {if (data) temp = [...temp,...data]})
+        await searchWithIngrNameInDB(ingredient)
+            .then(data => {if(data) temp = [...temp,...data]})
+        setDrinks(temp)
 
     }
 
     const searchWithAlc = () => {
+        searchWithAlcoholicInPublicAPI(radioButtonValue)
+            .then(data => data && setDrinks([...drinks,...data]))
+
         searchWithAlcoholicInDB(radioButtonValue)
-            .then(data => console.log(data))
+            .then(data => setDrinks([...drinks,...data]))
     }
     const renderFilter = () => {
         return <div>
@@ -66,8 +92,8 @@ export default function Search() {
 
         <div>
             <div>
-                {drinks.length === 0 && renderFilter()}
-                {drinks.length > 0 &&
+                {drinks && drinks.length === 0 && renderFilter()}
+                {drinks && drinks.length > 0 &&
                 renderResultat()}
 
             </div>
