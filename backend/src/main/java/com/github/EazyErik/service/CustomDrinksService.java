@@ -39,6 +39,7 @@ public class CustomDrinksService {
                     .toList();
         }
 
+
     }
     private boolean hasIngredient(CustomDrink customDrink,String ingredient ) {
         return customDrink.getCustomIngredients().stream()
@@ -59,6 +60,7 @@ public class CustomDrinksService {
                   .map(ing -> ing.getCustomIngredientName()).toList());
         }
         return ingredientNames.stream().distinct().toList();
+
     }
     public List<CustomDrink> getDrinksByName(String drinkName) {
 
