@@ -5,26 +5,19 @@ export interface IngredientModel{
    }]
 }
 
-export interface CategoryModel{
-    drinks:[{
-        idDrink:string
-        strDrink:string
-        strDrinkThumb:string
-
-    }]
-}
-
 export interface DetailModel{
     drinks:CocktailModel[]
 
 
 }
 export interface CocktailModel {
+
     idDrink:string
     strDrinkThumb: string
     strDrink: string
     strInstructions: string
     strGlass: string
+    strAlcoholic:string
     strIngredient1: string
     strIngredient2: string
     strIngredient3: string

@@ -1,5 +1,12 @@
 import axios, {AxiosResponse} from "axios";
-import {CategoryModel, CustomDrinkModel, DetailModel, FavouriteDrinkModel, IngredientModel, LoginResponseModel}
+import {
+
+    CocktailModel,
+    CustomDrinkModel,
+    FavouriteDrinkModel,
+    IngredientModel,
+    LoginResponseModel
+}
     from "../components/Model";
 
 
@@ -15,13 +22,13 @@ export function getCategory(drinkCategory: string | undefined) {
     return axios.get(`https://thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkCategory}`
 
     )
-        .then((response:AxiosResponse<CategoryModel>) => response.data)
+        .then((response) => response.data.drinks)
 
 }
 export function getDrink(details:string | undefined) {
     return axios.get(`https://thecocktaildb.com/api/json/v1/1/lookup.php?i=${details}`)
-        .then((response:AxiosResponse<DetailModel>) =>{
-            return response.data
+        .then((response) =>{
+            return response.data.drinks[0]
 
         })
 }
@@ -74,13 +81,13 @@ export function postCustomDrink(customDrink:CustomDrinkModel) {
 
 
 export function getCustomIngredients () {
-    return axios(`/api/customDrink`,{
+    return axios(`/api/customDrink/ingredients`,{
         headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
         }
     })
-        .then((response:AxiosResponse<CustomDrinkModel[]>) =>response.data)
-        .then(customDrinks => customDrinks.flatMap(customDrink => customDrink.customIngredients))
+        .then((response:AxiosResponse<string[]>) =>response.data)
+
 }
 
 export function getAllCustomDrinks(ingredient:string | undefined) {
@@ -89,7 +96,7 @@ export function getAllCustomDrinks(ingredient:string | undefined) {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
         }
     })
-        .then((response:AxiosResponse<CustomDrinkModel[]>) =>response.data)
+        .then((response:AxiosResponse<CocktailModel[]>) =>response.data)
 
 }
 
@@ -99,7 +106,7 @@ export function getCustomDrink(details:string | undefined) {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
         }
     })
-        .then((response:AxiosResponse<CustomDrinkModel>) => response.data)
+        .then((response:AxiosResponse<CocktailModel>) => response.data)
 }
 
 
@@ -121,4 +128,51 @@ export function createUser(username:string, password:string, passwordAgain:strin
 export function loginNow(username:string, password:string) {
     return axios.post("/api/login",{username:username, password:password})
         .then((response:AxiosResponse<LoginResponseModel>) => response.data)
+}
+
+// search with drink name
+
+export function searchInPublicAPI(drinkname: string) {
+    return axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drinkname}`)
+        .then((response) => response.data.drinks)
+}
+
+export function searchInDB(drinkname:string) {
+    return axios.get(`/api/customDrink/search?drinkName=${drinkname}`,{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        }
+    })
+        .then(response => response.data)
+}
+
+//search with alcoholic
+
+export function searchWithAlcoholicInDB(alcoholic:string) {
+    return axios.get(`api/customDrink/searchByAlcoholic?alcoholic=${alcoholic}`,{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        }
+    })
+        .then(response => response.data)
+}
+
+export function searchWithAlcoholicInPublicAPI(alcoholic:string) {
+    return axios.get(`https://thecocktaildb.com/api/json/v1/1/filter.php?a=${alcoholic}`)
+        .then(response => response.data.drinks)
+}
+
+export function searchWithIngrNameInDB(ingredient:string) {
+    return axios.get(`api/customDrink/searchByIngredient?ingredient=${ingredient}`,{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        }
+    })
+        .then(response => response.data)
+}
+
+export function searchWithIngrNameInPublicAPI(ingredient:string) {
+    return axios.get(`https://thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`)
+        .then(response => response.data.drinks)
+
 }

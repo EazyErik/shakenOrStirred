@@ -15,11 +15,11 @@ public class CustomDrink {
 
     @Id
     private String customIDFromDB;
-    private boolean isCustomDrink = true;
     private String username;
     private String customDrinkName;
     private String customInstruction;
     private List<CustomIngredient> customIngredients;
     private String customGlass;
+    private String customAlcoholic;
     private String customDrinkURL;
 }

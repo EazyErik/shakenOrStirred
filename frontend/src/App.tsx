@@ -1,15 +1,16 @@
 import React from 'react';
 import {Route, Routes} from "react-router-dom";
-import Home from "./components/home/Home";
-import Ingredient from "./pages/Ingredient/Ingredient";
-import Favourite from "./pages/Favourite/Favourite";
-import Category from "./pages/Ingredient/Category";
-import Details from "./pages/Ingredient/Details";
-import Registration from "./pages/Registration/Registration";
+import Home from "./pages/Home";
+import Ingredient from "./pages/Ingredient";
+import Favourite from "./pages/Favourite";
+import Category from "./pages/Category";
+import Details from "./pages/Details";
+import Registration from "./pages/Registration";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import Login from "./pages/Login/Login";
-import CustomDrink from "./pages/CustomDrink/CustomDrink";
+import Login from "./pages/Login";
+import CustomDrink from "./pages/CustomDrink";
+import Search from "./pages/Search";
 
 
 
@@ -34,6 +35,7 @@ export default function App() {
             <Route path={"/customDrink"} element={<CustomDrink />} />
             <Route path={"/ingredient=:drinkCategory"} element={<Category />} />
             <Route path={"/details=:details&source=:source"} element={<Details />} />
+            <Route path={"/search"} element={<Search />} />
 
         </Routes>
         </div>

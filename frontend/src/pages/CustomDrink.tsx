@@ -1,7 +1,7 @@
 import "./CustomDrink.css"
 import {FormEvent, useState} from "react";
-import {postCustomDrink, sendPicture} from "../../apiServices/service";
-import {CustomIngredientModel} from "../../components/Model";
+import {postCustomDrink, sendPicture} from "../apiServices/service";
+import {CustomIngredientModel} from "../components/Model";
 import {useNavigate} from "react-router-dom";
 
 
@@ -16,6 +16,7 @@ export default function CustomDrink(){
     const[glass, setGlass] = useState("")
     const[image,setImage] = useState({} as File)
     const[cocktailName, setCocktailName] = useState("")
+    const[radioButtonValue, setRadioButtonValue] = useState("")
     const nav = useNavigate()
 
 
@@ -39,7 +40,8 @@ export default function CustomDrink(){
                     customDrinkURL:data.secure_url,
                     customIngredients:ingredients,
                     customInstruction:instruction,
-                    customGlass:glass
+                    customGlass:glass,
+                    customAlcoholic:radioButtonValue
 
                 }
                 postCustomDrink(currentDrink)
@@ -71,7 +73,8 @@ export default function CustomDrink(){
         setIngredientName("")
 
     }
-const disabledButton = (cocktailName !== "" && instruction !== ""  && glass !== "")
+const disabledButton = (cocktailName !== "" && instruction !== ""
+    && glass !== "" && ingredients !== [] && radioButtonValue !== "")
 
     return (
         <div className={"customDrink"}>
@@ -123,6 +126,16 @@ const disabledButton = (cocktailName !== "" && instruction !== ""  && glass !== 
                     <label>Enter your glass :</label>
                     <input type={"text"} value={glass} onChange={event => setGlass(event.target.value)}/>
                 </div>
+            <div>
+
+                <label>Alcoholic :</label>
+                <input type={"radio"} checked={radioButtonValue === "Alcoholic"}
+                       onChange={() =>setRadioButtonValue("Alcoholic")}/>
+                <label>Non Alcoholic :</label>
+                <input type={"radio"} checked={radioButtonValue === "Non_Alcoholic"}
+                       onChange={() => setRadioButtonValue("Non_Alcoholic")}/>
+
+            </div>
                 {
                     <button disabled={!disabledButton} onClick={addCustomDrink} type={"button"}>add</button>}
                 <div>

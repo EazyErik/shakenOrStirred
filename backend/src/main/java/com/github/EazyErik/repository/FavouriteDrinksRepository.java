@@ -14,6 +14,8 @@ public interface FavouriteDrinksRepository extends MongoRepository<FavouriteDrin
 
     int countAllByUsername(String username);
 
+    void deleteByIdDrink(String idDrink);
+
 
 
 
