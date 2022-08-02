@@ -1,12 +1,11 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {
     getCustomDrink,
     getDrink,
-    postToFavourites,
     showMyFavourites
 } from "../apiServices/service";
-import {CocktailModel,DetailModel} from "../components/Model";
+import {CocktailModel} from "../components/Model";
 import "./Details.css"
 import DetailsCard from "../components/DetailsCard";
 

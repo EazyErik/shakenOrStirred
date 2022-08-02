@@ -1,7 +1,7 @@
 import {CocktailModel} from "./Model";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useState} from "react";
-import {postToFavourites, showMyFavourites} from "../apiServices/service";
+import {postToFavourites} from "../apiServices/service";
 
 
 export interface DetailsCardProps{
