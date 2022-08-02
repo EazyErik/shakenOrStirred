@@ -35,7 +35,7 @@ export default function App() {
             <Route path={"/customDrink"} element={<CustomDrink />} />
             <Route path={"/ingredient=:drinkCategory"} element={<Category />} />
             <Route path={"/details=:details&source=:source"} element={<Details />} />
-            <Route path={"/search"} element={<Search/>} />
+            <Route path={"/search"} element={<Search />} />
 
         </Routes>
         </div>
