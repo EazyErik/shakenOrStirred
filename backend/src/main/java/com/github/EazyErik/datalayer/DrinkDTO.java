@@ -17,6 +17,7 @@ public class DrinkDTO {
     String strDrink;
     String strInstructions;
     String strGlass;
+    String strAlcoholic;
     String strIngredient1;
     String strIngredient2;
     String strIngredient3;
@@ -39,6 +40,7 @@ public class DrinkDTO {
         drinkDTO.setStrDrink(customDrink.getCustomDrinkName());
         drinkDTO.setStrInstructions(customDrink.getCustomInstruction());
         drinkDTO.setStrGlass(customDrink.getCustomGlass());
+        drinkDTO.setStrAlcoholic(customDrink.getCustomAlcoholic());
 
         List<CustomIngredient> ingredients = customDrink.getCustomIngredients();
         Class<DrinkDTO> drinkDTOClass = DrinkDTO.class;

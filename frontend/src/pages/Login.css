@@ -1,11 +1,14 @@
 .login{
-    margin-top: 20%;
+    margin-top: 10%;
     margin-left:5%;
-    border-color: black;
+
 
 }
 
 .account-question{
     padding-top: 2%;
+}
+.text{
+    margin-bottom:1%;
 }
 

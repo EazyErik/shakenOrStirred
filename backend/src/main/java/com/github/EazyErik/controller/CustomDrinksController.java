@@ -42,6 +42,28 @@ public class CustomDrinksController {
 
     }
 
+    @GetMapping("/search")
+    public List<DrinkDTO> getDrinksByName(@RequestParam String drinkName) {
+        return customDrinksService.getDrinksByName(drinkName).stream()
+                .map(drink -> DrinkDTO.of(drink))
+                .toList();
+    }
+
+    @GetMapping("/searchByAlcoholic")
+    public List<DrinkDTO>getDrinksByAlcoholic(@RequestParam String alcoholic) {
+        return customDrinksService.getDrinksByAlcoholic(alcoholic).stream()
+                .map(drink -> DrinkDTO.of(drink))
+                .toList();
+    }
+
+    @GetMapping("/searchByIngredient")
+    public List<DrinkDTO>getDrinksByIngredient(@RequestParam String ingredient) {
+        return customDrinksService.getDrinksByIngredient(ingredient).stream()
+                .map(drink -> DrinkDTO.of(drink))
+                .toList();
+    }
+
+
 
 
 

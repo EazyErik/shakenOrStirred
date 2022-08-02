@@ -10,6 +10,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Login from "./pages/Login";
 import CustomDrink from "./pages/CustomDrink";
+import Search from "./pages/Search";
 
 
 
@@ -34,6 +35,7 @@ export default function App() {
             <Route path={"/customDrink"} element={<CustomDrink />} />
             <Route path={"/ingredient=:drinkCategory"} element={<Category />} />
             <Route path={"/details=:details&source=:source"} element={<Details />} />
+            <Route path={"/search"} element={<Search />} />
 
         </Routes>
         </div>

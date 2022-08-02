@@ -22,12 +22,12 @@ export default function Registration() {
 
 
     return(
-        <div>
+        <div className={"registration"}>
             <h1>Please register:</h1>
             <form onSubmit={register} >
-                <input type={"text"} placeholder={"Username"} value={username} onChange={event => setUsername(event.target.value)}/>
-                <input type={"password"} placeholder={"Password"} value={password} onChange={event => setPassword(event.target.value)}/>
-                <input type={"password"} placeholder={"Password again"} value={passwordAgain} onChange={event => setPasswordAgain(event.target.value)}/>
+              <div className={"text"}> <input type={"text"} placeholder={"Username"} value={username} onChange={event => setUsername(event.target.value)}/></div>
+              <div className={"password"}><input type={"password"} placeholder={"Password"} value={password} onChange={event => setPassword(event.target.value)}/></div>
+               <div className={"passwordAgain"}> <input type={"password"} placeholder={"Password again"} value={passwordAgain} onChange={event => setPasswordAgain(event.target.value)}/></div>
                 <input type={"submit"} value={"Register now"}/>
 
             </form>
