@@ -122,7 +122,7 @@ export function sendPicture(formData:FormData) {
 
 //registration and login
 export function createUser(username:string, password:string, passwordAgain:string) {
-    return axios.post("api/user",{username:username,password:password,passwordAgain:passwordAgain})
+    return axios.post("/api/user",{username:username,password:password,passwordAgain:passwordAgain})
 }
 
 export function loginNow(username:string, password:string) {
