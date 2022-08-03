@@ -13,6 +13,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -25,6 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/user", "/api/login").permitAll()
+                .antMatchers(HttpMethod.GET, "/*", "/index*", "/static/**", "/*.js", "/*.json", "/*.ico","/*.png").permitAll()
+                .antMatchers("/api/**").authenticated()
                 .antMatchers("/**").authenticated()
                 .and()
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
@@ -33,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
