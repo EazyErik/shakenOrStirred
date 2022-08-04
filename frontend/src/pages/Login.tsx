@@ -5,16 +5,12 @@ import React, {FormEvent, useEffect, useState} from "react";
 import {loginNow} from "../apiServices/service";
 
 
-
-
-
-
 export default function Login() {
     const nav = useNavigate()
 
-    const [username,setUsername] = useState("")
-    const[password,setPassword] = useState("")
-    const[error,setError] = useState("")
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [error, setError] = useState("")
 
 
 
@@ -32,9 +28,11 @@ export default function Login() {
     const login = (event:FormEvent) => {
         event.preventDefault()
         loginNow(username,password)
-            .then(loginResponse=> {localStorage.setItem("jwt",loginResponse.token)
+            .then(loginResponse=>
+            {
+                localStorage.setItem("jwt",loginResponse.token)
                 localStorage.setItem("username",username)
-            console.log(loginResponse)})
+            })
 
             .then(() => nav("/home"))
             .catch(() => setError("Password is wrong!"))
@@ -46,15 +44,22 @@ export default function Login() {
 
     return(
         <div className={"login"}>
-
-
             <h1>Please Login:</h1>
             <form onSubmit={login}>
-               <div className={"text"}><input type={"text"} placeholder={"Username"} onChange={event => setUsername(event.target.value)}/></div>
-                <div><input type={"password"} placeholder={"Password"} onChange={event => setPassword(event.target.value)}/></div>
-                <input type={"submit"} value={"Login now"} />
+                <div className={"text"}>
+                    <input data-testid={"username-field"} type={"text"} placeholder={"Username"} value={username}
+                           onChange={event => setUsername(event.target.value)}/>
+                </div>
+                <div>
+                    <input data-testid={"password-field"} type={"password"} placeholder={"Password"} value={password}
+                           onChange={event => setPassword(event.target.value)}/>
+                </div>
+                <input data-testid={"submit-button"} type={"submit"} value={"Login now"}/>
             </form>
-            {error && <div>{error}</div>}
+            <span data-testid={"login-output"}>{username}</span>
+            <span data-testid={"login-output-password"}>{password}</span>
+            {error &&
+                <div data-testid={"error"}>{error}</div>}
 
 
             <div className={"signUp"}>

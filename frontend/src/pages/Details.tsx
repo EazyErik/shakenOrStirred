@@ -18,7 +18,8 @@ export default function Details() {
     const numberOfFavourites = () => {
 
         showMyFavourites()
-            .then(data => {setSpotsLeft( maxNumberOfEmptySpots - data.length )
+            .then(data => {
+                setSpotsLeft(maxNumberOfEmptySpots - data.length)
                 console.log(data.length)
 
             })
