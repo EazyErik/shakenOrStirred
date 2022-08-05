@@ -18,6 +18,7 @@ export default function CustomDrink() {
     const [cocktailName, setCocktailName] = useState("")
     const [radioButtonValue, setRadioButtonValue] = useState("")
     const[editedIngredientIndex,setEditedIngredientIndex] = useState<number>()
+    const[error,setError] = useState("")
     const nav = useNavigate()
 
 
@@ -29,9 +30,11 @@ export default function CustomDrink() {
     }
 
     const handleUpload = () => {
+        console.log("image",image)
         const formData = new FormData()
         formData.append("file", image)
         formData.append("upload_preset", "customDrink")
+        console.log("formData",formData)
         sendPicture(formData)
             .then((data) => {
                 const currentDrink = {
@@ -56,7 +59,8 @@ export default function CustomDrink() {
                     })
                     .catch(() => {
                         localStorage.removeItem("jwt")
-                        nav("/")
+                        nav("/"),
+                            setError("Error")
                     })
 
             })
@@ -114,12 +118,12 @@ export default function CustomDrink() {
             <div>
                 <label>Enter the name of your drink:</label>
 
-                <input type={"text"} value={cocktailName} onChange={event => setCocktailName(event.target.value)}/>
+                <input data-testid={"name-field"} type={"text"} value={cocktailName} onChange={event => setCocktailName(event.target.value)}/>
             </div>
 
             <div>
                 <label>Upload your picture here:</label>
-                <input type={"file"} accept={"image/*"} onChange={event => {
+                <input data-testid={"upload-field"} type={"file"} accept={"image/*"} onChange={event => {
                     if (event.target.files !== null) {
                         setImage(event.target.files[0])
                     }
@@ -128,23 +132,23 @@ export default function CustomDrink() {
             </div>
             <div>
                 <label>Enter your instructions:</label>
-                <textarea id={"customDrink"} name={"customDrink"} rows={5} cols={50} value={instruction}
+                <textarea data-testid={"instruction-field"} id={"customDrink"} name={"customDrink"} rows={5} cols={50} value={instruction}
                           onChange={event => setInstruction(event.target.value)}/>
             </div>
             <div className={"ingredient"}>
                 <span>
                     <label>Enter the amount of your ingredient:</label>
-                    <input type={"number"} pattern={"[0-9]*"} min={0} value={amount}
-                           onChange={event => setAmount((value) => (event.target.validity ? parseInt(event.target.value) : value))}/>
+                    <input data-testid={"amount-field"} type={"number"} pattern={"[0-9]*"} min={0} value={amount}
+                           onChange={event => setAmount((value) => (event.target.validity ? event.target.valueAsNumber : value))}/>
                 </span>
                 <span>
                     <label>Enter the unit of your ingredient:</label>
-                    <input type={"text"} value={unit} onChange={event => setUnit(event.target.value)}/>
+                    <input data-testid={"unit-field"} type={"text"} value={unit} onChange={event => setUnit(event.target.value)}/>
                 </span>
                 <span>
                     <label>Enter the name of your ingredient:</label>
 
-                    <input value={ingredientName} onChange={event => setIngredientName(event.target.value)}/>
+                    <input data-testid={"ingredientName-field"} value={ingredientName} onChange={event => setIngredientName(event.target.value)}/>
 
                 </span>
 
@@ -153,7 +157,7 @@ export default function CustomDrink() {
                         (editedIngredientIndex !== null && editedIngredientIndex !== undefined)  ?
                         <button className={"edit-button"} onClick={saveIngredient}>edit</button>
                         :
-                    <button onClick={composeIngredient}>add </button>}
+                    <button data-testid={"add-button"} onClick={composeIngredient}>add </button>}
                 </div>
                 <div>{ingredients.map((ingredient,index) =>
                     <div key={index}>
@@ -166,21 +170,22 @@ export default function CustomDrink() {
             <div>
 
                 <label>Enter your glass :</label>
-                <input type={"text"} value={glass} onChange={event => setGlass(event.target.value)}/>
+                <input data-testid={"glass-field"} type={"text"} value={glass} onChange={event => setGlass(event.target.value)}/>
             </div>
             <div>
 
                 <label>Alcoholic :</label>
-                <input type={"radio"} checked={radioButtonValue === "Alcoholic"}
+                <input data-testid={"alcoholic-field"}  type={"radio"} checked={radioButtonValue === "Alcoholic"}
                        onChange={() => setRadioButtonValue("Alcoholic")}/>
                 <label>Non Alcoholic :</label>
-                <input type={"radio"} checked={radioButtonValue === "Non_Alcoholic"}
+                <input data-testid={"nonAlcoholic-field"} type={"radio"} checked={radioButtonValue === "Non_Alcoholic"}
                        onChange={() => setRadioButtonValue("Non_Alcoholic")}/>
 
             </div>
-            {
-                <button disabled={!disabledButton} onClick={addCustomDrink} type={"button"}>add</button>}
-            <div>
+
+                <button  data-testid={"addAll-button"} disabled={!disabledButton} onClick={addCustomDrink} type={"button"}>add</button>
+            <div data-testid={"error"}>
+                {error}
 
             </div>
 
