@@ -81,7 +81,7 @@ export function postCustomDrink(customDrink:CustomDrinkModel) {
 
 
 export function getCustomIngredients () {
-    return axios(`/api/customDrink/ingredients`,{
+    return axios.get(`/api/customDrink/ingredients`,{
         headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
         }
@@ -91,7 +91,7 @@ export function getCustomIngredients () {
 }
 
 export function getAllCustomDrinks(ingredient:string | undefined) {
-    return axios(`/api/customDrink?ingredient=${ingredient}`,{
+    return axios.get(`/api/customDrink?ingredient=${ingredient}`,{
         headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
         }
@@ -101,7 +101,7 @@ export function getAllCustomDrinks(ingredient:string | undefined) {
 }
 
 export function getCustomDrink(details:string | undefined) {
-    return axios(`api/customDrink/details?id=${details}`,{
+    return axios.get(`api/customDrink/details?id=${details}`,{
         headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`
         }

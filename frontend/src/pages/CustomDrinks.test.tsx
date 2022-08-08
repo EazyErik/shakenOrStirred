@@ -82,12 +82,12 @@ test("that inputFields are empty after drink was sent ", async () => {
     screen.getByTestId("addAll-button").click()
 
     await waitFor(()=> {
-        expect(screen.getByTestId("name-field").textContent).toEqual("")
+        expect(screen.getByTestId("name-field").getAttribute("value")).toEqual("")
         expect(screen.getByTestId("instruction-field").textContent).toEqual("")
-        expect(screen.getByTestId("amount-field").textContent).toEqual("")
-        expect(screen.getByTestId("unit-field").textContent).toEqual("")
-        expect(screen.getByTestId("ingredientName-field").textContent).toEqual("")
-        expect(screen.getByTestId("glass-field").textContent).toEqual("")
+        expect(screen.getByTestId("amount-field").getAttribute("value")).toEqual("0")
+        expect(screen.getByTestId("unit-field").getAttribute("value")).toEqual("")
+        expect(screen.getByTestId("ingredientName-field").getAttribute("value")).toEqual("")
+        expect(screen.getByTestId("glass-field").getAttribute("value")).toEqual("")
 
     })
 
