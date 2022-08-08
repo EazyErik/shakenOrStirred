@@ -1,5 +1,5 @@
 import "./CustomDrink.css"
-import {FormEvent, useEffect, useState} from "react";
+import {FormEvent, useState} from "react";
 import {postCustomDrink, sendPicture} from "../apiServices/service";
 import {CustomIngredientModel} from "../components/Model";
 import {useNavigate} from "react-router-dom";

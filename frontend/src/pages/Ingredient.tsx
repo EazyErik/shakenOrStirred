@@ -14,7 +14,7 @@ export default function Ingredient() {
             .then(customIngredientName => {
                 setAllIngredientNames(currentIngredientNames => [...currentIngredientNames, ...customIngredientName])
 
-                console.log(customIngredientName)
+
             })
 
     }, [])
