@@ -4,8 +4,7 @@ import React from "react";
 import {fireEvent, render, screen, waitFor} from "@testing-library/react";
 import {MemoryRouter, Route, Routes} from "react-router-dom";
 
-
-
+afterEach(() => localStorage.removeItem("jwt"))
 
 test("that values are rendered", async ()=> {
     jest.spyOn(axios, "post").mockImplementation((url: string, data: unknown) => {
@@ -58,15 +57,15 @@ test("that error is rendered",async ()=> {
         return Promise.reject({} as AxiosError)
     })
 
-
     render(
         <MemoryRouter initialEntries={["/"]}>
             <Routes>
                 <Route path={"/"} element={<Login/>}/>
             </Routes>
-        </MemoryRouter>)
+        </MemoryRouter>
+    )
 
-    const usernameField= screen.getByTestId("username-field")
+    const usernameField = screen.getByTestId("username-field")
     fireEvent.change(usernameField,{target:{value:"erik"}})
 
     const passwordField = screen.getByTestId("password-field")

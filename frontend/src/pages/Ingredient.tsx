@@ -41,8 +41,8 @@ export default function Ingredient() {
             <div className="d-grid gap-2">
                 {allIngredientNames &&
                     allIngredientNames.filter(distinct).map((name,index) =>
-                        <button data-testid={"button-field" + index} type="button" className={"btn btn-secondary"}
-                                onClick={() => nav(`/ingredient=${name}`)}>{name}
+                        <button key={"button-field" + index} data-testid={"button-field" + index} type="button" className={"btn btn-secondary"}
+                                onClick={() => nav(`/ingredient/${name}`)}>{name}
                         </button>)}
                 <br/>
 
