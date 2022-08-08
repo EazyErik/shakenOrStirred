@@ -71,7 +71,7 @@ useEffect (()=> {
     const renderFilter = () => {
         return <div className={"searchBars"}>
             <div>
-               <div> <label >Enter the name of your drink:</label></div>
+               <div className={"searchDrinkName"}> <label >Enter the name of your drink:</label></div>
                <div> <input type={"text"} placeholder={"drink name"} value={drinkName}
                        onChange={event => setDrinkName(event.target.value)}/></div>
                <div className={"buttonSearch"}><button onClick={searchWithDrinkName}>Search</button></div>

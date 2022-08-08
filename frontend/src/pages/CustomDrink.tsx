@@ -18,7 +18,6 @@ export default function CustomDrink() {
     const [cocktailName, setCocktailName] = useState("")
     const [radioButtonValue, setRadioButtonValue] = useState("")
     const[editedIngredientIndex,setEditedIngredientIndex] = useState<number>()
-    const[error,setError] = useState("")
     const nav = useNavigate()
 
 
@@ -59,8 +58,8 @@ export default function CustomDrink() {
                     })
                     .catch(() => {
                         localStorage.removeItem("jwt")
-                        nav("/"),
-                            setError("Error")
+                        nav("/")
+
                     })
 
             })
@@ -88,9 +87,6 @@ export default function CustomDrink() {
         setEditedIngredientIndex(index)
     }
 
-    useEffect(()=>{
-        console.log(editedIngredientIndex)
-    },[editedIngredientIndex])
 
     const saveIngredient = () => {
       let editedIngredient: CustomIngredientModel = {customIngredientName:ingredientName, customUnit:unit, customAmount:amount}
@@ -184,12 +180,6 @@ export default function CustomDrink() {
             </div>
 
                 <button  data-testid={"addAll-button"} disabled={!disabledButton} onClick={addCustomDrink} type={"button"}>add</button>
-            <div data-testid={"error"}>
-                {error}
-
-            </div>
-
-
         </div>
     )
 }

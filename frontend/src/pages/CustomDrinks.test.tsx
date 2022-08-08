@@ -20,7 +20,7 @@ test("that inputFields are empty after drink was sent ", async () => {
             })
         } else if (url === "api/customDrink") {
             expect(data).toEqual({
-                customDrinkName: "",
+                customDrinkName: "Pornstar Martini",
                 customDrinkURL: "https://myCustomDrinkPicture",
                 customIngredients: [{
                     customAmount: 4,
@@ -84,7 +84,7 @@ test("that inputFields are empty after drink was sent ", async () => {
     await waitFor(()=> {
         expect(screen.getByTestId("name-field").textContent).toEqual("")
         expect(screen.getByTestId("instruction-field").textContent).toEqual("")
-        //expect(screen.getByTestId("amount-field")).toEqual(0)
+        expect(screen.getByTestId("amount-field").textContent).toEqual("")
         expect(screen.getByTestId("unit-field").textContent).toEqual("")
         expect(screen.getByTestId("ingredientName-field").textContent).toEqual("")
         expect(screen.getByTestId("glass-field").textContent).toEqual("")
@@ -94,11 +94,11 @@ test("that inputFields are empty after drink was sent ", async () => {
 })
 
 
-test("that exception is thrown", async () => {
+test("that button is disabled", async () => {
     jest.spyOn(axios, "post").mockImplementation((url: string, data: unknown) => {
             expect(url).toEqual("api/customDrink")
             expect(data).toEqual({
-                customDrinkName: "Pornstar Martini",
+                customDrinkName: "",
                 customDrinkURL: "https://myCustomDrinkPicture",
                 customIngredients: [{
                     customAmount: 4,
@@ -149,7 +149,7 @@ test("that exception is thrown", async () => {
 
     await waitFor(()=> {
        expect(screen.getByTestId("addAll-button")).toBeDisabled()
-       //expect(screen.getByTestId("error").textContent).toEqual("error")
+
 
     })
 

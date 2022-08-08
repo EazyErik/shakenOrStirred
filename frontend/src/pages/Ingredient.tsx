@@ -10,6 +10,16 @@ export default function Ingredient() {
     const nav = useNavigate()
 
     useEffect(() => {
+        getCustomIngredients()
+            .then(customIngredientName => {
+                setAllIngredientNames(currentIngredientNames => [...currentIngredientNames, ...customIngredientName])
+
+                console.log(customIngredientName)
+            })
+
+    }, [])
+
+    useEffect(() => {
 
         getIngredientsFromCocktailApi()
             .then(cocktailIngredients =>
@@ -20,15 +30,7 @@ export default function Ingredient() {
 
     }, [])
 
-    useEffect(() => {
-        getCustomIngredients()
-            .then(customIngredientName => {
-                setAllIngredientNames(currentIngredientNames => [...currentIngredientNames, ...customIngredientName])
 
-                console.log(customIngredientName)
-            })
-
-    }, [])
 
     const distinct = (value: string, index: number, self: Array<string>) => {
         return self.indexOf(value) === index;
@@ -38,8 +40,8 @@ export default function Ingredient() {
         <div className={"ingredientsTable"}>
             <div className="d-grid gap-2">
                 {allIngredientNames &&
-                    allIngredientNames.filter(distinct).map(name =>
-                        <button type="button" className={"btn btn-secondary"}
+                    allIngredientNames.filter(distinct).map((name,index) =>
+                        <button data-testid={"button-field" + index} type="button" className={"btn btn-secondary"}
                                 onClick={() => nav(`/ingredient=${name}`)}>{name}
                         </button>)}
                 <br/>

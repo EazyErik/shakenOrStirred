@@ -1,20 +1,19 @@
 .header{
 
-    margin-bottom: 10%;
-    margin-top:10%;
+    //margin-bottom: 5%;
+    margin-top:1%;
     position:sticky;
     background-color: white;
-    padding-bottom: 15%;
+    //padding-bottom: 15%;
     border: solid black;
-
-
 
 }
 
 .header-text{
     text-align: center;
     font-size: 40px;
-    padding-top: 20%;
+    margin-top: 0;
+
 
 }
 

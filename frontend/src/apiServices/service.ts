@@ -176,3 +176,21 @@ export function searchWithIngrNameInPublicAPI(ingredient:string) {
         .then(response => response.data.drinks)
 
 }
+
+//random Drink form Cocktail API
+
+export function randomDrinkFromPublicAPI(){
+    return axios.get("https://thecocktaildb.com/api/json/v1/1/random.php")
+        .then(response => response.data.drinks)
+}
+
+export function randomDrinkFromDB(){
+    return axios.get("api/customDrink/randomCocktail",{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        }
+    })
+        .then(response => response.data)
+}
+
+

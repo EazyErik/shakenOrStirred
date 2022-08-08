@@ -63,8 +63,16 @@ public class CustomDrinksController {
                 .toList();
     }
 
-
-
-
-
+    @GetMapping("/randomCocktail")
+    public List<DrinkDTO> getRandomCocktail() {
+        return customDrinksService.getRandomCocktail().stream()
+                .map(drink -> DrinkDTO.of(drink))
+                .toList();
+    }
 }
+
+
+
+
+
+
