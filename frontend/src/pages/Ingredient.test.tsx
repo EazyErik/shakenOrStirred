@@ -36,39 +36,7 @@ test("that ingredients form db and public api are displayed", async () => {
     })
 })
 
-test("that we are connected to category list", async () => {
-    jest.spyOn(axios, "get").mockImplementation((url: string, data: any) => {
-        if (url === "https://thecocktaildb.com/api/json/v1/1/list.php?i=list") {
-            return Promise.resolve({
-                data: {
-                    drinks: [{strIngredient1: "Gin"}]
 
-                }
-            })
-        } else {
-            return Promise.resolve({data: ["Vodka"]});
-        }
-
-    })
-
-    function DummyCategory() {
-        return <div data-testid={"dummy-category"}>Category</div>
-    }
-
-
-    render(
-        <MemoryRouter initialEntries={["/ingredient"]}>
-            <Routes>
-                <Route path={"/ingredient"} element={<Ingredient/>}/>
-                <Route path={"/ingredient=:drinkCategory"} element={<DummyCategory/>}/>
-            </Routes>
-        </MemoryRouter>
-    )
-    await waitFor(() => {
-        screen.getByTestId("button-field0").click()
-        expect(screen.getByTestId("dummy-category").textContent).not.toThrowError()
-    })
-})
 
 
 
