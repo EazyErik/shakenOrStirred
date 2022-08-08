@@ -16,8 +16,6 @@ test("that ingredients form db and public api are displayed", async () => {
                 }
             })
         } else if (url === `/api/customDrink/ingredients`) {
-            // jest.spyOn(axios, "get").mockImplementation((url: string) => {
-            // if (url === `/api/customDrink/ingredients`) {
             return Promise.resolve({
                 data: ["Vodka"]
             })

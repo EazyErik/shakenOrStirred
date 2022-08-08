@@ -54,7 +54,7 @@ test("that inputFields are empty after drink was sent ", async () => {
     const file = new File([blob], 'values.json', {
         type: 'application/JSON',
     });
-    /*File.prototype.text = jest.fn().mockResolvedValueOnce(str);*/
+
 
     const input = screen.getByTestId('upload-field');
     fireEvent.change(input,{target:{files:[file]}});
@@ -136,7 +136,6 @@ test("that button is disabled", async () => {
     const ingredientNameField = screen.getByTestId("ingredientName-field")
     fireEvent.change(ingredientNameField, {target: {value: "Vodka"}})
 
-    // no need for image, NOT mandatory
 
     screen.getByTestId("add-button").click()
 
