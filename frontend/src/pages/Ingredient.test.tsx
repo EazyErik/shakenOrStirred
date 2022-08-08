@@ -7,7 +7,6 @@ import Ingredient from "./Ingredient";
 
 test("that ingredients form db and public api are displayed", async () => {
     jest.spyOn(axios, "get").mockImplementation((url: string, data: any) => {
-        console.log(url)
         if (url === "https://thecocktaildb.com/api/json/v1/1/list.php?i=list") {
             return Promise.resolve({
                 data: {
@@ -39,7 +38,6 @@ test("that ingredients form db and public api are displayed", async () => {
 
 test("that we are connected to category list", async () => {
     jest.spyOn(axios, "get").mockImplementation((url: string, data: any) => {
-        console.log(url)
         if (url === "https://thecocktaildb.com/api/json/v1/1/list.php?i=list") {
             return Promise.resolve({
                 data: {
