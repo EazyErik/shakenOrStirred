@@ -112,13 +112,13 @@ export default function CustomDrink() {
             <h3>Add your own creations:</h3>
 
             <div>
-                <label>Enter the name of your drink:</label>
+                <label>Name of your drink:</label>
 
                 <input data-testid={"name-field"} type={"text"} value={cocktailName} onChange={event => setCocktailName(event.target.value)}/>
             </div>
 
             <div>
-                <label>Upload your picture here:</label>
+                <label>Your picture here:</label>
                 <input data-testid={"upload-field"} type={"file"} accept={"image/*"} onChange={event => {
                     if (event.target.files !== null) {
                         setImage(event.target.files[0])
@@ -127,22 +127,22 @@ export default function CustomDrink() {
                 }/>
             </div>
             <div>
-                <label>Enter your instructions:</label>
+                <label>Your instructions:</label>
                 <textarea data-testid={"instruction-field"} id={"customDrink"} name={"customDrink"} rows={5} cols={50} value={instruction}
                           onChange={event => setInstruction(event.target.value)}/>
             </div>
             <div className={"ingredient"}>
                 <span>
-                    <label>Enter the amount of your ingredient:</label>
+                    <label>The amount of your ingredient:</label>
                     <input data-testid={"amount-field"} type={"number"} pattern={"[0-9]*"} min={0} value={amount}
                            onChange={event => setAmount((value) => (event.target.validity ? event.target.valueAsNumber : value))}/>
                 </span>
                 <span>
-                    <label>Enter the unit of your ingredient:</label>
+                    <label>The unit of your ingredient:</label>
                     <input data-testid={"unit-field"} type={"text"} value={unit} onChange={event => setUnit(event.target.value)}/>
                 </span>
                 <span>
-                    <label>Enter the name of your ingredient:</label>
+                    <label>The name of your ingredient:</label>
 
                     <input data-testid={"ingredientName-field"} value={ingredientName} onChange={event => setIngredientName(event.target.value)}/>
 
@@ -165,7 +165,7 @@ export default function CustomDrink() {
             </div>
             <div>
 
-                <label>Enter your glass :</label>
+                <label>Your glass :</label>
                 <input data-testid={"glass-field"} type={"text"} value={glass} onChange={event => setGlass(event.target.value)}/>
             </div>
             <div>

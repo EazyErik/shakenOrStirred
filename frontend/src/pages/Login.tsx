@@ -56,8 +56,8 @@ export default function Login() {
                 </div>
                 <input data-testid={"submit-button"} type={"submit"} value={"Login now"}/>
             </form>
-            <span data-testid={"login-output"}>{username}</span>
-            <span data-testid={"login-output-password"}>{password}</span>
+            {/* <span data-testid={"login-output"}>{username}</span>
+            <span data-testid={"login-output-password"}>{password}</span>*/}
             {error &&
                 <div data-testid={"error"}>{error}</div>}
 

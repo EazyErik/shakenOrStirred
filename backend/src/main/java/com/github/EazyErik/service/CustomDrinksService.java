@@ -5,11 +5,13 @@ import com.github.EazyErik.datalayer.CustomDrink;
 import com.github.EazyErik.datalayer.DrinkDTO;
 import com.github.EazyErik.repository.CustomDrinksRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -95,7 +97,7 @@ public class CustomDrinksService {
 
     }
 
-    public List<CustomDrink>  getRandomCocktail() {
+   /* public List<CustomDrink>  getRandomCocktail() {
 
         List<CustomDrink> allCustomDrinks = customDrinksRepository.findAll();
 
@@ -110,7 +112,25 @@ public class CustomDrinksService {
         int random = (int)(Math.random() * range) + min;
 
 
-       return List.of(allCustomDrinks.get(random));
+       return allCustomDrinks.get(random);
+
+    }*/
+
+    public Optional<CustomDrink> getRandomCocktail() {
+        List<CustomDrink> allCustomDrinks = customDrinksRepository.findAll();
+
+        int maxLength = allCustomDrinks.size();
+
+        if(maxLength == 0){
+            return Optional.empty();
+        }
+        int min = 0;
+        maxLength -= 1;
+        int range = maxLength - min + 1;
+        int random = (int)(Math.random() * range) + min;
+
+
+        return Optional.of(allCustomDrinks.get(random));
 
     }
 }

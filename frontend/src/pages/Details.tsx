@@ -20,7 +20,6 @@ export default function Details() {
         showMyFavourites()
             .then(data => {
                 setSpotsLeft(maxNumberOfEmptySpots - data.length)
-                console.log(data.length)
 
             })
     }
