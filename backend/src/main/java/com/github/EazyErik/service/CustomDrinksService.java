@@ -97,24 +97,6 @@ public class CustomDrinksService {
 
     }
 
-   /* public List<CustomDrink>  getRandomCocktail() {
-
-        List<CustomDrink> allCustomDrinks = customDrinksRepository.findAll();
-
-        int maxLength = allCustomDrinks.size();
-
-        if(maxLength == 0){
-            return allCustomDrinks;
-        }
-        int min = 0;
-        maxLength -= 1;
-        int range = maxLength - min + 1;
-        int random = (int)(Math.random() * range) + min;
-
-
-       return allCustomDrinks.get(random);
-
-    }*/
 
     public Optional<CustomDrink> getRandomCocktail() {
         List<CustomDrink> allCustomDrinks = customDrinksRepository.findAll();

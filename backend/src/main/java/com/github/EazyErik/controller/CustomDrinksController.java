@@ -65,19 +65,14 @@ public class CustomDrinksController {
                 .toList();
     }
 
-    /*@GetMapping("/randomCocktail")
-    public List<DrinkDTO> getRandomCocktail() {
-        return customDrinksService.getRandomCocktail().stream()
-                .map(drink -> DrinkDTO.of(drink))
-                .toList();
-    }*/
+
       @GetMapping(("/randomCocktail"))
     public ResponseEntity<DrinkDTO> getRandomCocktail(){
           Optional<CustomDrink> selectedDrink = customDrinksService.getRandomCocktail();
           if(selectedDrink.isEmpty()){
               return ResponseEntity.of(Optional.empty());
           }
-          return ResponseEntity.of(Optional.of(DrinkDTO.of(selectedDrink.get())));
+          return ResponseEntity.of(customDrinksService.getRandomCocktail().map(DrinkDTO::of));
       }
 }
 
