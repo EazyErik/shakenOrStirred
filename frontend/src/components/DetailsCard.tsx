@@ -37,7 +37,6 @@ export default function DetailsCard({drinkDetails,source,spotsLeft,checkLength}:
     }
     return(
         <div>
-
                 <div>
                     <div className={"heading_details"}>{drinkDetails.strDrink}</div>
                     <div>

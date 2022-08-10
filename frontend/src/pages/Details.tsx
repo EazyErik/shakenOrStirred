@@ -18,19 +18,18 @@ export default function Details() {
     const numberOfFavourites = () => {
 
         showMyFavourites()
-            .then(data => {setSpotsLeft( maxNumberOfEmptySpots - data.length )
-                console.log(data.length)
+            .then(data => {
+                setSpotsLeft(maxNumberOfEmptySpots - data.length)
 
             })
     }
 
     useEffect(() => {
-        console.log(source)
         numberOfFavourites()
         if(source === "public_api"){
             getDrink(details)
-                .then(data => {setDetail(data)
-                console.log(data)})
+                .then(data => setDetail(data)
+               )
         }
         else{
             getCustomDrink(details)
@@ -38,9 +37,6 @@ export default function Details() {
                     setDetail(data)
                 })
         }
-
-
-
 
     },[details,source])
 

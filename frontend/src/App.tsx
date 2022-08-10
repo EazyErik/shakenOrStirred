@@ -33,7 +33,7 @@ export default function App() {
             <Route path={"/ingredient"} element={<Ingredient />} />
             <Route path={"/favourites"} element={<Favourite />}/>
             <Route path={"/customDrink"} element={<CustomDrink />} />
-            <Route path={"/ingredient=:drinkCategory"} element={<Category />} />
+            <Route path={"/ingredient/:drinkCategory"} element={<Category />} />
             <Route path={"/details=:details&source=:source"} element={<Details />} />
             <Route path={"/search"} element={<Search />} />
 

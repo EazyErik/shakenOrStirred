@@ -17,15 +17,15 @@ export default function Category() {
         getCategory(drinkCategory)
             .then(data => {
                 setCategory(data)
-                console.log(data)
+
             })
         getAllCustomDrinks(drinkCategory)
             .then(currentCocktail => setCustomDrink(currentCocktail))
-        console.log(drinkCategory)
+
 
     }, [drinkCategory])
 
-console.log(category)
+
     return (
         <div className={"table"}>
             <label className={"category"}> {drinkCategory} Drinks:</label>

@@ -5,10 +5,12 @@ import com.github.EazyErik.datalayer.CustomDrink;
 import com.github.EazyErik.datalayer.DrinkDTO;
 import com.github.EazyErik.service.CustomDrinksService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/customDrink")
@@ -64,7 +66,18 @@ public class CustomDrinksController {
     }
 
 
-
-
-
+      @GetMapping(("/randomCocktail"))
+    public ResponseEntity<DrinkDTO> getRandomCocktail(){
+          Optional<CustomDrink> selectedDrink = customDrinksService.getRandomCocktail();
+          if(selectedDrink.isEmpty()){
+              return ResponseEntity.of(Optional.empty());
+          }
+          return ResponseEntity.of(customDrinksService.getRandomCocktail().map(DrinkDTO::of));
+      }
 }
+
+
+
+
+
+
